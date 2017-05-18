@@ -1,0 +1,91 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewUser
+
+@{
+    ViewBag.Title = Html.DisplayFor(model => model.JobName) + " - " + Html.DisplayFor(model => model.Job.Company.name) + " - " + @Html.DisplayFor(model => model.Location);
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+<div class="" style="height: auto;">
+    @*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+    <div class="jumbotron card" style="width: 100%;">
+        <div class="row">
+            <h3><i class="fa fa-list-alt" style="color:#ee6e73"></i> @Html.DisplayFor(model => model.JobName)</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <p style="margin: 0px;"><i class="fa fa-map-marker fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(model => model.Job.location)</p>
+            </div>
+            <div class="col-md-3">
+                <p style="margin: 0px;"><i class="fa fa-clock-o fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(model => model.Job.jobType)</p>
+            </div>
+            <div class="col-md-3">
+                <p style="margin: 0px;"><i class="fa fa-sort-amount-asc fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(model => model.Job.experience)</p>
+            </div>
+            <div class="col-md-3">
+                <p style="margin: 0px;"><i class="fa fa-dollar fa-md" style="color: #26a69a;"></i> $@Html.DisplayFor(model => model.Job.salaryMin) - $@Html.DisplayFor(model => model.Job.salaryMax)</p>
+            </div>        
+        </div>
+        <div class="row">
+            <hr style="border-top-color: #ee6e73; clear: both;" />
+            <div class="col-md-1" style="margin: 0 auto;">
+                <img class="circle" style="width: 75px; height: 75px; margin: auto; display: block;" src="~/Content/Images/@Html.DisplayFor(model => model.Job.Company.logo)" />
+            </div>
+            <div class="col-md-5">
+                <h4 style="margin-top: 5px;"><a href="/Searcher/Company?id=@Html.DisplayFor(model => model.Job.Company.ID)">@Html.DisplayFor(model => model.Job.Company.name)</a></h4>
+                <p style="margin: 0px;">@Html.DisplayFor(model => model.Job.Company.address)</p>
+                <p style="margin: 0px;"><a href="http://@Html.DisplayFor(model => model.Job.Company.website)">@Html.DisplayFor(model => model.Job.Company.website)</a></p>
+
+            </div>
+            <div class="col-md-3">
+                <p style="margin: 0px;">Contact: @Html.DisplayFor(model => model.Job.Company.contact)</p>
+                <p style="margin: 0px;">@Html.DisplayFor(model => model.Job.applyTo)</p>
+                <p style="margin: 0px;">Phone: @Html.DisplayFor(model => model.Job.Company.phone)</p>
+            </div>
+            <div class="col-md-3">
+                
+            </div>
+        </div>
+            <hr style="border-top-color: #ee6e73;" />
+       
+
+            <p>@Html.DisplayFor(model => model.Job.description)</p>
+
+            <hr style="border-top-color: #ee6e73;" />
+            <div class="row">
+                <div class="col-md-3" style="text-align: center;">
+                    <a class="text-success" style="text-decoration: none;" href="mailto:@Html.DisplayFor(model => model.Company.contact)">
+                        <i class="fa fa-mail-forward fa-lg"></i><br />
+                        Apply
+                    </a>
+                </div>
+                <div class="col-md-3" style="text-align: center;">
+                    <a class="text-warning" style="text-decoration: none;" href="/Searcher/Favourite?id=@Html.DisplayFor(model => model.Job.ID)">
+                        <i class="fa fa-star fa-lg"></i><br />
+                        Favourite
+                    </a>
+                </div>
+                <div class="col-md-3" style="text-align: center;">
+                    <a class="text-danger" style="text-decoration: none;" href="mailto:@Html.DisplayFor(model => model.Company.contact)">
+                        <i class="fa fa-volume-off fa-lg"></i><br />
+                        Ignore
+                    </a>
+                </div>
+                <div class="col-md-3" style="text-align: center;">
+                    <a id="ShareButton" style="text-decoration: none;" class="text-info" href="#">
+                        <i class="fa fa-share-alt fa-lg"></i><br />
+                        Share
+                    </a>
+                </div>
+                <div id="ShareDiv" style="display:none;">
+                    <h6>Add an email to share this Job.</h6>
+                    @using (Html.BeginForm())
+            {
+                        @Html.AntiForgeryToken()
+                        <input type="text" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,1044 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="notajobb_devModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="100" />
+          <Property Name="logo" Type="varchar" MaxLength="100" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="website" Type="varchar" MaxLength="100" />
+          <Property Name="credits" Type="int" />
+          <Property Name="contact" Type="varchar" MaxLength="100" />
+          <Property Name="phone" Type="varchar" MaxLength="100" />
+          <Property Name="industry" Type="varchar" MaxLength="100" />
+          <Property Name="NAJB_userID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="jobType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="industry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="salaryMin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="salaryMax" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="jobDate" Type="date" Nullable="false" />
+          <Property Name="jobEndDate" Type="date" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="applyTo" Type="varchar" MaxLength="250" />
+          <Property Name="reference" Type="varchar" MaxLength="50" />
+          <Property Name="experience" Type="varchar" MaxLength="50" />
+          <Property Name="views" Type="int" />
+        </EntityType>
+        <EntityType Name="JobCompanies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Companies" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="JobIndustries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Industries" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="JobMatches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" />
+          <Property Name="location" Type="varchar" MaxLength="50" />
+          <Property Name="industry" Type="varchar" MaxLength="50" />
+          <Property Name="jobType" Type="varchar" MaxLength="50" />
+          <Property Name="salaryMin" Type="varchar" MaxLength="50" />
+          <Property Name="salaryMax" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="companyName" Type="varchar" MaxLength="50" />
+          <Property Name="logo" Type="varchar" MaxLength="50" />
+          <Property Name="active" Type="bit" />
+          <Property Name="favourite" Type="bit" />
+          <Property Name="ignore" Type="bit" />
+          <Property Name="jobID" Type="int" />
+          <Property Name="NAJB_userID" Type="int" Nullable="false" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="applied" Type="bit" />
+          <Property Name="experience" Type="varchar" MaxLength="50" />
+          <Property Name="jobDate" Type="date" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="applyDate" Type="date" />
+        </EntityType>
+        <EntityType Name="JobSearch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="50" />
+          <Property Name="radius" Type="varchar" MaxLength="50" />
+          <Property Name="industry" Type="varchar" MaxLength="50" />
+          <Property Name="jobType" Type="varchar" MaxLength="50" />
+          <Property Name="jobName" Type="varchar" MaxLength="50" />
+          <Property Name="companyName" Type="varchar" MaxLength="50" />
+          <Property Name="salaryMin" Type="varchar" MaxLength="50" />
+          <Property Name="salaryMax" Type="varchar" MaxLength="50" />
+          <Property Name="additionalLocations" Type="varchar(max)" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="najb_userID" Type="int" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="experience" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="NAJB_user">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userImage" Type="varchar" MaxLength="128" />
+          <Property Name="IdentityID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="resume" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayPalID" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="Credits" Type="int" Nullable="false" />
+          <Property Name="Dollars" Type="money" Nullable="false" />
+          <Property Name="TransactionDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Company__NAJB_us__24927208">
+          <End Role="NAJB_user" Type="Self.NAJB_user" Multiplicity="1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NAJB_user">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="NAJB_userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Job__companyID__276EDEB3">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobMatche__compa__2F10007B">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="JobMatches" Type="Self.JobMatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobMatches">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobMatche__NAJB___2E1BDC42">
+          <End Role="NAJB_user" Type="Self.NAJB_user" Multiplicity="1" />
+          <End Role="JobMatches" Type="Self.JobMatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NAJB_user">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobMatches">
+              <PropertyRef Name="NAJB_userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobSearch__compa__2A4B4B5E">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="JobSearch" Type="Self.JobSearch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobSearch">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobSearch__najb___2B3F6F97">
+          <End Role="NAJB_user" Type="Self.NAJB_user" Multiplicity="0..1" />
+          <End Role="JobSearch" Type="Self.JobSearch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NAJB_user">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobSearch">
+              <PropertyRef Name="najb_userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NAJB_user__Ident__20C1E124">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="NAJB_user" Type="Self.NAJB_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NAJB_user">
+              <PropertyRef Name="IdentityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Compa__31EC6D26">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="notajobb_devModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="jesse" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="jesse" store:Type="Tables" />
+          <EntitySet Name="JobCompanies" EntityType="Self.JobCompanies" Schema="jesse" store:Type="Tables" />
+          <EntitySet Name="JobIndustries" EntityType="Self.JobIndustries" Schema="jesse" store:Type="Tables" />
+          <EntitySet Name="JobMatches" EntityType="Self.JobMatches" Schema="jesse" store:Type="Tables" />
+          <EntitySet Name="JobSearch" EntityType="Self.JobSearch" Schema="jesse" store:Type="Tables" />
+          <EntitySet Name="JobTitle" EntityType="Self.JobTitle" Schema="jesse" store:Type="Tables" />
+          <EntitySet Name="NAJB_user" EntityType="Self.NAJB_user" Schema="jesse" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="jesse" store:Type="Tables" />
+          <AssociationSet Name="FK__Company__NAJB_us__24927208" Association="Self.FK__Company__NAJB_us__24927208">
+            <End Role="NAJB_user" EntitySet="NAJB_user" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Job__companyID__276EDEB3" Association="Self.FK__Job__companyID__276EDEB3">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobMatche__compa__2F10007B" Association="Self.FK__JobMatche__compa__2F10007B">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="JobMatches" EntitySet="JobMatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobMatche__NAJB___2E1BDC42" Association="Self.FK__JobMatche__NAJB___2E1BDC42">
+            <End Role="NAJB_user" EntitySet="NAJB_user" />
+            <End Role="JobMatches" EntitySet="JobMatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobSearch__compa__2A4B4B5E" Association="Self.FK__JobSearch__compa__2A4B4B5E">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="JobSearch" EntitySet="JobSearch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobSearch__najb___2B3F6F97" Association="Self.FK__JobSearch__najb___2B3F6F97">
+            <End Role="NAJB_user" EntitySet="NAJB_user" />
+            <End Role="JobSearch" EntitySet="JobSearch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NAJB_user__Ident__20C1E124" Association="Self.FK__NAJB_user__Ident__20C1E124">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="NAJB_user" EntitySet="NAJB_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Compa__31EC6D26" Association="Self.FK__Transacti__Compa__31EC6D26">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="notajobb_devModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="NAJB_user" Relationship="Self.FK__NAJB_user__Ident__20C1E124" FromRole="AspNetUsers" ToRole="NAJB_user" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="logo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="credits" Type="Int32" />
+          <Property Name="contact" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="industry" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NAJB_userID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NAJB_user" Relationship="Self.FK__Company__NAJB_us__24927208" FromRole="Company" ToRole="NAJB_user" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK__Job__companyID__276EDEB3" FromRole="Company" ToRole="Job" />
+          <NavigationProperty Name="JobMatches" Relationship="Self.FK__JobMatche__compa__2F10007B" FromRole="Company" ToRole="JobMatches" />
+          <NavigationProperty Name="JobSearches" Relationship="Self.FK__JobSearch__compa__2A4B4B5E" FromRole="Company" ToRole="JobSearch" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Compa__31EC6D26" FromRole="Company" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jobType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="industry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="salaryMin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="salaryMax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jobDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="jobEndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="applyTo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="experience" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Job__companyID__276EDEB3" FromRole="Job" ToRole="Company" />
+          <Property Name="views" Type="Int32" />
+        </EntityType>
+        <EntityType Name="JobCompany">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Companies" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JobIndustry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Industries" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JobMatch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="industry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jobType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salaryMin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salaryMax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="favourite" Type="Boolean" />
+          <Property Name="ignore" Type="Boolean" />
+          <Property Name="jobID" Type="Int32" />
+          <Property Name="NAJB_userID" Type="Int32" Nullable="false" />
+          <Property Name="companyID" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__JobMatche__compa__2F10007B" FromRole="JobMatches" ToRole="Company" />
+          <NavigationProperty Name="NAJB_user" Relationship="Self.FK__JobMatche__NAJB___2E1BDC42" FromRole="JobMatches" ToRole="NAJB_user" />
+          <Property Name="applied" Type="Boolean" />
+          <Property Name="experience" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jobDate" Type="DateTime" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <Property Name="applyDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="JobSearch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="radius" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="industry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jobType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="jobName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salaryMin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salaryMax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="additionalLocations" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="najb_userID" Type="Int32" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="experience" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__JobSearch__compa__2A4B4B5E" FromRole="JobSearch" ToRole="Company" />
+          <NavigationProperty Name="NAJB_user" Relationship="Self.FK__JobSearch__najb___2B3F6F97" FromRole="JobSearch" ToRole="NAJB_user" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="NAJB_user">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userImage" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="IdentityID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__NAJB_user__Ident__20C1E124" FromRole="NAJB_user" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__Company__NAJB_us__24927208" FromRole="NAJB_user" ToRole="Company" />
+          <NavigationProperty Name="JobMatches" Relationship="Self.FK__JobMatche__NAJB___2E1BDC42" FromRole="NAJB_user" ToRole="JobMatches" />
+          <NavigationProperty Name="JobSearches" Relationship="Self.FK__JobSearch__najb___2B3F6F97" FromRole="NAJB_user" ToRole="JobSearch" />
+          <Property Name="resume" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayPalID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="Credits" Type="Int32" Nullable="false" />
+          <Property Name="Dollars" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Transacti__Compa__31EC6D26" FromRole="Transactions" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NAJB_user__Ident__20C1E124">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="NAJB_user" Type="Self.NAJB_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NAJB_user">
+              <PropertyRef Name="IdentityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Company__NAJB_us__24927208">
+          <End Role="NAJB_user" Type="Self.NAJB_user" Multiplicity="1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NAJB_user">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="NAJB_userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Job__companyID__276EDEB3">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobMatche__compa__2F10007B">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="JobMatches" Type="Self.JobMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobMatches">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobSearch__compa__2A4B4B5E">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="JobSearch" Type="Self.JobSearch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobSearch">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Compa__31EC6D26">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobMatche__NAJB___2E1BDC42">
+          <End Role="NAJB_user" Type="Self.NAJB_user" Multiplicity="1" />
+          <End Role="JobMatches" Type="Self.JobMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NAJB_user">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobMatches">
+              <PropertyRef Name="NAJB_userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobSearch__najb___2B3F6F97">
+          <End Role="NAJB_user" Type="Self.NAJB_user" Multiplicity="0..1" />
+          <End Role="JobSearch" Type="Self.JobSearch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NAJB_user">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JobSearch">
+              <PropertyRef Name="najb_userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="notajobb_devEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="JobCompanies" EntityType="Self.JobCompany" />
+          <EntitySet Name="JobIndustries" EntityType="Self.JobIndustry" />
+          <EntitySet Name="JobMatches" EntityType="Self.JobMatch" />
+          <EntitySet Name="JobSearches" EntityType="Self.JobSearch" />
+          <EntitySet Name="JobTitles" EntityType="Self.JobTitle" />
+          <EntitySet Name="NAJB_user" EntityType="Self.NAJB_user" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NAJB_user__Ident__20C1E124" Association="Self.FK__NAJB_user__Ident__20C1E124">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="NAJB_user" EntitySet="NAJB_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Company__NAJB_us__24927208" Association="Self.FK__Company__NAJB_us__24927208">
+            <End Role="NAJB_user" EntitySet="NAJB_user" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Job__companyID__276EDEB3" Association="Self.FK__Job__companyID__276EDEB3">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobMatche__compa__2F10007B" Association="Self.FK__JobMatche__compa__2F10007B">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="JobMatches" EntitySet="JobMatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobSearch__compa__2A4B4B5E" Association="Self.FK__JobSearch__compa__2A4B4B5E">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="JobSearch" EntitySet="JobSearches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Compa__31EC6D26" Association="Self.FK__Transacti__Compa__31EC6D26">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobMatche__NAJB___2E1BDC42" Association="Self.FK__JobMatche__NAJB___2E1BDC42">
+            <End Role="NAJB_user" EntitySet="NAJB_user" />
+            <End Role="JobMatches" EntitySet="JobMatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobSearch__najb___2B3F6F97" Association="Self.FK__JobSearch__najb___2B3F6F97">
+            <End Role="NAJB_user" EntitySet="NAJB_user" />
+            <End Role="JobSearch" EntitySet="JobSearches" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="notajobb_devModelStoreContainer" CdmEntityContainer="notajobb_devEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="notajobb_devModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="notajobb_devModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="notajobb_devModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="notajobb_devModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="notajobb_devModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="notajobb_devModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="credits" ColumnName="credits" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="NAJB_userID" ColumnName="NAJB_userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="notajobb_devModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="views" ColumnName="views" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="jobType" ColumnName="jobType" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="salaryMin" ColumnName="salaryMin" />
+                <ScalarProperty Name="salaryMax" ColumnName="salaryMax" />
+                <ScalarProperty Name="jobDate" ColumnName="jobDate" />
+                <ScalarProperty Name="jobEndDate" ColumnName="jobEndDate" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="applyTo" ColumnName="applyTo" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobCompanies">
+            <EntityTypeMapping TypeName="notajobb_devModel.JobCompany">
+              <MappingFragment StoreEntitySet="JobCompanies">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Companies" ColumnName="Companies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobIndustries">
+            <EntityTypeMapping TypeName="notajobb_devModel.JobIndustry">
+              <MappingFragment StoreEntitySet="JobIndustries">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Industries" ColumnName="Industries" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobMatches">
+            <EntityTypeMapping TypeName="notajobb_devModel.JobMatch">
+              <MappingFragment StoreEntitySet="JobMatches">
+                <ScalarProperty Name="applyDate" ColumnName="applyDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="jobDate" ColumnName="jobDate" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+                <ScalarProperty Name="applied" ColumnName="applied" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="jobType" ColumnName="jobType" />
+                <ScalarProperty Name="salaryMin" ColumnName="salaryMin" />
+                <ScalarProperty Name="salaryMax" ColumnName="salaryMax" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="favourite" ColumnName="favourite" />
+                <ScalarProperty Name="ignore" ColumnName="ignore" />
+                <ScalarProperty Name="jobID" ColumnName="jobID" />
+                <ScalarProperty Name="NAJB_userID" ColumnName="NAJB_userID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobSearches">
+            <EntityTypeMapping TypeName="notajobb_devModel.JobSearch">
+              <MappingFragment StoreEntitySet="JobSearch">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="radius" ColumnName="radius" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="jobType" ColumnName="jobType" />
+                <ScalarProperty Name="jobName" ColumnName="jobName" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="salaryMin" ColumnName="salaryMin" />
+                <ScalarProperty Name="salaryMax" ColumnName="salaryMax" />
+                <ScalarProperty Name="additionalLocations" ColumnName="additionalLocations" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="najb_userID" ColumnName="najb_userID" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTitles">
+            <EntityTypeMapping TypeName="notajobb_devModel.JobTitle">
+              <MappingFragment StoreEntitySet="JobTitle">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NAJB_user">
+            <EntityTypeMapping TypeName="notajobb_devModel.NAJB_user">
+              <MappingFragment StoreEntitySet="NAJB_user">
+                <ScalarProperty Name="resume" ColumnName="resume" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="userImage" ColumnName="userImage" />
+                <ScalarProperty Name="IdentityID" ColumnName="IdentityID" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="notajobb_devModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PayPalID" ColumnName="PayPalID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Credits" ColumnName="Credits" />
+                <ScalarProperty Name="Dollars" ColumnName="Dollars" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="notajobb_devModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

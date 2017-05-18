@@ -1,0 +1,49 @@
+﻿<div class="hide-on-med-and-down col-md-3">
+    <div class="jumbotron card" style="width: 100%; margin-bottom: 15px; min-height: 155px; height:25vh;">
+        <div style="position: relative; top: -80px; margin-bottom: -80px;">
+            @if (ViewBag.Image == "" || ViewBag.Image == null)
+            {
+                <div class="circle img-responsive" style="overflow: hidden; display: inline-block; width:100px; height:100px;">
+                    <img style="width:100px; height:100px;" class="" src="~/Content/Images/user.png">
+                </div>
+            }
+            else
+            {
+                <div class="circle img-responsive" style="overflow: hidden; display: inline-block; width:100px; height:100px;">
+                    <img style="width:100px; height:100px;" class="" src="/Content/Images/@ViewBag.Image">
+                </div>
+            }
+            <h4>@ViewBag.FirstName @ViewBag.LastName</h4>
+            <h6>@ViewBag.Email</h6>
+            @*<hr style="border-top-color: #ee6e73;" />
+            @ViewBag.Postings Job Posts<br />
+            @ViewBag.JobMatches Job Matches
+            <hr style="border-top-color: #ee6e73;" />
+            @ViewBag.Applications Applications*@
+        </div>
+    </div>
+    <div class="jumbotron card" style="width: 100%; margin-top: 80px; min-height: 289px; height:40vh;">
+        <div style="position: relative; top: -80px; margin-bottom: -80px;">
+            @if (ViewBag.Company.logo == "" || ViewBag.Company.logo == null)
+            {
+                <div class="circle img-responsive" style="overflow: hidden; display: inline-block; width:100px; height:100px;">
+                    <img style="width:100px; height:100px;" class="" src="~/Content/Images/user.png">
+                </div>
+            }
+            else
+            {
+                <div class="circle img-responsive" style="overflow: hidden; display: inline-block; width:100px; height:100px;">
+                    <img style="width:100px; height:100px;" class="" src="/Content/Images/@ViewBag.Company.logo">
+                </div>
+            }
+            <h4>@ViewBag.Company.name</h4>
+            <h5>Credits: @ViewBag.Company.credits</h5>
+            <hr style="border-top-color: #ee6e73;" />
+            @ViewBag.Postings Job Posts<br />
+            @ViewBag.JobMatches Job Matches
+            <hr style="border-top-color: #ee6e73;" />
+            @ViewBag.Applications Applications
+        </div>
+    </div>
+</div>
+

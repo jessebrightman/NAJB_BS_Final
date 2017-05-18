@@ -1,0 +1,533 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewUser
+
+@{
+    ViewBag.Title = "EditSearch";
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3 active"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Users" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-user fa-lg"></i><br />Users</a></li>
+    </ul>
+</div>
+<div class="mobileSearch" style="">
+    <div class="hide-on-med-and-down" style="margin-bottom:15px !important;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+            <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+                        <li role="presentation" id="profileli" class="col-xs-3 active"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Users" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-user fa-lg"></i><br />Users</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_SearcherUserBox")
+    <div class="col-md-9 mobile">
+        <div class="" style="height: auto;">
+            <div class="jumbotron card" style="width: 100%;">
+                <h4><i class="fa fa-list-alt page-icon" style="padding-left: 14px;"></i> Edit Your Job Search</h4>
+                <hr style="border-top-color: #ee6e73;" />
+
+                @using (Html.BeginForm("EditSearch", "Searcher", null, FormMethod.Post, new { @id = "editSearch" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <p>Enter at least 3 search terms here to begin your Job Search.</p>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @if (ViewBag.SuccessMessage != null)
+                        {
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @ViewBag.SuccessMessage
+                            </div>
+                        }
+                        @if (ViewBag.ErrorMessage != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @ViewBag.ErrorMessage
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="form-group col-md-12" id="JobNameChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="JobName"><i class="fa fa-comment fa-md primary" style=""></i> Job Name</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Enter your Job Name search terms here. Ex. CEO, Senior Accountant, etc." style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12" id="IndustryNameChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Industry"><i class="fa fa-building fa-md primary" style=""></i> Industry</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Industry, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" id="CompanyNameChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-commenting fa-md primary" style=""></i> Company Name</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-dollar fa-md primary" style=""></i> Salary</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.SalaryMin, new { htmlAttributes = new { @class = "form-control bootstrap-tagsinput SalaryMin" } })
+                                    @Html.ValidationMessageFor(model => model.SalaryMin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" id="LocationChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-map-marker fa-md primary" style=""></i> Location</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6" id="RadiusRadioButton">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-arrows-alt fa-md primary" style=""></i> Radius</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    <div class="bootstrap-tagsinput" style="">
+                                        <div class="col-md-12" style="padding-top: 6px;">
+                                            <div class="col-xs-12 col-md-2 radio radio-primary radio-inline" style="margin-left: 10px;">
+                                                <input type="radio" id="MobileRadiusch1" value="25" name="radioInline">
+                                                <label for="MobileRadiusch1" style="font-weight: bold;"> 25km </label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-2 radio radio-primary radio-inline">
+                                                <input type="radio" id="MobileRadiusch2" value="50" name="radioInline">
+                                                <label for="MobileRadiusch2" style="font-weight: bold;"> 50km </label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-2 radio radio-primary radio-inline">
+                                                <input type="radio" id="MobileRadiusch3" value="100" name="radioInline">
+                                                <label for="MobileRadiusch3" style="font-weight: bold;"> 100km </label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-4 radio radio-primary radio-inline">
+                                                <input type="radio" id="MobileRadiusch4" value="" name="radioInline">
+                                                <label for="MobileRadiusch4" style="font-weight: bold;"> Province Wide </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Radius, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" id="JobTypeCheckbox">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-clock-o fa-md primary" style=""></i> Job Type</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    <div class="bootstrap-tagsinput" style="">
+                                        <div class="checkbox checkbox-primary" style="padding-top: 12px;">
+                                            <div class="col-md-3">
+                                                <input id="MobileJobTypech1" type="checkbox" value="Full Time">
+                                                <label for="MobileJobTypech1" style="font-weight: bold;">
+                                                    Full Time
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileJobTypech2" type="checkbox" value="Part Time">
+                                                <label for="MobileJobTypech2" style="font-weight: bold;">
+                                                    Part Time
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileJobTypech3" type="checkbox" value="Casual">
+                                                <label for="MobileJobTypech3" style="font-weight: bold;">
+                                                    Casual
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileJobTypech4" type="checkbox" value="Contract">
+                                                <label for="MobileJobTypech4" style="font-weight: bold;">
+                                                    Contract
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" id="ExperienceCheckbox">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-sort-amount-asc fa-md primary" style=""></i> Job Experience</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    <div class="bootstrap-tagsinput" style="">
+                                        <div class="checkbox checkbox-primary" style="padding-top: 12px;">
+                                            <div class="col-md-3">
+                                                <input id="MobileExperiencech1" type="checkbox" value="Entry Level">
+                                                <label for="MobileExperiencech1" style="font-weight: bold;">
+                                                    Entry Level
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileExperiencech2" type="checkbox" value="0 - 2 Years">
+                                                <label for="MobileExperiencech2" style="font-weight: bold;">
+                                                    0 - 2 Years
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileExperiencech3" type="checkbox" value="2 - 5 Years">
+                                                <label for="MobileExperiencech3" style="font-weight: bold;">
+                                                    2 - 5 Years
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileExperiencech4" type="checkbox" value="5+ Years">
+                                                <label for="MobileExperiencech4" style="font-weight: bold;">
+                                                    5+ Years
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="border-top-color: #ee6e73;" />
+                        <div class="form-group">
+                            <div class="col-md-12" style="padding:0px;">
+                                <input type="submit" value="Save Search" class="btn btn-default pull-left" />
+                            </div>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(model => model.FirstName)
+                    @Html.HiddenFor(model => model.LastName)
+                    @Html.HiddenFor(model => model.Email)
+                    @Html.HiddenFor(model => model.JobName)
+                    @Html.HiddenFor(model => model.Industry)
+                    @Html.HiddenFor(model => model.CompanyName)
+                    @Html.HiddenFor(model => model.Location)
+                    @Html.HiddenFor(model => model.JobType)
+                    @Html.HiddenFor(model => model.Radius)
+                    @Html.HiddenFor(model => model.Experience)
+                    @Html.HiddenFor(model => model.AdditionalLocations, new { @id = "additionalLocations", @value = "" })
+                    <input type="hidden" name="AdditionalLocations" id="AdditionalLocations" value="" />
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" id="searchli" class="col-xs-3"><a href="/Searcher/Searcher" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Searches</a></li>
+            <li role="presentation" id="profileli" class="col-xs-3"><a href="/Searcher/AddSearch" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+            <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Searcher/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+            <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Searcher/Favourites" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-star fa-lg"></i><br />Favourites</a></li>
+        </ul>
+    </div>
+    @*<div class="hide-on-large-only" style="position: absolute; top: 120px; background-color: lightgrey; width: 100%; height: auto;">
+            <div class="jumbotron card" style="width: 100%; padding: 20px;">
+                <h4 style="font-size:20px;"><i class="fa fa-plus page-icon" style=""></i> Add A New Job Search</h4>
+                <hr style="border-top-color: #ee6e73;" />
+
+                @using (Html.BeginForm("EditSearch", "Searcher", null, FormMethod.Post, new { @id = "editSearch" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <p>Enter at least 3 search terms here to begin your Job Search.</p>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @if (ViewBag.SuccessMessage != null)
+                    {
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @ViewBag.SuccessMessage
+                            </div>
+                        }
+                        @if (ViewBag.ErrorMessage != null)
+                    {
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @ViewBag.ErrorMessage
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="form-group col-md-12" id="JobNameChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="JobName"><i class="fa fa-comment fa-md primary" style=""></i> Job Name</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Enter your Job Name search terms here. Ex. CEO, Senior Accountant, etc." style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12" id="IndustryNameChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Industry"><i class="fa fa-building fa-md primary" style=""></i> Industry</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Industry, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" id="CompanyNameChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-commenting fa-md primary" style=""></i> Company Name</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-dollar fa-md primary" style=""></i> Salary</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.SalaryMin, new { htmlAttributes = new { @class = "form-control bootstrap-tagsinput SalaryMin" } })
+                                    @Html.ValidationMessageFor(model => model.SalaryMin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" id="LocationChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-map-marker fa-md primary" style=""></i> Location</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6" id="RadiusRadioButton">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-arrows-alt fa-md primary" style=""></i> Radius</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    <div class="bootstrap-tagsinput" style="">
+                                        <div class="col-md-12" style="padding-top: 6px;">
+                                            <div class="col-xs-12 col-md-2 radio radio-primary radio-inline" style="margin-left: 10px;">
+                                                <input type="radio" id="MobileRadiusch1" value="25" name="radioInline">
+                                                <label for="MobileRadiusch1" style="font-weight: bold;"> 25km </label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-2 radio radio-primary radio-inline">
+                                                <input type="radio" id="MobileRadiusch2" value="50" name="radioInline">
+                                                <label for="MobileRadiusch2" style="font-weight: bold;"> 50km </label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-2 radio radio-primary radio-inline">
+                                                <input type="radio" id="MobileRadiusch3" value="100" name="radioInline">
+                                                <label for="MobileRadiusch3" style="font-weight: bold;"> 100km </label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-4 radio radio-primary radio-inline">
+                                                <input type="radio" id="MobileRadiusch4" value="" name="radioInline">
+                                                <label for="MobileRadiusch4" style="font-weight: bold;"> Province Wide </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Radius, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" id="JobTypeCheckbox">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-clock-o fa-md primary" style=""></i> Job Type</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    <div class="bootstrap-tagsinput" style="">
+                                        <div class="checkbox checkbox-primary" style="padding-top: 12px;">
+                                            <div class="col-md-3">
+                                                <input id="MobileJobTypech1" type="checkbox" value="Full Time">
+                                                <label for="MobileJobTypech1" style="font-weight: bold;">
+                                                    Full Time
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileJobTypech2" type="checkbox" value="Part Time">
+                                                <label for="MobileJobTypech2" style="font-weight: bold;">
+                                                    Part Time
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileJobTypech3" type="checkbox" value="Casual">
+                                                <label for="MobileJobTypech3" style="font-weight: bold;">
+                                                    Casual
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileJobTypech4" type="checkbox" value="Contract">
+                                                <label for="MobileJobTypech4" style="font-weight: bold;">
+                                                    Contract
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" id="ExperienceCheckbox">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-sort-amount-asc fa-md primary" style=""></i> Job Experience</label>
+                                <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                                <div class="col-md-12">
+                                    <div class="bootstrap-tagsinput" style="">
+                                        <div class="checkbox checkbox-primary" style="padding-top: 12px;">
+                                            <div class="col-md-3">
+                                                <input id="MobileExperiencech1" type="checkbox" value="Entry Level">
+                                                <label for="MobileExperiencech1" style="font-weight: bold;">
+                                                    Entry Level
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileExperiencech2" type="checkbox" value="0 - 2 Years">
+                                                <label for="MobileExperiencech2" style="font-weight: bold;">
+                                                    0 - 2 Years
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileExperiencech3" type="checkbox" value="2 - 5 Years">
+                                                <label for="MobileExperiencech3" style="font-weight: bold;">
+                                                    2 - 5 Years
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input id="MobileExperiencech4" type="checkbox" value="5+ Years">
+                                                <label for="MobileExperiencech4" style="font-weight: bold;">
+                                                    5+ Years
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="border-top-color: #ee6e73;" />
+                        <div class="form-group">
+                            <div class="col-md-12" style="padding:0px;">
+                                <input type="submit" value="Save Search" class="btn btn-default pull-left" />
+                            </div>
+                        </div>
+                    </div>
+                        @Html.HiddenFor(model => model.FirstName)
+                        @Html.HiddenFor(model => model.LastName)
+                        @Html.HiddenFor(model => model.Email)
+                        @Html.HiddenFor(model => model.JobName)
+                        @Html.HiddenFor(model => model.Industry)
+                        @Html.HiddenFor(model => model.CompanyName)
+                        @Html.HiddenFor(model => model.Location)
+                        @Html.HiddenFor(model => model.JobType)
+                        @Html.HiddenFor(model => model.Radius)
+                        @Html.HiddenFor(model => model.Experience)
+                        @Html.HiddenFor(model => model.AdditionalLocations, new { @id = "additionalLocations", @value="" } )
+                        <input type="hidden" name="AdditionalLocations" id="AdditionalLocations" value="" />
+                }
+            </div>
+        </div>*@
+</div>
+
+        @{
+            var experience = (Model.Experience ?? "");
+            var radius = (Model.Radius ?? "");
+            var jobType = (Model.JobType ?? "");
+        }
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    if("@experience" === ""){
+
+                    }
+                    else
+                    {
+                        if ('@experience' === 'Entry Level') {
+                            $('#Experiencech1').attr('checked', 'checked');
+                            $('#MobileExperiencech1').attr('checked', 'checked');
+                        }
+                        if ('@experience' === '0 - 2 Years') {
+                            $('#MobileExperiencech2').attr('checked', 'checked');
+                        }
+                        if ('@experience' === '2 - 5 Years') {
+                            $('#MobileExperiencech3').attr('checked', 'checked');
+                        }
+                        if ('@experience' === '5+ Years') {
+                            $('#MobileExperiencech4').attr('checked', 'checked');
+                        }
+                    }
+                    if("@radius" === ""){
+                    }
+                    else{
+
+                        if ('@radius' === '25') {
+                            $('#Radiusch1').attr('checked', 'checked');
+                            $('#MobileRadiusch1').attr('checked', 'checked');
+                        }
+                        if ('@radius' === '50') {
+                            $('#Radiusch2').attr('checked', 'checked');
+                            $('#MobileRadiusch2').attr('checked', 'checked');
+                        }
+                        if ('@radius' === '100') {
+                            $('#Radiusch3').attr('checked', 'checked');
+                            $('#MobileRadiusch3').attr('checked', 'checked');
+                        }
+                        if ('@radius' === '') {
+                            $('#Radiusch4').attr('checked', 'checked');
+                            $('#MobileRadiusch4').attr('checked', 'checked');
+                        }
+                    }
+                    if("@jobType" === ""){
+                    }
+                    else{
+
+                        if ('@jobType' === 'Full Time') {
+                            $('#JobTypech1').attr('checked', 'checked');
+                            $('#MobileJobTypech1').attr('checked', 'checked');
+                        }
+                        if ('@jobType' === 'Part Time') {
+                            $('#JobTypech2').attr('checked', 'checked');
+                            $('#MobileJobTypech2').attr('checked', 'checked');
+                        }
+                        if ('@jobType' === 'Casual') {
+                            $('#JobTypech3').attr('checked', 'checked');
+                            $('#MobileJobTypech3').attr('checked', 'checked');
+                        }
+                        if ('@jobType' === 'Contract') {
+                            $('#JobTypech4').attr('checked', 'checked');
+                            $('#MobileJobTypech4').attr('checked', 'checked');
+                        }
+                    }
+                    if(@Model.SalaryMin != null || @Model.SalaryMin != '' || @Model.SalaryMax != null || @Model.SalaryMax != ''){
+                        var salaryMin = @Model.SalaryMin;
+                        var salaryMax = @Model.SalaryMax;
+
+                        $("#SalaryMin").ionRangeSlider({
+                            type: "double",
+                            grid: true,
+                            prefix: "$",
+                            min: 0,
+                            max: 150000,
+                            from: @Model.SalaryMin,
+                            to: @Model.SalaryMax,
+                            step: 5000
+                        });
+                    }
+                });
+            </script>
+        }
+

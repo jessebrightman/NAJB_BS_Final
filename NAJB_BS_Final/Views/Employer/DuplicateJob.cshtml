@@ -1,0 +1,388 @@
+﻿@model NAJB_BS_Final.ViewModels.AddJob
+
+@{
+    ViewBag.Title = "DuplicateJob";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Users" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-user fa-lg"></i><br />Users</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+    </ul>
+</div>
+
+<div class="mobileSearch" style="">
+    <div class="jumbotron card" style="width: 100%;">
+        <h1><i class="fa fa-list-alt page-icon" style="padding-left: 14px;"></i> Duplicate Job</h1>
+        <hr style="border-top-color: #ee6e73;" />
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <p>Enter your Job requirements here.</p>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row">
+                    <div class="form-group col-md-12" id="JobNameChip">
+                        <label class="control-label col-md-12" style="text-align: left;" for="JobName"><i class="fa fa-comment fa-md primary" style=""></i> Job Name</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6" id="ApplyToChip">
+                        <label class="control-label col-md-12" style="text-align: left;" for="ApplyTo"><i class="fa fa-comment fa-md primary" style=""></i> ApplyTo</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.ApplyTo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ApplyTo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6" id="ReferenceChip">
+                        <label class="control-label col-md-12" style="text-align: left;" for="ReferenceNumber"><i class="fa fa-comment fa-md primary" style=""></i> Reference Number</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.ReferenceNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReferenceNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12" id="IndustryNameChip">
+                        <label class="control-label col-md-12" style="text-align: left;" for="Industry"><i class="fa fa-building fa-md primary" style=""></i> Industry</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Industry, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6" id="LocationChip">
+                        <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-map-marker fa-md primary" style=""></i> Location</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6" id="DateChip">
+                        <label class="control-label col-md-12" style="text-align: left;" for="Date"><i class="fa fa-calendar fa-md primary" style=""></i> Start Date</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6" id="JobTypeCheckbox">
+                        <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-clock-o fa-md primary" style=""></i> Job Type</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            <div class="bootstrap-tagsinput" style="">
+                                <div class="checkbox checkbox-primary" style="padding-top: 12px;">
+                                    <div class="col-md-3">
+                                        <input id="JobTypech1" type="checkbox" value="Full Time">
+                                        <label for="JobTypech1" style="font-weight: bold;">
+                                            Full Time
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input id="JobTypech2" type="checkbox" value="Part Time">
+                                        <label for="JobTypech2" style="font-weight: bold;">
+                                            Part Time
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input id="JobTypech3" type="checkbox" value="Casual">
+                                        <label for="JobTypech3" style="font-weight: bold;">
+                                            Casual
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input id="JobTypech4" type="checkbox" value="Contract">
+                                        <label for="JobTypech4" style="font-weight: bold;">
+                                            Contract
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6" id="ExperienceCheckbox">
+                        <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-sort-amount-asc fa-md primary" style=""></i> Job Experience</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            <div class="bootstrap-tagsinput" style="">
+                                <div class="checkbox checkbox-primary" style="padding-top: 12px;">
+                                    <div class="col-md-3">
+                                        <input id="Experiencech1" type="checkbox" value="Entry Level">
+                                        <label for="Experiencech1" style="font-weight: bold;">
+                                            Entry Level
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input id="Experiencech2" type="checkbox" value="0 - 2 Years">
+                                        <label for="Experiencech2" style="font-weight: bold;">
+                                            0 - 2 Years
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input id="Experiencech3" type="checkbox" value="2 - 5 Years">
+                                        <label for="Experiencech3" style="font-weight: bold;">
+                                            2 - 5 Years
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input id="Experiencech4" type="checkbox" value="5+ Years">
+                                        <label for="Experiencech4" style="font-weight: bold;">
+                                            5+ Years
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-sort-amount-asc fa-md primary" style=""></i> Salary</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-3">
+                            <div class="checkbox checkbox-primary" style="padding: 12px 0px; margin-left:40px;">
+                                <input id="SalaryCheckbox" type="checkbox" value="SalaryCheckbox">
+                                <label for="SalaryCheckbox" style="font-weight: bold;">
+                                    Use Salary?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-9" id="SalaryDiv" style="display: none;">
+                            @Html.EditorFor(model => model.SalaryMin, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SalaryMin, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-12" style="text-align: left;" for="JobDescription"><i class="fa fa-pencil-square-o fa-md primary" style=""></i> Job Description</label>
+                        <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!" style="float: right; color: #ee6e73;"></i>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.JobDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.JobDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr style="border-top-color: #ee6e73;" />
+                <div class="form-group">
+                    <div class="col-md-12" style="padding:0px;">
+                        <input type="submit" value="Save Job" class="btn btn-default pull-left" onclick="getValue()" />
+                        <!-- Button trigger modal -->
+                        <a target="_blank" href="" value="Preview" class="btn btn-default" data-toggle="modal" data-target="#myModal" onclick="getPreview()" style="float:right;">Preview</a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document" style="max-width: 800px; width: 90%;">
+                                <div class="modal-content jumbotron card">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        @*<h4 class="modal-title" id="myModalLabel">Modal title</h4>*@
+                                        <h3 class="modal-title" id="JobNamePreview"><i class="fa fa-list-alt" style="color:#ee6e73"></i></h3>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p id="LocationPreview" style="margin: 0px;"></p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p id="JobTypePreview" style="margin: 0px;"></p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p id="ExperiencePreview" style="margin: 0px;"></p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p id="JobTypePreview" style="margin: 0px;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <hr style="border-top-color: #ee6e73; clear: both;" />
+                                            <div class="col-md-2" style="margin: 0 auto;">
+                                                <img id="LogoPreview" class="circle" style="width: 75px; height: 75px; margin: auto; display: block;" src="~/Content/Images/" />
+                                            </div>
+                                            <div class="col-md-5">
+                                                <h4 id="CompanyNamePreview" style="margin-top: 5px;"><a href="/Searcher/Company?id=@Html.DisplayFor(model => model.Company.ID)">@Html.DisplayFor(model => model.Company.name)</a></h4>
+                                                <p id="AddressPreview" style="margin: 0px;">*add address*</p>
+                                                <p id="WebsitePreview" style="margin: 0px;"><a href="http://">*add website*</a></p>
+
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p style="margin: 0px;">Contact: *add contact*</p>
+                                                <p style="margin: 0px;">Apply To: @Html.DisplayFor(model => model.ApplyTo)</p>
+                                                <p style="margin: 0px;">Phone: *add phone*</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <hr style="border-top-color: #ee6e73;" />
+                                            <p>@Html.DisplayFor(model => model.JobDescription)</p>
+                                        </div>
+                                        <div class="row">
+                                        </div>
+                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                    </div>
+                                    @*<div class="modal-body">
+
+
+
+
+
+                                            <hr style="border-top-color: #ee6e73;" />
+                                            <div class="row">
+                                                <div class="col-xs-3" style="text-align: center;">
+
+                                                        <a class="text-success" style="text-decoration: none;" href="mailto:@Html.DisplayFor(model => model.ApplyTo)">
+                                                            <i class="fa fa-mail-forward fa-lg"></i><br />
+                                                            Apply
+                                                        </a>
+
+                                                </div>
+                                                <div class="col-xs-3" style="text-align: center;">
+                                                    <a class="text-warning" style="text-decoration: none;" href="">
+                                                        <i class="fa fa-star fa-lg"></i><br />
+                                                        Favourite
+                                                    </a>
+                                                </div>
+                                                <div class="col-xs-3" style="text-align: center;">
+                                                    <a class="text-danger" style="text-decoration: none;" href="">
+                                                        <i class="fa fa-volume-off fa-lg"></i><br />
+                                                        Ignore
+                                                    </a>
+                                                </div>
+                                                <div class="col-xs-3" style="text-align: center;">
+                                                    <a id="ShareButton" style="text-decoration: none;" class="text-info" href="#">
+                                                        <i class="fa fa-share-alt fa-lg"></i><br />
+                                                        Share
+                                                    </a>
+                                                </div>
+                                                <div id="ShareDiv" style="display:none;">
+                                                    <h6>Add an email to share this Job.</h6>
+                                                    @using (Html.BeginForm())
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="text" />
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    @*<div class="modal-footer">
+
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.Company.ID)
+                @Html.HiddenFor(model => model.Company.credits)
+                @Html.HiddenFor(model => model.JobName)
+                @Html.HiddenFor(model => model.Industry)
+                @Html.HiddenFor(model => model.Location)
+                @Html.HiddenFor(model => model.StartDate)
+                @Html.HiddenFor(model => model.SalaryMin)
+                @Html.HiddenFor(model => model.SalaryMax)
+                @Html.HiddenFor(model => model.JobDescription)
+                @Html.HiddenFor(model => model.JobType)
+                @Html.HiddenFor(model => model.Experience)
+                @Html.HiddenFor(model => model.ReferenceNumber)
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<!-- need to write script to update checkboxes and radio buttons -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if("@Model.Experience" === ""){
+
+            }
+            else
+            {
+                if ('@Model.Experience' === 'Entry Level') {
+                    $('#Experiencech1').attr('checked', 'checked');
+                    $('#Experiencech1').attr('checked', 'checked');
+                }
+                if ('@Model.Experience' === '0 - 2 Years') {
+                    $('#Experiencech2').attr('checked', 'checked');
+                }
+                if ('@Model.Experience' === '2 - 5 Years') {
+                    $('#Experiencech3').attr('checked', 'checked');
+                }
+                if ('@Model.Experience' === '5+ Years') {
+                    $('#Experiencech4').attr('checked', 'checked');
+                }
+            }
+
+            if("@Model.JobType" === ""){
+            }
+            else{
+
+                if ('@Model.JobType' === 'Full Time') {
+                    $('#JobTypech1').attr('checked', 'checked');
+                    $('#JobTypech1').attr('checked', 'checked');
+                }
+                if ('@Model.JobType' === 'Part Time') {
+                    $('#JobTypech2').attr('checked', 'checked');
+                    $('#JobTypech2').attr('checked', 'checked');
+                }
+                if ('@Model.JobType' === 'Casual') {
+                    $('#JobTypech3').attr('checked', 'checked');
+                    $('#JobTypech3').attr('checked', 'checked');
+                }
+                if ('@Model.JobType' === 'Contract') {
+                    $('#JobTypech4').attr('checked', 'checked');
+                    $('#JobTypech4').attr('checked', 'checked');
+                }
+            }
+            if(@Model.SalaryMin != null || @Model.SalaryMin != '' || @Model.SalaryMax != null || @Model.SalaryMax != ''){
+                var salaryMin = @Model.SalaryMin;
+                var salaryMax = @Model.SalaryMax;
+
+                $("#SalaryMin").ionRangeSlider({
+                    type: "double",
+                    grid: true,
+                    prefix: "$",
+                    min: 0,
+                    max: 150000,
+                    from: @Model.SalaryMin,
+                    to: @Model.SalaryMax,
+                    step: 5000
+                });
+            }
+        });
+    </script>
+    <!-- CKE Editor -->
+<script src="//cdn.ckeditor.com/4.5.10/standard/ckeditor.js"></script>
+<script>
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+    CKEDITOR.replace('JobDescription');
+
+</script>
+<script>
+    var description = $('#JobDescription').val();
+    CKEDITOR.instances['JobDescription'].setData(description)
+</script>
+}

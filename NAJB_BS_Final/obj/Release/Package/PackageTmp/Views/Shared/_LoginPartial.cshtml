@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (HttpContext.Current.User.IsInRole("Employer") && Request.IsAuthenticated && HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @if (ViewBag.Image == "" || ViewBag.Image == null)
+                    {
+                    <img class="circle" src="~/Content/Images/user.png" style="display: inline-block; width: 40px; height: 40px;">
+                    @Html.ActionLink("Hello " + (string)ViewBag.FirstName + " " + (string)ViewBag.LastName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = "display: inline-block" })
+                }
+                else
+                {
+                    <img class="circle" src="/Content/Images/@ViewBag.Image" style="display: inline-block; width: 40px; height: 40px;">
+                    @Html.ActionLink("Hello " + (string)ViewBag.FirstName + " " + (string)ViewBag.LastName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = "display: inline-block" })
+                    //<img id="userImage" src="/Content/@Model.UserImage" class="najb-avatar">
+                }
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()"><div class="fa fa-lg fa-sign-out"></div> Log off</a></li>
+        </ul>
+    }
+}
+
+else if (HttpContext.Current.User.IsInRole("Searcher") && Request.IsAuthenticated && HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @if (ViewBag.Image == "" || ViewBag.Image == null)
+                    {
+                    <img class="circle" src="~/Content/Images/user.png" style="display: inline-block; width: 40px; height: 40px;">
+                    @Html.ActionLink("Hello " + (string)ViewBag.FirstName + " " + (string)ViewBag.LastName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = "display: inline-block" })
+                }
+                else
+                {
+                    <img class="circle" src="/Content/Images/@ViewBag.Image" style="display: inline-block; width: 40px; height: 40px;">
+                    @Html.ActionLink("Hello " + (string)ViewBag.FirstName + " " + (string)ViewBag.LastName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = "display: inline-block" })
+                    //<img id="userImage" src="/Content/@Model.UserImage" class="najb-avatar">
+                }
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()"><div class="fa fa-lg fa-sign-out"></div> Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="/Account/Login" id="loginLink"><div class="fa fa-lg fa-sign-in"></div> Login</a></li>
+        <li><a href="/Account/Register" id="registerLink"><div class="fa fa-lg fa-user-plus"></div> Sign Up</a></li>
+    </ul>
+}

@@ -1,0 +1,148 @@
+﻿@using NAJB_BS_Final.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="row hide-on-small-only" style="align-self:center; width: 500px;">
+    <div class="col s12">
+        <div class="card">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "", role = "form" }))
+            {
+                @*<div class="card-image" style="height:20%; max-height: 100px; overflow: hidden;">
+                        <img src="~/Content/Images/office.jpg" style="" />
+                    </div>*@
+                <div class="card-content">
+                    <h4 class=""><span class="fa fa-lg fa-sign-in" style="color: #ee6e73;"></span>  Login</h4>
+                    <hr style="border-top-color: #ee6e73;" />
+                    <div id="loginForm" class="">
+
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "" })
+                                @Html.LabelFor(m => m.Email, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.PasswordFor(m => m.Password, new { @class = "" })
+                                @Html.LabelFor(m => m.Password, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                <p>
+                                    <input type="checkbox" id="RememberMe" />
+                                    <label for="RememberMe">Remember Me?</label>
+                                </p>
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                                                </div>
+                                            </div>*@
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                <p class="center-align">
+                                    @Html.ActionLink("Register as a new user", "Register")
+                                </p>
+                                <p class="center-align">
+                                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-action center-align">
+                    <button type="submit" class="btn btn-default waves-effect waves-light center-align"><i class="fa fa-sign-in"></i> Login</button>
+                </div>
+            }
+            <div class="card-content">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <section id="socialLoginForm" class="center-align">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row hide-on-med-and-up" style="align-self:center; width: 90%; ">
+    <div class="col s12">
+        <div class="card">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "", role = "form" }))
+            {
+                <div class="card-content">
+                    <h4 class="">Login</h4>
+                    <hr />
+                    <div id="loginForm" class="">
+
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "" })
+                                @Html.LabelFor(m => m.Email, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.PasswordFor(m => m.Password, new { @class = "" })
+                                @Html.LabelFor(m => m.Password, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                <p>
+                                    <input type="checkbox" id="RememberMe" />
+                                    <label for="RememberMe">Remember Me?</label>
+                                </p>
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                                                </div>
+                                            </div>*@
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                <p class="center-align">
+                                    @Html.ActionLink("Register as a new user", "Register")
+                                </p>
+                                <p class="center-align">
+                                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-action center-align">
+                    <button type="submit" class="btn btn-default waves-effect waves-light center-align"><i class="fa fa-sign-in"></i> Login</button>
+                </div>
+            }
+            <div class="card-content">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <section id="socialLoginForm">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

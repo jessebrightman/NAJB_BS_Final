@@ -1,0 +1,130 @@
+﻿@model NAJB_BS_Final.Job
+
+@{
+    ViewBag.Title = "Job";
+}
+
+<h2>Job</h2>
+
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jobType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.industry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.industry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salaryMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salaryMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salaryMax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salaryMax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jobDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jobEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.applyTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.applyTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.experience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.experience)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

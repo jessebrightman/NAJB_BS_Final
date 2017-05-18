@@ -1,0 +1,62 @@
+﻿@*@model NAJB_BS_Final.ViewModels.ViewUser*@
+
+    @if (Request.IsAuthenticated)
+    {
+        
+        <div id="sidenav" class="side-nav" style="z-index: 994;">
+            <div class="userView">
+                <img class="background" src="~/Content/Images/office.jpg">
+                @if (ViewBag.Image == "" || ViewBag.Image == null)
+                {
+                    <img class="circle" src="~/Content/Images/user.png">
+                }
+                else
+                {
+                    <img class="circle" src="/Content/Images/@ViewBag.Image">
+                    //<img id="userImage" src="/Content/@Model.UserImage" class="najb-avatar">
+                }
+
+                <span class="white-text name">@ViewBag.FirstName @ViewBag.LastName</span>
+                <span class="white-text email">@ViewBag.Email</span>
+            </div>
+            <ul class="hide-on-med-and-down">
+                <li class="links"><a href="@Url.Action("About", "Searcher")" class="waves-effect"><i class="fa fa-info-circle fa-lg"></i>About</a></li>
+                <li class="links"><a href="@Url.Action("AddSearch", "Searcher")" class="waves-effect"><i class="fa fa-plus fa-lg"></i>Add Job Search</a></li>
+                <li class="links"><a href="@Url.Action("Searcher", "Searcher")" class="waves-effect"><i class="fa fa-list-alt fa-lg"></i>My Job Searches <span class="badge red">@ViewBag.Searches</span></a></li>
+                <li class="links"><a href="@Url.Action("EditSearcher", "Searcher")" class="waves-effect"><i class="fa fa-pencil fa-lg"></i>Edit Profile</a></li>
+                <li class="links"><a href="@Url.Action("Matches", "Searcher")" class="waves-effect"><i class="fa fa-retweet fa-lg"></i>Job Matches <span class="badge red">@ViewBag.Matches</span></a></li>
+                <li class="links"><a href="@Url.Action("Favourites", "Searcher")" class="waves-effect"><i class="fa fa-star fa-lg"></i>Job Favourites <span class="badge red">@ViewBag.Favourites</span></a></li>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <li class="links" style="position: absolute; bottom: 72px; right: 0px;"><a class="" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out fa-lg"></i>Log off</a></li>
+
+                }
+                <li class="links" style="position: absolute; bottom: 72px;"><a href="@Url.Action("About", "Searcher")" class=""><i class="fa fa-question-circle fa-lg"></i>Help</a></li>
+            </ul>
+            <ul class="hide-on-large-only">
+                <li class="links" style="position: absolute; bottom: 72px;"><a href="@Url.Action("About", "Searcher")" class=""><i class="fa fa-question-circle fa-lg"></i>Help</a></li>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <li class="links" style="position: absolute; bottom: 72px; right: 0px;"><a class="" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out fa-lg"></i>Log off</a></li>
+
+                }
+                
+                <li class="links"><a href="@Url.Action("About", "Searcher")" class="waves-effect"><i class="fa fa-info-circle fa-lg"></i>About</a></li>
+                <li class="links"><a href="@Url.Action("AddSearch", "Searcher")" class="waves-effect"><i class="fa fa-plus fa-lg"></i>Add Job Search</a></li>
+                <li class="links"><a href="@Url.Action("Searcher", "Searcher")" class="waves-effect"><i class="fa fa-list-alt fa-lg"></i>My Job Searches <span class="badge red">@ViewBag.Searches</span></a></li>
+                <li class="links"><a href="@Url.Action("EditSearcher", "Searcher")" class="waves-effect"><i class="fa fa-pencil fa-lg"></i>Edit Profile</a></li>
+                <li class="links"><a href="@Url.Action("Favourites", "Searcher")" class="waves-effect"><i class="fa fa-star fa-lg"></i>Job Favourites <span class="badge red">@ViewBag.Favourites</span></a></li>
+               
+            </ul>
+        </div>
+        <div id="backdrop"></div>
+      
+    }
+
+
+    
+   
+
+

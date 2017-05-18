@@ -1,0 +1,115 @@
+﻿@model NAJB_BS_Final.Company
+
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+    </ul>
+</div>
+<div class="mobileSearch" style="">
+    <div class="hide-on-med-and-down" style="margin-bottom:15px !important;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+            <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+                        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_EmployerUserBox")
+    <div class="col-md-9 mobile">
+        <div class="jumbotron card" style="width: 100%;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1><i class="fa fa-building page-icon" style="color:#ee6e73"></i> @Html.DisplayFor(model => model.name)</h1>
+                    <hr style="border-top-color: #ee6e73;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-2" style="margin: 0 auto;">
+                    <img class="circle" style="width: 80px; height: 80px; margin: auto; display: block;" src="~/Content/Images/@Html.DisplayFor(model => model.logo)" />
+                </div>
+                <div class="col-xs-12 col-md-5">
+                    <h3 style="margin-top: 5px;"><a href="/Employer/Company?id=@Html.DisplayFor(model => model.ID)">@Html.DisplayFor(model => model.name)</a></h3>
+                    <p style="margin: 0px;">@Html.DisplayFor(model => model.address)</p>
+                    <p style="margin: 0px;"><a href="http://@Html.DisplayFor(model => model.website)">@Html.DisplayFor(model => model.website)</a></p>
+
+                </div>
+                <div class="col-xs-12 col-md-5">
+                    <p style="margin: 0px;">Phone: @Html.DisplayFor(model => model.phone)</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <hr style="border-top-color: #ee6e73;" />
+                    <div>
+                        <p><strong>Company Description:</strong></p>
+                        <p>@Html.Raw(Model.description)</p>
+                    </div>
+                    <hr style="border-top-color: #ee6e73;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="@Url.Action("EditCompany", "Employer")" class="btn btn-default">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    @*<div class="hide-on-med-and-down" style="height: auto;">
+            <div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">
+            <div class="jumbotron card" style="width: 100%;">
+                <h2>Company</h2>
+
+                <div>
+                    <h4>ViewCompany</h4>
+                    <hr />
+                    <div class="row">
+                        <div class="col s7">
+                            @if (Model.CompanyImage == "" || Model.CompanyImage == null)
+                            {
+                                <img class="circle" style="height: 75px; width: 75px; float:left; margin:10px;" src="~/Content/Images/user.png">
+                            }
+                            else
+                            {
+                                <img class="circle" style="height: 75px; width: 75px; float:left; margin:10px;" src="/Content/@Model.CompanyImage">
+                                //<img id="userImage" src="/Content/@Model.UserImage" class="najb-avatar">
+                            }
+                            <h3 style="float:left;margin-left: 20px;"><strong>@Html.DisplayFor(model => model.CompanyName, new { @class = "" })</strong></h3>
+                        </div>
+                        <div class="col s5 right-align">
+                            <p><strong>Address: </strong>@Html.DisplayFor(model => model.Address, new { @class = "" })</p>
+                            <p><strong>Website: </strong>@Html.DisplayFor(model => model.Website, new { @class = "" })</p>
+                            <p><strong>Apply To: </strong>@Html.DisplayFor(model => model.Contact, new { @class = "" })</p>
+                            <p><strong>Email: </strong>@Html.DisplayFor(model => model.Email, new { @class = "" })</p>
+                            <p><strong>Industry: </strong>@Html.DisplayFor(model => model.Industry, new { @class = "" })</p>
+                        </div>
+                    </div>
+                    <hr />
+
+
+                    <p><strong>Description: </strong>@Html.DisplayFor(model => model.CompanyDescription, new { @class = "" })</p>
+
+                    <hr />
+                    <a href="@Url.Action("EditCompany", "Employer")" class="btn btn-default">Edit</a>
+                </div>
+            </div>
+        </div>*@

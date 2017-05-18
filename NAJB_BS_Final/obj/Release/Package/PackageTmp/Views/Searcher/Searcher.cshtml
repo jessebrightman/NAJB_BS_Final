@@ -1,0 +1,564 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewUser
+
+@{
+    ViewBag.Title = "Searcher";
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.SuccessMessage
+    </div>
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<div class="hide-on-med-and-down" style="height: auto;">
+@*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+<div class="jumbotron card" style="width: 100%;">
+    <h3><i class="fa fa-list-alt" style="color:#ee6e73"></i> My Job Searches</h3>
+    <hr style="border-top-color: #ee6e73;" />
+
+    <table class="table table_id">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Industry)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Experience)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Radius)
+                </th>
+                <th>
+                    @Html.Raw("Salary")
+                </th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.JobSearches)
+            {
+                <tr>
+                    <td style="text-align: center;"><i class="fa fa-chevron-down fa-lg"></i></td>
+                    <td style="text-align: center;">
+                        @if (item.Active == true)
+                        {
+                            <a class="" style="color: green" id="job-active-@item.ID" href="DeactivateJobSearch?id=@item.ID"><i class="fa fa-lightbulb-o fa-2x"></i></a>
+
+                        }
+                        else
+                        {
+                            <a class="" style="color: red" id="job-inactive-@item.ID" href="ActivateJobSearch?id=@item.ID"><i class="fa fa-lightbulb-o fa-2x"></i></a>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Industry)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Experience)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Radius)@Html.Raw(" kms")
+                    </td>
+                    <td>
+                        @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMin) - @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMax)
+                    </td>
+                    <td>
+                        <a class="" href="EditSearch?id=@item.ID"><i class="fa fa-pencil fa-2x"></i></a>
+                        <a class="" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID"><i class="fa fa-trash fa-2x" style="color:red;"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="col-xs-3 active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-list-alt fa-lg"></i></a></li>
+        <li role="presentation" class="col-xs-3"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-plus fa-lg"></i></a></li>
+        <li role="presentation" class="col-xs-3"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><i class="fa fa-building fa-lg"></i></a></li>
+        <li role="presentation" class="col-xs-3"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-star fa-lg"></i></a></li>
+    </ul>
+</div>
+<div class="hide-on-large-only" style="position: relative; top: 25px;">
+    <div class="tab-content" style="padding: 0px; background-color: white;">
+        <div role="tabpanel" class="tab-pane active" id="home" style="height: calc(100vh - 120px); padding: 0px 20px;">
+            <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+                @foreach (var item in Model.JobSearches)
+                {
+                    <div class="carousel-cell" style="width: 100%;" href="#one!">
+                        <h4><i class="fa fa-list-alt" style="color:#ee6e73"></i> My Job Search #</h4>
+                        <hr style="border-top-color: #ee6e73; margin-bottom: 0px;" />
+                        <table class="table" style="font-size: 0.8rem;">
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.JobName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.JobName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Industry)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Industry)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.JobType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.JobType)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Location)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Radius)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Radius)@Html.Raw(" kms")
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.SalaryMin)
+                                </td>
+                                <td>
+                                    @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMin)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.SalaryMax)
+                                </td>
+                                <td>
+                                    @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMax)
+                                </td>
+                            </tr>
+                            <tr>
+                                @if (item.Active == true)
+                    {
+                                    <td>
+                                        <a class="" style="color: green" id="job-active-@item.ID" href="DeactivateJobSearch?id=@item.ID"><i class="material-icons">lightbulb_outline</i></a>
+                                        <a class="icon material-icons right-align" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID">delete</a>
+                                    </td>
+                    }
+                    else
+                    {
+                                    <td>
+                                        <a class="" style="color: red" id="job-inactive-@item.ID" href="ActivateJobSearch?id=@item.ID"><i class="material-icons">lightbulb_outline</i></a>
+                                        <a class="icon material-icons right-align" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID">delete</a>
+
+                                    </td>
+                    }
+                                <td></td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+
+    }
+
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="profile" style="padding: 0px 20px;">
+                <h4 style="margin-top: 0px; padding-top: 20px;"><i class="fa fa-plus" style="color:#ee6e73"></i> Add A New Job Search</h4>
+                <hr style="border-top-color: #ee6e73;" />
+
+                @using (Html.BeginForm("AddSearch", "Searcher", null, FormMethod.Post, new { @id = "addSearch" }))
+{
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            <div class="form-group col-md-12" id="JobNameChip">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-comment fa-2x"></i> Job Name <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!"></i></label>
+                                @*@Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                                <div class="col-md-12">
+                                    @*<span class="input-group-addon" id="basic-addon1" style="width: 5%; float: left; height:55px;"><i class="fa fa-comment fa-2x"></i></span>*@
+                                    @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control", @style = "width: 100%;", data_role = "tagsinput", aria_describedby = "basic-addon1" } })
+                                    @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-building fa-2x"></i> Industry <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!"></i></label>
+                                @*@Html.LabelFor(model => model.Industry, htmlAttributes: new { @class = "control-label col-md-12", @style = "text-align: left;" })*@
+                                <div class="col-md-12">
+                                    @*<span class="input-group-addon" id="basic-addon1" style="width: 5%; float: left; height:55px;"><i class="fa fa-building fa-2x"></i></span>*@
+                                    @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control", data_role = "tagsinput" } })
+                                    @Html.ValidationMessageFor(model => model.Industry, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-commenting fa-2x"></i> Company Name <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!"></i></label>
+                                @*@Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-12", @style = "text-align: left;" })*@
+                                <div class="col-md-12">
+                                    @*<span class="input-group-addon" id="basic-addon1" style="width: 10%; float: left; height:55px;"><i class="fa fa-commenting fa-2x"></i></span>*@
+                                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control", data_role = "tagsinput" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-dollar fa-2x"></i> Salary <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!"></i></label>
+                                @*@Html.LabelFor(model => model.SalaryMin, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                <div class="col-md-12">
+                                    @*<span class="input-group-addon" id="basic-addon1" style="width: 10%; float: left; height:55px;"><i class="fa fa-dollar fa-2x"></i></span>*@
+                                    @Html.EditorFor(model => model.SalaryMin, new { htmlAttributes = new { @class = "form-control bootstrap-tagsinput" } })
+                                    @Html.ValidationMessageFor(model => model.SalaryMin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-map-marker fa-2x"></i> Location <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!"></i></label>
+                                @*@Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-12", @style = "text-align: left;" })*@
+                                <div class="col-md-12">
+                                    @*<span class="input-group-addon" id="basic-addon1" style="width: 10%; float: left; height:55px;"><i class="fa fa-map-marker fa-2x"></i></span>*@
+                                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", data_role = "tagsinput" } })
+                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6" id="RadiusRadioButton">
+                                @*@Html.LabelFor(model => model.Radius, htmlAttributes: new { @class = "control-label col-md-12", @style = "text-align: left;" })
+                                    <div class="col-md-12">
+                                    <span class="input-group-addon" id="basic-addon1" style="width: 10%; float: left; height:55px;"><i class="fa fa-arrows-alt fa-2x"></i></span>
+                                    @Html.EditorFor(model => model.Radius, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Radius, "", new { @class = "text-danger" })
+                                    </div>*@
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-arrows-alt fa-2x"></i> Radius <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!"></i></label>
+                                <div class="col-md-12">
+                                    @*<span class="input-group-addon" id="basic-addon1" style="width: 10%; float: left; height:55px;"><i class="fa fa-arrows-alt fa-2x"></i></span>*@
+                                    <div class="" style="">
+                                        <p style="display:inline-block; margin-left:40px;">
+                                            <input class="with-gap" name="group1" type="radio" id="Radiusch1" value="25" />
+                                            <label for="Radiusch1" style="padding: 0px 20px 0px 25px;">25km</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input class="with-gap" name="group1" type="radio" id="Radiusch2" value="50" />
+                                            <label for="Radiusch2" style="padding: 0px 20px 0px 25px;">50km</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input class="with-gap" name="group1" type="radio" id="Radiusch3" value="100" />
+                                            <label for="Radiusch3" style="padding: 0px 20px 0px 25px;">100km</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input class="with-gap" name="group1" type="radio" id="Radiusch4" value="" />
+                                            <label for="Radiusch4" style="padding: 0px 20px 0px 25px;">Province Wide</label>
+                                        </p>
+                                    </div>
+
+                                    @Html.ValidationMessageFor(model => model.Radius, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @*<div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.JobType, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                @Html.EditorFor(model => model.JobType, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+                                </div>
+
+                                <div class="form-group">
+                                @Html.LabelFor(model => model.SalaryMax, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                @Html.EditorFor(model => model.SalaryMax, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SalaryMax, "", new { @class = "text-danger" })
+                                </div>
+                                </div>*@
+
+                            @*<div class="form-group">
+                                @Html.LabelFor(model => model.AdditionalLocations, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                @Html.EditorFor(model => model.AdditionalLocations, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AdditionalLocations, "", new { @class = "text-danger" })
+                                </div>
+                                </div>*@
+
+                            @*<div class="form-group">
+                                @Html.LabelFor(model => model.Experience, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
+                                </div>
+                                </div>*@
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6" id="JobTypeCheckbox">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-clock-o fa-2x"></i> Job Type <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!"></i></label>
+                                <div class="col-md-12">
+                                    @*<span class="input-group-addon" id="basic-addon1" style="width: 10%; float: left; height:55px;"><i class="fa fa-clock-o fa-2x"></i></span>*@
+                                    <div class="" style="">
+                                        <p style="display:inline-block; margin-left:10px;">
+                                            <input type="checkbox" class="filled-in" id="JobTypech1" value="Full Time" />
+                                            <label for="JobTypech1" style="padding: 0px 10px 0px 25px;">Full Time</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input type="checkbox" class="filled-in" id="JobTypech2" value="Part Time" />
+                                            <label for="JobTypech2" style="padding: 0px 10px 0px 25px;">Part Time</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input type="checkbox" class="filled-in" id="JobTypech3" value="Casual" />
+                                            <label for="JobTypech3" style="padding: 0px 10px 0px 25px;">Casual</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input type="checkbox" class="filled-in" id="JobTypech4" value="Contract" />
+                                            <label for="JobTypech4" style="padding: 0px 10px 0px 25px;">Contract</label>
+                                        </p>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" id="ExperienceCheckbox">
+                                <label class="control-label col-md-12" style="text-align: left;" for="Location"><i class="fa fa-sort-amount-asc fa-2x"></i> Job Type <i class="fa fa-info-circle" data-toggle="tooltip" title="Some tooltip text!"></i></label>
+                                <div class="col-md-12">
+                                    @*<span class="input-group-addon" id="basic-addon1" style="width: 10%; float: left; height:55px;"><i class="fa fa-sort-amount-asc fa-2x"></i></span>*@
+                                    <div class="" style="">
+                                        <p style="display:inline-block; margin-left:10px;">
+                                            <input type="checkbox" class="filled-in" id="Experiencech1" value="Entry Level" />
+                                            <label for="Experiencech1" style="padding: 0px 10px 0px 25px;">Entry Level</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input type="checkbox" class="filled-in" id="Experiencech2" value="0 - 2 Years" />
+                                            <label for="Experiencech2" style="padding: 0px 10px 0px 25px;">0 - 2 Years</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input type="checkbox" class="filled-in" id="Experiencech3" value="2 - 5 Years" />
+                                            <label for="Experiencech3" style="padding: 0px 10px 0px 25px;">2 - 5 Years</label>
+                                        </p>
+                                        <p style="display:inline-block;">
+                                            <input type="checkbox" class="filled-in" id="Experiencech4" value="5+ Years" />
+                                            <label for="Experiencech4" style="padding: 0px 10px 0px 25px;">5+ Years</label>
+                                        </p>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="border-top-color: #ee6e73;" />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default pull-right" />
+                            </div>
+                        </div>
+                    </div>
+        }
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="messages" style="padding: 0px 20px;">
+            @foreach (var item in Model.Companies)
+{
+
+                <div class="collapsible-header" style="padding: 1rem;">
+                    <div class="collection-item avatar">
+                        <div class="row">
+                            <div class="col s3" style="text-align: center;">
+                                @if (item.name == "" || item.name == null)
+                    {
+                                    <img class="circle" style="width: 65px; height: 65px;" src="~/Content/MVC_f9ad17b1-5d3b-4258-a449-abd5dc2ab8c1.jpg" />
+                    }
+                    else
+                    {
+                        //<img class="activator" src="@Html.DisplayFor(modelItem => item.logo)">
+                        <img class="circle" style="width: 65px; height: 65px;" src="~/Content/MVC_f9ad17b1-5d3b-4258-a449-abd5dc2ab8c1.jpg" />
+                    }
+                            </div>
+                            <div class="col s8">
+                                <span class="title">@Html.DisplayFor(modelItem => item.name)</span>
+                                <p>
+                                    @Html.DisplayFor(modelItem => item.industry)
+                                    @Html.DisplayFor(modelItem => item.website)
+                                </p>
+                            </div>
+                            <div class="col s1">
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </div>
+                        </div>
+                        <hr style="margin: 0px;" />
+                        <div class="row">
+
+                            @Html.DisplayFor(modelItem => item.Jobs.Count) @Html.Raw("Jobs")
+                            @Html.DisplayFor(modelItem => item.JobMatches.Count) @Html.Raw("Job Matches")
+                            <i class="material-icons">info_outline</i>
+                            <i class="material-icons right">more_vert</i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-body" style="background-color: white; padding: 1rem;"><span>@Html.DisplayFor(modelItem => item.description)</span></div>
+
+
+}
+        </div>
+        <div role="tabpanel" class="tab-pane" id="settings" style="padding: 0px 20px;">
+            @if (Model.JobMatchFavourites.Count > 0)
+            {
+            foreach (var item in Model.JobMatchFavourites)
+            {
+                <div class="carousel-cell" style="background-color: white;" href="#one!">
+                    <table class="table">
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.JobName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Industry)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Industry)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.JobType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobType)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.SalaryMin)
+                            </td>
+                            <td>
+                                @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMin)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.SalaryMax)
+                            </td>
+                            <td>
+                                @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMax)
+                            </td>
+                        </tr>
+                        <tr>
+                            @if (item.Active == true)
+                            {
+                                <td>
+                                    <a class="" style="color: green" id="job-active-@item.ID" href="DeactivateJobSearch?id=@item.ID"><i class="material-icons">lightbulb_outline</i></a>
+                                    <a class="icon material-icons right-align" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID">delete</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a class="" style="color: red" id="job-inactive-@item.ID" href="ActivateJobSearch?id=@item.ID"><i class="material-icons">lightbulb_outline</i></a>
+                                    <a class="icon material-icons right-align" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID">delete</a>
+
+                                </td>
+                            }
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <i class="material-icons">skip_previous</i>
+
+                            </td>
+                            <td><i class="material-icons right-align">skip_next</i></td>
+                        </tr>
+                    </table>
+                </div>
+
+            }
+            }
+            else
+            {
+                <div style="height: calc(100vh - 120px); padding: 0px 20px;">
+                    <h4>Start selecting some Job Favourites!</h4>
+                </div>
+            }
+        </div>
+    </div>
+</div>

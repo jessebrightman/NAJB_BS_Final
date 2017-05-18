@@ -1,0 +1,499 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Not A Job Board</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link href="~/Content/js/sidenav.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+
+    <!--Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
+    <!-- Compiled and minified CSS -->
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">*@
+    @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ion Range Slider -->
+    <link href="~/Content/normalize.css" rel="stylesheet" />
+    <link href="~/Content/ion.rangeSlider.css" rel="stylesheet" />
+    <link href="~/Content/ion.rangeSlider.skinHTML5.css" rel="stylesheet" />
+    @*<!-- In <head> -->
+    <link href="~/Content/nouislider.min.css" rel="stylesheet">*@
+    @*<link href="~/Content/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />*@
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    @*<link href="~/Content/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />*@
+    <!-- Bootstrap Material -->
+    @*<link href="~/Content/css/bootstrap-material-design.css" rel="stylesheet" />
+    <link href="~/Content/css/ripples.css" rel="stylesheet" />*@
+    <link href="~/Content/css/build.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css" />
+    
+    <link href="~/Content/js/materialtab.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">*@
+    @*<link href="~/Content/js/bootstrap-tagsinput.css" rel="stylesheet" />*@
+    @*<link href="~/Content/css/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/Content/css/app.css" rel="stylesheet" />*@
+    @*<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />*@
+    <link href="~/Content/css/slick.css" rel="stylesheet" />
+    <link href="~/Content/css/slick-theme.css" rel="stylesheet" />
+
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/css/tag-it.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.theme.css" rel="stylesheet" />
+    <!-- Custom Site CSS -->
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    
+
+    <script src="~/Content/js/sidenav.min.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-fixed-top" style="position: fixed; height: 70px; background-color: white; color: #ee6e73; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);">
+        <div id="content">
+            <a id="menu-toggle" style="position: absolute; top: 20px; left: 20px; width: 35px; height: 35px; cursor: pointer;"><span style="top: 11px;"></span></a>
+        </div>
+        <div class="container nav-wrapper" style="height: 100%;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="display: none;">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/Home/Index" class="brand-logo"><img src="~/Content/Images/NAJB_Logo_Web.png" style="height: 40px; margin:15px 0px;" /></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse" style="display:none;"><i class="material-icons" style="color: #ee6e73; display:none; padding: 12px;">menu</i></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    
+        @if (HttpContext.Current.User.IsInRole("Searcher") && Request.IsAuthenticated && HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            @Html.Partial("_Dashboard_Searcher")
+            <div class="main-content" style="background-color: lightgrey; min-height: 100vh; height: 100%;">
+                <div class="container body-content" style="height: inherit;  display: flex; flex-direction: column; margin: auto; max-width: 1380px;">
+                    @RenderBody()
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="" style="background-color: lightgrey; min-height: 100vh;">
+                <div class="container body-content" style="height: inherit; display: flex; flex-direction: column; justify-content: center;">
+                    @RenderBody()
+                </div>
+            </div>
+        }
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    
+        <!-- Compiled and minified JavaScript -->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>-->
+        @*<script src="~/Content/js/materialize.js"></script>*@
+        @*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
+        @*<script src="~/Scripts/jquery-ui.min.js"></script>*@
+        <script src="~/Content/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/Content/js/tag-it.js"></script>
+
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.js"></script>
+        
+        <!-- Ion Range Slider -->
+        <script src="~/Content/js/ion.rangeSlider.min.js"></script>
+    @*<script src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>*@
+    @*<script src="~/Content/js/bootstrap-tagsinput.js"></script>*@
+    @*<script src="~/Content/js/bootstrap-typeahead.js"></script>*@
+    
+    @*<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>*@
+    @*<script src="~/Content/js/bootstrap3-typeahead.js"></script>*@
+    @*<script src="~/Content/js/bloodhound.min.js"></script>*@
+    @*<script src="~/Content/js/typeahead.bundle.min.js"></script>*@
+    @*<script src="~/Content/js/typeahead.jquery.js"></script>*@
+        <!-- Bootstrap Material -->
+    @*<script src="~/Content/js/material.js"></script>
+    <script src="~/Content/js/ripples.js"></script>
+    <script>$.material.init()</script>*@
+    <script src="~/Content/js/AutocompleteScripts.js"></script>
+    <script src="~/Content/js/AddTagsValues.js"></script>
+    @*<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>*@
+    <script src="~/Content/js/slick.min.js"></script>
+    <script>
+        document.getElementById("addSearch").onkeypress = function (e) {
+            var key = e.charCode || e.keyCode || 0;
+            if (key == 13) {
+                //alert("I told you not to, why did you do it?");
+                e.preventDefault();
+            }
+        }
+    </script>
+    <script>
+        "use strict";
+
+        var sidenav = new Sidenav({
+            content: document.getElementById("content"),
+            sidenav: document.getElementById("sidenav"),
+            backdrop: document.getElementById("backdrop")
+        });
+
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            
+            if (!this.classList.contains('active')) {
+                sidenav.open();
+                $('#sidenav').css('display', 'block');
+                this.classList.toggle("active");
+            }
+            else {
+                sidenav.close();
+                this.classList.toggle("active");
+            }
+                
+        });
+    </script>
+    <script>
+        document.querySelector("#backdrop").addEventListener("click", function () {
+            document.getElementById("menu-toggle").classList.toggle("active");
+    });
+    </script>    
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.table_id').DataTable({
+                    responsive: true,
+                    "order": [[2, "desc"]],
+                    "pageLength": 5
+                });
+            });
+        </script>
+        
+       
+        <!-- Ajax Image File Upload -->
+        <script>
+            $("#File").change(function () {
+                var data = new FormData();
+                var files = $("#File").get(0).files;
+                if (files.length > 0) {
+                    data.append("MyImages", files[0]);
+                }
+
+                $.ajax({
+                    url: "@Url.RouteUrl("Default", new { Action = "UploadFile", Controller = "Ajax" })",
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                        //code after success
+                        $("#txtImg").val(response);
+                        $("#myUploadedImg").attr('src', '/Content/Images/' + response);
+                        $("#Image").val(response);
+                    },
+                    error: function (er) {
+                        alert(er);
+                    }
+
+                });
+            });
+        </script>
+        <!-- END Ajax Image File Upload -->
+    <script>
+    $('#Resume').change(function () {
+        alert('resume')
+      var data = new FormData();
+
+      var files = $("#Resume").get(0).files;
+
+      // Add the uploaded image content to the form data collection
+      if (files.length > 0) {
+          data.append("UploadedFile", files[0]);
+      }
+
+      // Make Ajax request with the contentType = false, and procesDate = false
+      var ajaxRequest = $.ajax({
+           type: "POST",
+           url: "@Url.RouteUrl("Default", new { Action = "UploadFileResume", Controller = "Ajax" })",
+           contentType: false,
+           processData: false,
+           data: data,
+           success: function (response) {
+               //code after success
+               alert('success');
+           },
+           error: function (er) {
+               alert(er);
+           }
+           });
+   });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#SendApplication').click(function() {
+                alert('application');
+                var to = $('#To').val();
+                var from = $('#From').val();
+                var subject = $('#Subject').val();
+                var message = $('#Body').val();
+                var resume = $('#Resume').val();
+                
+
+                $.ajax({
+                    url: "@Url.RouteUrl("Default", new { Action = "SendApplication", Controller = "Ajax" })",
+                    type: "POST",
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (response) {
+                    //code after success
+                    $("#txtImg").val(response);
+                    $("#myUploadedImg").attr('src', '/Content/Images/' + response);
+                    $("#Image").val(response);
+                },
+                error: function (er) {
+                    alert(er);
+                }
+
+            });
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $('#ShareButton').click(function () {
+            $('#ShareDiv').slideToggle();
+            $('#ShareDiv input').focus();
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#AddSearchLink').click(function (e) {
+                //e.preventDefault();
+                
+                $('.nav-tabs li').removeClass('active');
+                $('a[href="' + $(this).attr('href') + '"]').tab('show');
+                $('#profileli').addClass('active');
+                document.getElementById("menu-toggle").classList.toggle("active");
+                sidenav.close();
+            })
+        });
+
+        $(function () {
+            $('#MatchesLink').click(function (e) {
+                //e.preventDefault();
+
+                $('.nav-tabs li').removeClass('active');
+                $('a[href="' + $(this).attr('href') + '"]').tab('show');
+                $('#messagesli').addClass('active');
+                document.getElementById("menu-toggle").classList.toggle("active");
+                sidenav.close();
+            })
+        });
+        $(function () {
+            $('#FavouritesLink').click(function (e) {
+                //e.preventDefault();
+                $('.nav-tabs li').removeClass('active');
+                $('a[href="' + $(this).attr('href') + '"]').tab('show');
+                $('#settingsli').addClass('active');
+
+                document.getElementById("menu-toggle").classList.toggle("active");
+                sidenav.close();
+            })
+        });
+        
+        $(function () {
+            var hash = window.location.hash;
+            if (hash != "") {
+                //alert(hash);
+                $('a[href="' + hash + '"]').tab('show');
+            }
+        });
+    </script>
+    <script>
+
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('.main-carousel').slick({
+                dots: true
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.second-carousel').slick({
+                dots: true
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#searchli').on('click', function (e) {            
+                $('.main-carousel').resize();
+                $('.main-carousel').slick("getSlick").refresh();
+                alert('main-carousel');
+            });
+        });
+        
+    </script>
+   
+    @*<script>
+        function resize() {
+            alert('resize');
+            $('.second-carousel').flickity('resize');
+        }
+    </script>*@
+    @*<script>
+        $(document).ready(function () {
+            $('#searchli').on('click', function (e) {
+                $('.main-carousel').resize();
+            });
+        });
+    </script>*@
+
+    @*<script>
+        $(function () {
+            $('.main-carousel').flickity({
+                cellAlign: 'left', contain: true, resize: true
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('.second-carousel').flickity({
+                cellAlign: 'left', contain: true, resize: true
+            });
+        });
+    </script>*@
+    <script>
+            $(".SalaryMin").ionRangeSlider({
+                type: "double",
+                grid: true,
+                prefix: "$",
+                min: 0,
+                max: 150000,
+                from: 20000,
+                to: 50000,
+                step: 5000
+            });
+    </script>
+    <script>
+    $(document).ready(function(){
+        $('#ActiveButton div').click(function () {
+
+            alert('click');
+            if ($(this).hasClass('text-danger')){
+                $(this).removeClass('text-danger').addClass('text-success');
+                $(this).html('<i class="fa fa-lightbulb-o fa-2x" style=""></i><br /><span style="color: grey">Active</span>');
+                var id = $(this).attr('id');
+                alert(id);
+                $.ajax({
+                    url: "/Ajax/Active",
+                    type: "GET",
+                    dataType: "json",
+                    data: { "id": id },
+                    success: function (data) {
+                        alert(data);
+
+                    }
+                })
+            }
+            else {
+                $(this).removeClass('text-success').addClass('text-danger');
+                $(this).html('<i class="fa fa-lightbulb-o fa-2x" style=""></i><br /><span style="color: grey">Inactive</span>');
+                var id = $(this).attr('id');
+                alert(id);
+                $.ajax({
+                    url: "/Ajax/Active",
+                    type: "GET",
+                    dataType: "json",
+                    data: { "id": id },
+                    success: function (data) {
+                        alert(data);
+
+                    }
+                })
+            }
+        });
+    });
+    </script>
+    @*<script>
+        $(document).ready(function(){
+            $('#IgnoreButton div').click(function(){
+                if ($(this).hasClass('text-danger')){
+                    $(this).removeClass('text-danger').addClass('grey-text');
+                    var id = $(this).attr('id');
+                    alert(id);
+                    $.ajax({
+                        url: "/Ajax/Ignore",
+                        type: "GET",
+                        dataType: "json",
+                        data: { "id": id },
+                        success: function (data) {
+                            alert(data);
+
+                        }
+                    })
+                }
+                else {
+                    $(this).removeClass('grey-text').addClass('text-danger');
+                    var id = $(this).attr('id');
+                    alert(id);
+                    $.ajax({
+                        url: "/Ajax/Ignore",
+                        type: "GET",
+                        dataType: "json",
+                        data: { "id": id },
+                        success: function (data) {
+                            alert(data);
+
+                        }
+                    })
+                }
+            });
+            $('#FavouriteButton div').click(function(){
+                if ($(this).hasClass('text-warning')){
+                    $(this).removeClass('text-warning').addClass('grey-text');
+                    var id = $(this).attr('id');
+                    $('#Favourite-'+id).removeClass('text-warning');
+
+                    alert(id);
+                    $.ajax({
+                        url: "/Ajax/Favourite",
+                        type: "GET",
+                        dataType: "json",
+                        data: { "id": id },
+                        success: function (data) {
+                            alert(data);
+
+                        }
+                    })
+                }
+                else {
+                    $(this).removeClass('grey-text').addClass('text-warning');
+                    var id = $(this).attr('id');
+                    $('#Favourite-'+id).addClass('text-warning');
+                    alert(id);
+                    $.ajax({
+                        url: "/Ajax/Favourite",
+                        type: "GET",
+                        dataType: "json",
+                        data: { "id": id },
+                        success: function (data) {
+                            alert(data);
+
+                        }
+                    })
+                }
+            });
+        });
+    </script>*@
+</body>
+</html> 
+

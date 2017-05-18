@@ -1,0 +1,309 @@
+﻿@model IEnumerable<NAJB_BS_Final.JobSearch>
+
+@{
+    ViewBag.Title = "Searcher";
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-med-and-down" style="height: auto;">
+    <div style="margin-bottom:15px !important;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+            <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="searchli" class="col-xs-3 active"><a href="/Searcher/Searcher" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Searches</a></li>
+                        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Searcher/AddSearch" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Searcher/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Searcher/Favourites" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-star fa-lg"></i><br />Favourites</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_SearcherUserBox")
+    <div class="col-md-9">
+        
+            <div class="jumbotron card" style="width: 100%;">
+                <h1><i class="fa fa-list-alt page-icon" style="padding-left: 14px;"></i> My Job Searches<span style="float: right;">@Model.Count() Job Searches</span></h1>
+                <hr style="border-top-color: #ee6e73;" />
+
+                <table class="table table_id">
+                    <thead>
+                        <tr>
+                            @*<th></th>*@
+                            <th>
+                                @Html.Raw("Active")
+                            </th>
+                            <th>
+                                @Html.Raw("Job")
+                            </th>
+                            <th>
+                                @Html.Raw("Industry")
+                            </th>
+                            <th>
+                                @Html.Raw("Company")
+                            </th>
+                            <th>
+                                @Html.Raw("Type")
+                            </th>
+                            <th>
+                                @Html.Raw("Experience")
+                            </th>
+                            <th>
+                                @Html.Raw("Location")
+                            </th>
+                            <th>
+                                @Html.Raw("Radius")
+                            </th>
+                            <th>
+                                @Html.Raw("Salary")
+                            </th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+            {
+                            <tr>
+                                @*<td style="text-align: center;"><i class="fa fa-chevron-down fa-lg"></i></td>*@
+                                <td style="text-align: center;">
+                                    @if (item.active == true)
+                                    {
+                                        <a class="" style="color: green" id="job-active-@item.ID" href="DeactivateJobSearch?id=@item.ID"><i class="fa fa-lightbulb-o fa-2x"></i></a>
+
+                                    }
+                                    else
+                                    {
+                                        <a class="" style="color: red" id="job-inactive-@item.ID" href="ActivateJobSearch?id=@item.ID"><i class="fa fa-lightbulb-o fa-2x"></i></a>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.jobName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.industry)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.companyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.jobType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.experience)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.radius)@Html.Raw(" kms")
+                                </td>
+                                <td>
+                                    @Html.Raw("$")@Html.DisplayFor(modelItem => item.salaryMin) - @Html.Raw("$")@Html.DisplayFor(modelItem => item.salaryMax)
+                                </td>
+                                <td>
+                                    <a class="" href="EditSearch?id=@item.ID"><i class="fa fa-pencil fa-2x"></i></a>
+                                    <a class="" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID"><i class="fa fa-trash fa-2x" style="color:red;"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3 active"><a href="/Searcher/Searcher" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Searches</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Searcher/AddSearch" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Searcher/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Searcher/Favourites" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-star fa-lg"></i><br />Favourites</a></li>
+    </ul>
+</div>
+<div class="hide-on-large-only" style="position: absolute; top: 120px; background-color: white; width: 100%; padding: 20px; height: calc(100vh - 120px);">
+    <div class="hide-on-large-only">
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @ViewBag.SuccessMessage
+        </div>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @ViewBag.ErrorMessage
+        </div>
+    }
+</div>
+    <div id="JobSearches" class="main-carousel" style="height:100%;">
+                @{ int count = 1; }
+                @foreach (var item in Model)
+                {
+                    <div class="carousel-cell" style="width: 100%;" href="#one!">
+                        <h4 style="font-size: 20px;"><i class="fa fa-list-alt" style="color:#ee6e73"></i> My Job Search <span class="pull-right">#@count</span></h4>
+                        <hr style="border-top-color: #ee6e73; margin-bottom: 0px;" />
+                        <table class="table" style="font-size: 2.1vmax;">
+                            <tr>
+                                <td>
+                                    <i class="fa fa-comment fa-md primary" style=""></i> @Html.Raw("Name")
+                                </td>
+                                <td>
+                                    @if (item.jobName == null)
+                                    {
+                                        @Html.Raw(" - ")
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.jobName)
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-commenting fa-md primary" style=""></i> @Html.Raw("Company")
+                                </td>
+                                <td>
+                                    @if (item.companyName == null)
+                                    {
+                                        @Html.Raw(" - ")
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.companyName)
+                                    }
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-building fa-md primary" style=""></i> @Html.Raw("Industry")
+                                </td>
+                                <td>
+                                    @if (item.industry == null)
+                                    {
+                                        @Html.Raw(" - ")
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.industry)
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-clock-o fa-md primary" style=""></i> @Html.Raw("Job Type")
+                                </td>
+                                <td>
+                                    @if (item.jobType == null)
+                                    {
+                                        @Html.Raw(" - ")
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.jobType)
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-sort-amount-asc fa-md primary" style=""></i> @Html.Raw("Experience")
+                                </td>
+                                <td>
+                                    @if (item.experience == null)
+                                    {
+                                        @Html.Raw(" - ")
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.experience)
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-map-marker fa-md primary" style=""></i> @Html.Raw("Location")
+                                </td>
+                                <td>
+                                    @if (item.location == null)
+                                    {
+                                        @Html.Raw(" - ")
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.location)
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-arrows-alt fa-md primary" style=""></i> @Html.Raw("Radius")
+                                </td>
+                                <td>
+                                    @if (item.radius == null)
+                                    {
+                                        @Html.Raw(" - ")
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.radius)@Html.Raw(" kms")
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-dollar fa-md primary" style=""></i> @Html.Raw("Salary")
+                                </td>
+                                <td>
+                                    @if (item.salaryMin == null && item.salaryMax == null)
+                                    {
+                                        @Html.Raw(" - ")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("$")@Html.DisplayFor(modelItem => item.salaryMin)@Html.Raw(" - ")@Html.Raw("$")@Html.DisplayFor(modelItem => item.salaryMax)
+
+
+
+
+                                    }
+                                        </td>
+                                    </tr>
+                                </table>
+                                <hr style="border-top-color: #ee6e73;" />
+                                <div style="font-size: 2vmax;">
+                                    <div id="ActiveButton" class="col-xs-4" style="text-align: center;">
+                                        @if (item.active == true)
+                                        {
+                                            <div id="@item.ID" class="text-success" style="text-decoration: none; cursor: pointer;">
+                                                <i class="fa fa-lightbulb-o fa-2x" style=""></i>
+                                                <br /><span style="color: grey">Active</span>
+                                            </div>
+                                        }
+
+                                        else
+                                        {
+                                            <div id="@item.ID" class="text-danger" style="text-decoration: none;">
+                                                <i class="fa fa-lightbulb-o fa-2x" style=""></i>
+                                                <br /><span style="color: grey">Inactive</span>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="col-xs-4" style="text-align: center;">
+                                        <a class="" style="color: grey; text-decoration: none;" href="EditSearch?id=@item.ID"><i class="fa fa-pencil fa-2x" style="color: #4285F4;"></i><br />Edit</a>
+                                    </div>
+                                    <div class="col-xs-4" style="text-align: center;">
+                                        <a class="" style="color: grey; text-decoration: none;" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID"><i class="fa fa-trash fa-2x" style="color:red;"></i><br />Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                    count++;
+                }
+
+            </div>
+</div>

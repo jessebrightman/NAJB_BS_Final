@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Not A Job Board</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    @Styles.Render("~/Content/css")
+
+    <!--Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ion Range Slider -->
+    <link href="~/Content/normalize.css" rel="stylesheet" />
+    <link href="~/Content/ion.rangeSlider.css" rel="stylesheet" />
+    <link href="~/Content/ion.rangeSlider.skinHTML5.css" rel="stylesheet" />
+    @*<!-- In <head> -->
+    <link href="~/Content/nouislider.min.css" rel="stylesheet">*@
+    @*<link href="~/Content/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />*@
+    <!-- Bootstrap Material -->
+    @*<link href="~/Content/css/bootstrap-material-design.css" rel="stylesheet" />
+    <link href="~/Content/css/ripples.css" rel="stylesheet" />*@
+    <link href="~/Content/css/build.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css" />
+    <link href="~/Content/js/sidenav.css" rel="stylesheet" />
+    <link href="~/Content/js/materialtab.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link href="~/Content/js/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="navbar navbar-fixed-top" style="position: fixed; height: 70px; background-color: white; color: #ee6e73; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);">
+        <div id="content">
+            <a id="menu-toggle" style="position: absolute; top: 20px; left: 20px; width: 35px; height: 35px; cursor: pointer;"><span style="top: 11px;"></span></a>
+        </div>
+        <div class="container nav-wrapper" style="height: 100%;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="display: none;">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#!" class="brand-logo"><img src="~/Content/Images/NAJB_Logo_Web.png" style="height: 40px; margin:15px 0px;" /></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse" style="display:none;"><i class="material-icons" style="color: #ee6e73; display:none; padding: 12px;">menu</i></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                @*<ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>*@
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    
+        @if (HttpContext.Current.User.IsInRole("Searcher") && Request.IsAuthenticated && HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            @Html.Partial("_Dashboard_Searcher")
+            <div class="main-content" style="background-color: lightgrey; min-height: 100vh;">
+                <div class="container body-content" style="height: inherit; display: flex; flex-direction: column; margin: auto; max-width: 1380px;">
+                    @RenderBody()
+                </div>
+            </div>
+        }
+else if (HttpContext.Current.User.IsInRole("Employer") && Request.IsAuthenticated && HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_Dashboard_Employer")
+    <div class="main-content" style="background-color: lightgrey; min-height: 100vh;">
+        <div class="container body-content" style="height: inherit; display: flex; flex-direction: column; margin: auto; max-width: 1380px;">
+            @RenderBody()
+        </div>
+    </div>
+}
+else
+{
+            <div class="" style="background-color: lightgrey; min-height: 100vh;">
+                <div class="container body-content" style="height: inherit; display: flex; flex-direction: column; justify-content: center;">
+                    @RenderBody()
+                </div>
+            </div>
+        }
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    
+        <!-- Compiled and minified JavaScript -->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>-->
+        <script src="~/Content/js/materialize.js"></script>
+        @*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
+        @*<script src="~/Scripts/jquery-ui.min.js"></script>*@
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.js"></script>
+        
+        <!-- Ion Range Slider -->
+        <script src="~/Content/js/ion.rangeSlider.min.js"></script>
+    @*<script src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>*@
+    <script src="~/Content/js/bootstrap-tagsinput.min.js"></script>
+    @*<script src="~/Content/js/bootstrap-typeahead.js"></script>*@
+    <script src="~/Content/js/sidenav.min.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="~/Content/js/bootstrap3-typeahead.js"></script>
+        <!-- Bootstrap Material -->
+    @*<script src="~/Content/js/material.js"></script>
+    <script src="~/Content/js/ripples.js"></script>
+    <script>$.material.init()</script>*@
+
+    <script>
+        "use strict";
+
+        var sidenav = new Sidenav({
+            content: document.getElementById("content"),
+            sidenav: document.getElementById("sidenav"),
+            backdrop: document.getElementById("backdrop")
+        });
+
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            
+            if (!this.classList.contains('active')) {
+                sidenav.open();
+                $('#sidenav').css('display', 'block');
+                this.classList.toggle("active");
+            }
+            else {
+                sidenav.close();
+                this.classList.toggle("active");
+            }
+                
+        });
+    </script>
+    <script>
+        document.querySelector("#backdrop").addEventListener("click", function () {
+            document.getElementById("menu-toggle").classList.toggle("active");
+    });
+    </script>     
+
+      
+        <!-- Ajax Image File Upload -->
+        <script>
+            $("#File").change(function () {
+                var data = new FormData();
+                var files = $("#File").get(0).files;
+                if (files.length > 0) {
+                    data.append("MyImages", files[0]);
+                }
+
+                $.ajax({
+                    url: "@Url.RouteUrl("Default", new { Action = "UploadImage", Controller = "Ajax" })",
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                        //code after success
+                        $("#txtImg").val(response);
+                        $("#myUploadedImg").attr('src', '/Content/Images/' + response);
+                        $("#Image").val(response);
+                        $("#CompanyImage").val(response);
+                    },
+                    error: function (er) {
+                        alert(er);
+                    }
+
+                });
+            });
+        </script>
+        <!-- END Ajax Image File Upload -->
+    <!-- Ajax Image File Upload -->
+    <script>
+            $("#CompanyFile").change(function () {
+                var data = new FormData();
+                var files = $("#CompanyFile").get(0).files;
+                if (files.length > 0) {
+                    data.append("MyImages", files[0]);
+                }
+
+                $.ajax({
+                    url: "@Url.RouteUrl("Default", new { Action = "CompanyUploadFile", Controller = "Ajax" })",
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                        //code after success
+                        $("#CompanytxtImg").val(response);
+                        $("#CompanymyUploadedImg").attr('src', '/Content/Image/' + response);
+                        $("#CompanyImage").val(response);
+                    },
+                    error: function (er) {
+                        alert(er);
+                    }
+
+                });
+            });
+    </script>
+    <!-- END Ajax Image File Upload -->
+    <script>
+
+$(document).ready(function(){
+    $('#FileUpload1').change(function () {
+
+        // Checking whether FormData is available in browser
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#FileUpload1").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('username', 'Manas');
+
+            $.ajax({
+                url: '/Ajax/UploadFiles',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+                    alert(result);
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        } else {
+            alert("FormData is not supported.");
+        }
+    });
+});
+    </script>  
+      
+</body>
+</html> 
+

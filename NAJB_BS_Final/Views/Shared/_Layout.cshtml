@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Not A Job Board</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!--Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
+    @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
+    <!-- Compiled and minified CSS -->
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">*@
+    <link href="~/Content/css/materialize.css" rel="stylesheet" />
+    <!-- Compiled and minified JavaScript -->
+    
+    @*<link href="~/Content/navbar-fixed-side.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    @*<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.js"></script>*@
+</head>
+<body>
+    <div class="navbar navbar-fixed-top" style="position: fixed; height: 70px; background-color: white; color: #ee6e73; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);">
+        <div class="container">
+            <div class="navbar-header" style="height:70px;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/Home/Index" class="brand-logo"><img src="~/Content/Images/NAJB_Logo_Web.png" style="height: 40px; margin:15px 0px;" /></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse" style="display:none;"><i class="material-icons" style="color: #ee6e73; display:none; padding: 12px;">menu</i></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                @*<ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>*@
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="" style="background: url('../../Content/Images/177175.jpg'); min-height: 100vh;">
+        <div class="container body-content" style="height: inherit; display: flex; flex-direction: column; justify-content: center;">
+            @RenderBody()
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+
+    <!-- jQuery first, then tether, then Bootstrap Material Design JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdn.rawgit.com/HubSpot/tether/v1.3.4/dist/js/tether.min.js"></script>
+    <script src="https://cdn.rawgit.com/FezVrasta/bootstrap-material-design/dist/dist/bootstrap-material-design.iife.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script>
+      $('body').bootstrapMaterialDesign();
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('select').material_select();
+            $('#registerForm .caret').text('');
+        });
+    </script>
+</body>
+</html>

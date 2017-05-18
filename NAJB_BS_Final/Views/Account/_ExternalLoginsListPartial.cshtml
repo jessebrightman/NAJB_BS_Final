@@ -1,0 +1,66 @@
+﻿@model NAJB_BS_Final.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+<h6>Use another service to log in.</h6>
+<hr style="border-top-color: #ee6e73;" />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0) {
+        <div>
+            <p>
+                There are no external authentication services configured. 
+            </p>
+        </div>
+    }
+    else {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <div class="row">
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        if (p.Caption == "Google")
+                        {
+                            <div class="col s3" style="padding: 0.75rem;">
+                                <button type="submit" class="fabutton" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                                    <i class="fa fa-@p.Caption.ToLower() fa-2x" style="color: red;" title="Log in using your @p.Caption account" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"></i>
+                                </button>
+                            </div>
+                        }
+
+                        if (p.Caption == "Facebook")
+                        {
+                            <div class="col s3" style="padding: 0.75rem;">
+                                @*<button type="submit" class="btn btn-default waves-effect waves-light" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fa fa-@p.Caption.ToLower()"></i> @p.AuthenticationType</button>*@
+                                <button type="submit" class="fabutton" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                                    <i class="fa fa-@p.Caption.ToLower()-official fa-2x" style="color: darkblue;" title="Log in using your @p.Caption account" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"></i>
+                                </button>
+                            </div>
+                        }
+
+                        if (p.Caption == "Twitter")
+                        {
+                            <div class="col s3" style="padding: 0.75rem;">
+                                @*<button type="submit" class="btn btn-default waves-effect waves-light" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fa fa-@p.Caption.ToLower()"></i> @p.AuthenticationType</button>*@
+                                <button type="submit" class="fabutton" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                                    <i class="fa fa-@p.Caption.ToLower()-square fa-2x" style="color: deepskyblue;" title="Log in using your @p.Caption account" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"></i>
+                                </button>
+                            </div>
+                        }
+
+                        if (p.Caption == "LinkedIn")
+                        {
+                            <div class="col s3" style="padding: 0.75rem;">
+                                @*<button type="submit" class="btn btn-default waves-effect waves-light" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fa fa-@p.Caption.ToLower()"></i> @p.AuthenticationType</button>*@
+                                <button type="submit" class="fabutton" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                                    <i class="fa fa-@p.Caption.ToLower()-square fa-2x" style="color: dodgerblue;" title="Log in using your @p.Caption account" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"></i>
+                                </button>
+                            </div>
+                        }
+                        @*<button type="submit" class="" styid="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><i class="fa fa-@p.Caption.ToLower()-square"></i> @p.AuthenticationType</button>*@
+                    }
+                </div>
+            </div>
+        }
+    }
+}

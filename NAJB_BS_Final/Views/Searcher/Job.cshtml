@@ -1,0 +1,209 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewUser
+
+@{
+    ViewBag.Title = Html.DisplayFor(model => model.JobName) + " - " + Html.DisplayFor(model => model.Job.Company.name) + " - " + @Html.DisplayFor(model => model.Location);
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Searcher/Searcher" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Searches</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Searcher/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Searcher/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Searcher/Favourites" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-star fa-lg"></i><br />Favourites</a></li>
+    </ul>
+</div>
+<div class="mobileSearch" style="">
+    <div class="hide-on-med-and-down" style="margin-bottom:15px !important;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+            <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Searcher/Searcher" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Searches</a></li>
+                        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Searcher/AddSearch" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Searcher/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Searcher/Favourites" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-star fa-lg"></i><br />Favourites</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_SearcherUserBox")
+    <div class="col-md-9 mobileColumn">
+            <div class="jumbotron card" style="width: 100%;">
+
+                <h1><i class="fa fa-list-alt page-icon" style="padding-left: 14px;"></i> @Html.DisplayFor(model => model.JobName)            </h1>
+
+                <div class="row">
+                    <hr style="border-top-color: #ee6e73; clear: both;" />
+                    <div class="col-md-3">
+                        <p style="margin: 0px;"><i class="fa fa-eye fa-md primary" style=""></i> @Html.DisplayFor(model => model.Job.views) Views</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p style="margin: 0px;"><i class="fa fa-calendar fa-md primary" style=""></i> Posted: @Model.Job.jobDate.ToShortDateString()</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p style="margin: 0px;"><i class="fa fa-calendar fa-md primary" style=""></i> Ends: @Model.Job.jobEndDate.ToShortDateString()</p>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    @if (Model.Job.location != null)
+            {
+                        <div class="col-md-3">
+                            <p style="margin: 0px;"><i class="fa fa-map-marker fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(model => model.Job.location)</p>
+                        </div>
+                    }
+                    @if (Model.Job.jobType != null)
+            {
+                        <div class="col-md-3">
+                            <p style="margin: 0px;"><i class="fa fa-clock-o fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(model => model.Job.jobType)</p>
+                        </div>
+                    }
+                    @if (Model.Job.experience != null)
+            {
+                        <div class="col-md-3">
+                            <p style="margin: 0px;"><i class="fa fa-sort-amount-asc fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(model => model.Job.experience)</p>
+                        </div>
+                    }
+                    @if (Model.Job.salaryMin != null)
+            {
+                        <div class="col-md-3">
+                            <p style="margin: 0px;"><i class="fa fa-dollar fa-md" style="color: #26a69a;"></i> $@Html.DisplayFor(model => model.Job.salaryMin) - $@Html.DisplayFor(model => model.Job.salaryMax)</p>
+                        </div>
+                    }
+                </div>
+
+                <div class="row">
+                    <hr style="border-top-color: #ee6e73; clear: both;" />
+                    <div class="col-xs-3" style="margin: 0 auto;">
+                        <img class="circle" style="width: 60px; height: 60px; margin: auto; display: block;" src="~/Content/Images/@Html.DisplayFor(model => model.Job.Company.logo)" />
+                    </div>
+                    <div class="col-xs-9 col-md-5">
+                        <h5 style="margin-top: 5px;"><a href="/Searcher/Company?id=@Html.DisplayFor(model => model.Job.Company.ID)">@Html.DisplayFor(model => model.Job.Company.name)</a></h5>
+                        <p style="margin: 0px;">@Html.DisplayFor(model => model.Job.Company.address)</p>
+                        <p style="margin: 0px;"><a href="http://@Html.DisplayFor(model => model.Job.Company.website)">@Html.DisplayFor(model => model.Job.Company.website)</a></p>
+
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <p style="margin: 0px;">Contact: @Html.DisplayFor(model => model.Job.Company.contact)</p>
+                        @if (Model.Job.applyTo.IndexOf("@") == -1)
+                        {
+
+                        }
+                        else
+                        {
+                            <p style="margin: 0px;">Apply To: @Html.DisplayFor(model => model.Job.applyTo)</p>
+                        }
+                        <p style="margin: 0px;">Phone: @Html.DisplayFor(model => model.Job.Company.phone)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <hr style="border-top-color: #ee6e73;" />
+                    <div class="col-xs-12">
+                        <h5>Job Description</h5>
+                        <p>@Html.Raw(Model.Job.description)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <hr style="border-top-color: #ee6e73;" />
+                    <div class="row">
+                        <div class="col-xs-3" style="text-align: center; padding: 0px 5px;">
+                            @if (Model.Job.applyTo.IndexOf("@") >= 1)
+                            {
+                                <div class="" style="text-decoration: none; color: grey;" data-toggle="modal" data-target="#myModal">
+                                    <i class="fa fa-mail-forward fa-lg"></i><br />
+                                    Apply
+                                </div>
+                            }
+                            else
+                            {
+                                <a class="" style="text-decoration: none; color: grey;" href="@Html.DisplayFor(model => model.Job.applyTo)">
+                                    <i class="fa fa-mail-forward fa-lg"></i><br />
+                                    Apply
+                                </a>
+                            }
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                @using (Html.BeginForm("SendApplication", "Email", null, FormMethod.Post, new { @id = Model.Job.ID }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">
+                                                    Apply To: @Html.DisplayFor(model => model.Job.name)<br />
+                                                    @Html.DisplayFor(model => model.Job.Company.name)
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-xs-12" style="line-height: 2em;">
+                                                        <label for="To" style="float: left;">To:</label>
+                                                        <input id="To" name="to" type="text" style="width:100%;" value="@Html.DisplayFor(model => model.Job.applyTo)" />
+                                                        <label for="From" style="float: left;">From:</label>
+                                                        <input id="From" name="from" type="text" style="width:100%;" value="@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)" />
+                                                        <label for="Subject" style="float: left;">Subject:</label>
+                                                        <input id="Subject" name="subject" type="text" style="width:100%;" value="Application for @if (Model.Job.reference == null)
+                                            {  @Html.Raw("Job: ") @Html.DisplayFor(model => model.Job.name)}
+                                            else
+                                            { @Html.Raw("Job Reference #:") @Html.DisplayFor(model => model.Job.reference)} " />
+                                                        <label for="Body" style="float: left;">Message:</label>
+                                                        <textarea id="Body" name="body" style="width:100%;" rows="15"></textarea>
+                                                        <div class="checkbox checkbox-primary" style="padding-top: 12px;">
+                                                            <input id="resume" name="resume" type="checkbox" value="Resume">
+                                                            <label for="resume" style="font-weight: bold;">Include Resume?</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="id" value="@Model.Job.ID" />
+                                                <input type="hidden" name="email" value="@Model.Email" />
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button id="SendApplication" type="submit" class="btn btn-primary">Send Application</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-xs-3" style="text-align: center; padding: 0px 5px;">
+                            <a class="" style="text-decoration: none; color: grey;" href="/Searcher/Favourite?id=@Html.DisplayFor(model => model.Job.ID)">
+                                <i class="fa fa-star fa-lg"></i><br />
+                                Favourite
+                            </a>
+                        </div>
+                        <div class="col-xs-3" style="text-align: center; padding: 0px 5px;">
+                            <a class="" style="text-decoration: none; color: grey;" href="/Searcher/Ignore?id=@Html.DisplayFor(model => model.Job.ID)">
+                                <i class="fa fa-volume-off fa-lg"></i><br />
+                                Ignore
+                            </a>
+                        </div>
+                        <div class="col-xs-3" style="text-align: center; padding: 0px 5px;">
+                            <a id="ShareButton" style="text-decoration: none; color: grey;" class="text-info" href="#">
+                                <i class="fa fa-share-alt fa-lg"></i><br />
+                                Share
+                            </a>
+                        </div>
+                        <div id="ShareDiv" style="display:none; float:right;">
+                            <h6>Add an email to share this Job.</h6>
+                            @using (Html.BeginForm("Share", "Email", null, FormMethod.Post, new { @id = "addJob" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input name="email" id="email" type="text" style="height: 36px;" />
+                                <input name="from" id="from" type="hidden" value="@Model.FirstName @Model.LastName" />
+                                <input name="jobID" id="jobID" type="hidden" value="@Model.Job.ID" />
+
+                                <input class="btn" type="submit" value="Share" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

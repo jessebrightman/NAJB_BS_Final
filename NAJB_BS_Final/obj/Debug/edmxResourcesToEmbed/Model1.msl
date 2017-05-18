@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="notajobb_devModelStoreContainer" CdmEntityContainer="notajobb_devEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="notajobb_devModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="notajobb_devModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="notajobb_devModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="notajobb_devModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="notajobb_devModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="notajobb_devModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="credits" ColumnName="credits" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="industry" ColumnName="industry" />
+          <ScalarProperty Name="NAJB_userID" ColumnName="NAJB_userID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jobs">
+      <EntityTypeMapping TypeName="notajobb_devModel.Job">
+        <MappingFragment StoreEntitySet="Job">
+          <ScalarProperty Name="views" ColumnName="views" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="jobType" ColumnName="jobType" />
+          <ScalarProperty Name="industry" ColumnName="industry" />
+          <ScalarProperty Name="salaryMin" ColumnName="salaryMin" />
+          <ScalarProperty Name="salaryMax" ColumnName="salaryMax" />
+          <ScalarProperty Name="jobDate" ColumnName="jobDate" />
+          <ScalarProperty Name="jobEndDate" ColumnName="jobEndDate" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
+          <ScalarProperty Name="applyTo" ColumnName="applyTo" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="experience" ColumnName="experience" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobCompanies">
+      <EntityTypeMapping TypeName="notajobb_devModel.JobCompany">
+        <MappingFragment StoreEntitySet="JobCompanies">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Companies" ColumnName="Companies" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobIndustries">
+      <EntityTypeMapping TypeName="notajobb_devModel.JobIndustry">
+        <MappingFragment StoreEntitySet="JobIndustries">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Industries" ColumnName="Industries" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobMatches">
+      <EntityTypeMapping TypeName="notajobb_devModel.JobMatch">
+        <MappingFragment StoreEntitySet="JobMatches">
+          <ScalarProperty Name="applyDate" ColumnName="applyDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="jobDate" ColumnName="jobDate" />
+          <ScalarProperty Name="experience" ColumnName="experience" />
+          <ScalarProperty Name="applied" ColumnName="applied" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="industry" ColumnName="industry" />
+          <ScalarProperty Name="jobType" ColumnName="jobType" />
+          <ScalarProperty Name="salaryMin" ColumnName="salaryMin" />
+          <ScalarProperty Name="salaryMax" ColumnName="salaryMax" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="favourite" ColumnName="favourite" />
+          <ScalarProperty Name="ignore" ColumnName="ignore" />
+          <ScalarProperty Name="jobID" ColumnName="jobID" />
+          <ScalarProperty Name="NAJB_userID" ColumnName="NAJB_userID" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobSearches">
+      <EntityTypeMapping TypeName="notajobb_devModel.JobSearch">
+        <MappingFragment StoreEntitySet="JobSearch">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="radius" ColumnName="radius" />
+          <ScalarProperty Name="industry" ColumnName="industry" />
+          <ScalarProperty Name="jobType" ColumnName="jobType" />
+          <ScalarProperty Name="jobName" ColumnName="jobName" />
+          <ScalarProperty Name="companyName" ColumnName="companyName" />
+          <ScalarProperty Name="salaryMin" ColumnName="salaryMin" />
+          <ScalarProperty Name="salaryMax" ColumnName="salaryMax" />
+          <ScalarProperty Name="additionalLocations" ColumnName="additionalLocations" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
+          <ScalarProperty Name="najb_userID" ColumnName="najb_userID" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="experience" ColumnName="experience" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobTitles">
+      <EntityTypeMapping TypeName="notajobb_devModel.JobTitle">
+        <MappingFragment StoreEntitySet="JobTitle">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NAJB_user">
+      <EntityTypeMapping TypeName="notajobb_devModel.NAJB_user">
+        <MappingFragment StoreEntitySet="NAJB_user">
+          <ScalarProperty Name="resume" ColumnName="resume" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="userImage" ColumnName="userImage" />
+          <ScalarProperty Name="IdentityID" ColumnName="IdentityID" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="notajobb_devModel.Transaction">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PayPalID" ColumnName="PayPalID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Credits" ColumnName="Credits" />
+          <ScalarProperty Name="Dollars" ColumnName="Dollars" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="notajobb_devModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

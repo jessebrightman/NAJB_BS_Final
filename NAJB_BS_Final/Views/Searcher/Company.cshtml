@@ -1,0 +1,66 @@
+﻿@model NAJB_BS_Final.Company
+
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-med-and-down" style="height: auto;">
+    <div style="margin-bottom:15px !important;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+            <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Searcher/Searcher" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Searches</a></li>
+                        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Searcher/AddSearch" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Searcher/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Searcher/Favourites" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-star fa-lg"></i><br />Favourites</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_SearcherUserBox")
+    <div class="col-md-9">
+        @*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+        <div class="jumbotron card" style="width: 100%;">
+            <div class="row">
+                <h3><i class="fa fa-building page-icon" style="color:#ee6e73"></i> @Html.DisplayFor(model => model.name)</h3>
+            </div>
+            <div class="row">
+                <hr style="border-top-color: #ee6e73; clear: both;" />
+                <div class="col-md-2" style="margin: 0 auto;">
+                    <img class="" style="width: 100%; height: auto; margin: auto; display: block; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);" src="~/Content/Images/@Html.DisplayFor(model => model.logo)" />
+                </div>
+                <div class="col-md-5">
+                    <p style="margin: 0px;">@Html.DisplayFor(model => model.address)</p>
+                    <p style="margin: 0px;"><a href="http://@Html.DisplayFor(model => model.website)">@Html.DisplayFor(model => model.website)</a></p>
+
+                </div>
+                <div class="col-md-5">
+                    <p style="margin: 0px;">Industry: @Html.DisplayFor(model => model.industry)</p>
+                    <p style="margin: 0px;">Contact: @Html.DisplayFor(model => model.contact)</p>
+                    <p style="margin: 0px;">Phone: @Html.DisplayFor(model => model.phone)</p>
+                </div>
+            </div>
+            <div class="row">
+                <hr style="border-top-color: #ee6e73;" />
+                @Html.Raw(Model.description)
+            </div>
+
+            <div class="row">
+                <hr style="border-top-color: #ee6e73;" />
+                <span style="float: right;">@Html.DisplayFor(model => model.Jobs.Count) Jobs</span>
+
+                @foreach (var item in Model.Jobs)
+            {
+                    <a href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.ID)">@Html.DisplayFor(modelItem => item.name)</a><br />
+                }
+            </div>
+        </div>
+    </div>
+</div>

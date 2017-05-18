@@ -1,0 +1,38 @@
+﻿@model NAJB_BS_Final.Models.VerifyPhoneNumberViewModel
+@{
+    ViewBag.Title = "Verify Phone Number";
+    Layout = "~/Views/Shared/_Layout_Manage.cshtml";
+}
+
+<div class="row" style="align-self:center; max-width: 500px; width: 90%;">
+    <div class="col s12">
+        <div class="jumbotron card">
+            <h2>@ViewBag.Title.</h2>
+
+            @using (Html.BeginForm("VerifyPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("phoneNumber", @Model.PhoneNumber)
+                <h4>Enter verification code</h4>
+                <h5>@ViewBag.Status</h5>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="input-field col s10 offset-s1">
+                        @Html.TextBoxFor(m => m.Code, new { @class = "" })
+                        @Html.LabelFor(m => m.Code, new { @class = "" })
+                        @Html.ValidationMessageFor(m => m.Code, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Submit" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

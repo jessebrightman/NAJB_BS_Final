@@ -1,0 +1,259 @@
+﻿@model IEnumerable<NAJB_BS_Final.Company>
+
+@{
+    ViewBag.Title = "Companies";
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-med-and-down">
+    <div class="" style="height: auto;">
+        <div style="margin-bottom:15px !important;">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+                <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" id="searchli" class="col-xs-3"><a href="/Searcher/Searcher" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Searches</a></li>
+                            <li role="presentation" id="profileli" class="col-xs-3"><a href="/Searcher/AddSearch" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                            <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Searcher/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                            <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Searcher/Favourites" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-building fa-lg"></i><br />Applications</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_SearcherUserBox")
+        <div class="col-md-9">
+            <div class="jumbotron card" style="width: 100%;">
+                <h1 style=""><i class="fa fa-building page-icon" style="padding-left: 17px;"></i> Companies<span style="float: right;">@Model.Count() Companies</span></h1>
+                <hr style="border-top-color: #ee6e73;" />
+                @*<p>Review your Job Matches here. <i id="matchHelp" class="fa fa-info-circle fa-lg" style="color: #ee6e73;"></i></p>
+                <ul id="matchHelpText" style="display: none;">
+                    <li>Click <i class="fa fa-eye"></i> View to view the complete Job Post for this Job.</li>
+                    <li>Click <i class="fa fa-star"></i> Favourite to store this in your Favourites tab.</li>
+                    <li>Click <i class="fa fa-mail-forward"></i> Apply to send in your Application or be transferred to the Company's internal Job Portal</li>
+                    <li>Click <i class="fa fa-close"></i> Ignore to remove this Job Match and remove it form any future Emails.</li>
+                </ul>*@
+            </div>
+
+
+            <br />
+            <div class="row" style="margin-left: -15px !important; margin-right: -15px !important;">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-12 col-md-6 " style="float: left; margin-bottom: 20px;">
+                        <div class="panel-group card">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="height:auto; padding: 15px;">
+                                    <div class="row">
+                                        <div class="col-xs-3" style="padding: 0px;">
+                                            @if (item.logo == "" || item.logo == null)
+                                            {
+                                                <img class="circle" style="width: 65px; height: 65px;" src="~/Content/Images/user.png" />
+                                            }
+                                            else
+                                            {
+                                                //<img class="activator" src="@Html.DisplayFor(modelItem => item.logo)">
+                                                <img class="circle" style="width: 65px; height: 65px;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.logo)" />
+                                            }
+                                        </div>
+                                        <div class="col-xs-7" style="padding: 0px;">
+                                            <h3 style="float:left; margin: 0px;">@Html.DisplayFor(modelItem => item.name)</h3><br />
+                                            <h5><a href="http://@Html.DisplayFor(modelItem => item.website)">@Html.DisplayFor(modelItem => item.website)</a></h5><br />
+
+                                        </div>
+                                        <div class="col-xs-2" style="padding: 0px;">
+                                            <h6>Jobs: @Html.DisplayFor(modelItem => item.Jobs.Count)</h6>
+                                            <a data-toggle="collapse" href="#collapse-mobile-@Html.DisplayFor(modelItem => item.ID)"><i class="fa fa-chevron-down"></i></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="collapse-mobile-@Html.DisplayFor(modelItem => item.ID)" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        @foreach (var job in item.Jobs)
+                                        {
+                                            <div class="col-xs-10">
+                                                <h6><i class="fa fa-list-alt" style="color:#ee6e73"></i> @job.name</h6>
+                                                <h6>@job.location</h6>
+                                            </div>
+                                                                <div class="col-xs-2" style="text-align:center;">
+                                                                    <h6 style="float:right;">
+                                                                        <a class="" style="color: grey;" href="/Searcher/Job?id=@job.ID">
+                                                                            <i class="fa fa-eye text-info" title="View" style=""></i><br />View
+                                                                        </a>
+                                                                    </h6>
+                                                                </div>
+                                                                <hr style="border-top-color: #ee6e73;clear:both;" />
+                                        }
+
+
+                                    </div>
+
+
+                                    @*<div class="panel-footer">
+
+                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" id="searchli" class="col-xs-3"><a href="/Searcher/Searcher" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Searches</a></li>
+                                    <li role="presentation" id="profileli" class="col-xs-3"><a href="/Searcher/AddSearch" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                                    <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Searcher/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                                    <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Searcher/Favourites" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-star fa-lg"></i><br />Favourites</a></li>
+                                </ul>
+                            </div>
+                            <div class="hide-on-large-only" style="position: absolute; top: 120px; background-color: lightgrey; width: 100%; height: auto;">
+                                <div id="Matches" class="" style="padding-top: 10px; background-color: lightgrey;">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="col-xs-12 col-md-6" style="float: left; margin-bottom: 10px; padding: 0px;">
+                                            <div class="panel-group card">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" style="height:auto; padding: 15px;">
+                                                        <div class="row">
+                                                            <div class="col-xs-3" style="padding: 0px;">
+                                                                @if (item.logo == "" || item.logo == null)
+                                                                {
+                                                                    <img class="circle" style="width: 65px; height: 65px;" src="~/Content/Images/user.png" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    //<img class="activator" src="@Html.DisplayFor(modelItem => item.logo)">
+                                                                    <img class="circle" style="width: 65px; height: 65px;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.logo)" />
+                                                                }
+                                                            </div>
+                                                            <div class="col-xs-7" style="padding: 0px;">
+                                                                <h3 style="float:left; font-size: 2.5vmax !important; margin: 0px;">@Html.DisplayFor(modelItem => item.name)</h3><br />
+                                                                <h5><a href="http://@Html.DisplayFor(modelItem => item.website)">@Html.DisplayFor(modelItem => item.website)</a></h5><br />
+
+                                                            </div>
+                                                            <div class="col-xs-2" style="padding: 0px;">
+                                                                <h6>Jobs: @Html.DisplayFor(modelItem => item.Jobs.Count)</h6>
+                                                                <a data-toggle="collapse" href="#collapse-mobile-@Html.DisplayFor(modelItem => item.ID)"><i class="fa fa-chevron-down"></i></a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div id="collapse-mobile-@Html.DisplayFor(modelItem => item.ID)" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            @foreach (var job in item.Jobs)
+                                                            {
+                                                                <div class="col-xs-10">
+                                                                    <h6><i class="fa fa-list-alt" style="color:#ee6e73"></i> @job.name</h6>
+                                                                    <h6>@job.location</h6>
+                                                                </div>
+                                                                <div class="col-xs-2" style="text-align:center;">
+                                                                    <h6 style="float:right;">
+                                                                        <a class="" style="color: grey;" href="/Searcher/Job?id=@job.ID">
+                                                                            <i class="fa fa-eye text-info" title="View" style=""></i><br />View
+                                                                        </a>
+                                                                    </h6>
+                                                                </div>
+                                                                <hr style="border-top-color: #ee6e73;clear:both;" />
+                                                            }
+
+
+                                                        </div>
+
+
+                                                        @*<div class="panel-footer">
+
+                                                            </div>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            @*<table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.address)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.logo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.description)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.website)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.credits)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.contact)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.phone)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.industry)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.NAJB_userID)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.address)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.logo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.website)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.credits)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.contact)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.phone)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.industry)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NAJB_userID)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>*@

@@ -1,0 +1,447 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewCompany
+
+@{
+    ViewBag.Title = "Employer";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.SuccessMessage
+    </div>
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<div class="hide-on-med-and-down" style="height: auto;">
+    @*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+    <div class="jumbotron card" style="width: 100%;">
+        <h4><i class="fa fa-list-alt" style="color:#ee6e73"></i> My Job Postings</h4>
+        <hr style="border-top-color: #ee6e73;" />
+        <div>
+            <table class="table table_id">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.JobName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Industry)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.JobType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Experience)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location)
+                        </th>
+                        <th>
+                            @Html.Raw("Salary")
+                        </th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Jobs)
+                    {
+                        <tr>
+                            <td style="text-align: center;"><i class="fa fa-chevron-down fa-lg"></i></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Industry)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Experience)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMin) - @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMax)
+                            </td>
+                            <td>
+                                <a class="" href="EditJob?id=@item.ID"><i class="fa fa-pencil fa-2x"></i></a>
+                                <a class="" id="job-delete-@item.ID" href="DeleteJob?id=@item.ID"><i class="fa fa-trash fa-2x" style="color:red;"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="col-xs-3 active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-list-alt fa-lg"></i></a></li>
+        <li role="presentation" class="col-xs-3"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-plus fa-lg"></i></a></li>
+        <li role="presentation" class="col-xs-3"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><i class="fa fa-building fa-lg"></i></a></li>
+        <li role="presentation" class="col-xs-3"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><i class="fa fa-star fa-lg"></i></a></li>
+    </ul>
+</div>
+
+<div class="hide-on-large-only" style="position: relative; top: 25px;">
+    <div class="tab-content" style="padding: 0px; background-color: white;">
+        <div role="tabpanel" class="tab-pane active" id="home" style="height: calc(100vh - 120px); padding: 0px 20px;">
+            <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+                @foreach (var item in Model.Jobs)
+                {
+                    <div class="carousel-cell" style="width: 100%;" href="#one!">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.JobName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Industry)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Industry)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.JobType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.JobType)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.Location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Location)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.SalaryMin)
+                                </td>
+                                <td>
+                                    @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMin)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.SalaryMax)
+                                </td>
+                                <td>
+                                    @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMax)
+                                </td>
+                            </tr>
+                            <tr>
+                                @if (item.Active == true)
+                                {
+                                    <td>
+                                        <a class="" style="color: green" id="job-active-@item.ID" href="DeactivateJobSearch?id=@item.ID"><i class="material-icons">lightbulb_outline</i></a>
+                                        <a class="icon material-icons right-align" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID">delete</a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a class="" style="color: red" id="job-inactive-@item.ID" href="ActivateJobSearch?id=@item.ID"><i class="material-icons">lightbulb_outline</i></a>
+                                        <a class="icon material-icons right-align" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID">delete</a>
+
+                                    </td>
+                                }
+                                <td></td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+
+                }
+
+            </div>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="profile" style="padding: 0px 20px;">
+            <h4 style="margin-top: 0px; padding-top: 20px;"><i class="fa fa-plus" style="color:#ee6e73"></i> Add A New Job Search</h4>
+            <hr style="border-top-color: #ee6e73;" />
+
+            @using (Html.BeginForm("AddSearch", "Searcher", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col s12" }))
+            {
+                <div class="card">
+                    <div class="card-image" style="height:20%; max-height: 100px; overflow: hidden;">
+                        <img src="~/Content/Images/office.jpg" style="" />
+                    </div>
+                    <div class="card-content">
+                        @*<span class="card-title">@ViewBag.Title.</span>*@
+                        <div class="row" style="margin: 0px 20px;">
+
+                            @Html.AntiForgeryToken()
+                            @if (ViewBag.ErrorMessage != null)
+                            { @ViewBag.ErrorMessage;
+                            }
+                            <div class="row" style="margin-bottom: 0px;">
+                                @*<div class="input-field col s12">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "autocomplete" } })
+                                        @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "" })
+                                        @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                                    </div>*@
+                                <div class="input-field col s12">
+                                    <p style="margin-left:40px;">
+                                        @Html.Raw("Job Name")
+                                    </p>
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <div id="JobNameChip" class="chips autocomplete" style="margin-left:40px;"></div>
+                                    @*@Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "autocomplete" } })*@
+
+                                    @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 0px;">
+                                <div class="input-field col s12">
+                                    <p style="margin-left:40px;">
+                                        @Html.Raw("Industry")
+                                    </p>
+                                    <i class="material-icons prefix">business</i>
+                                    @*@Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "" } })*@
+                                    <div id="IndustryChip" class="chips autocomplete" style="margin-left:40px;"></div>
+                                    @Html.ValidationMessageFor(model => model.Industry, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 0px;">
+                                <div class="input-field col s12 m12 l6">
+                                    <p style="margin-left:40px;">
+                                        @Html.Raw("Company Name")
+                                    </p>
+                                    <i class="material-icons prefix">message</i>
+                                    @*@Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "" } })*@
+                                    <div id="CompanyNameChip" class="chips autocomplete" style="margin-left:40px;"></div>
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="input-field col s12 m12 l6" style="">
+
+                                    <p style="margin-left:40px;">
+                                        @Html.Raw("Salary")
+                                    </p>
+                                    <i class="material-icons prefix">monetization_on</i>
+                                    @Html.EditorFor(model => model.SalaryMin, new { htmlAttributes = new { @class = "" } })
+                                    @*@Html.LabelFor(model => model.SalaryMin, htmlAttributes: new { @class = "" })*@
+                                    @Html.ValidationMessageFor(model => model.SalaryMin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 0px;">
+                                <div class="input-field col s12 m12 l6">
+                                    <p style="margin-left:40px;">
+                                        @Html.Raw("Location")
+                                    </p>
+                                    <i class="material-icons prefix">my_location</i>
+                                    <div id="LocationNameChip" class="chips autocomplete" style="margin-left:40px;"></div>
+                                    @*@Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "", @autocomplete = "off" } })*@
+                                    @*@Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "" })*@
+                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="margin-bottom: 0px;">
+                                <div class="input-field col s12 m12 l6" id="JobTypeCheckbox">
+
+                                    <p style="margin-left:40px;">
+                                        @Html.Raw("Job Type")
+                                    </p>
+                                    <i class="material-icons prefix">schedule</i>
+                                    <p style="display:inline-block; margin-left:40px;">
+                                        <input type="checkbox" class="filled-in" id="JobTypech1" value="Full Time" />
+                                        <label for="JobTypech1" style="padding: 0px 20px 0px 25px;">Full Time</label>
+                                    </p>
+                                    <p style="display:inline-block;">
+                                        <input type="checkbox" class="filled-in" id="JobTypech2" value="Part Time" />
+                                        <label for="JobTypech2" style="padding: 0px 20px 0px 25px;">Part Time</label>
+                                    </p>
+                                    <p style="display:inline-block;">
+                                        <input type="checkbox" class="filled-in" id="JobTypech3" value="Casual" />
+                                        <label for="JobTypech3" style="padding: 0px 20px 0px 25px;">Casual</label>
+                                    </p>
+                                    <p style="display:inline-block;">
+                                        <input type="checkbox" class="filled-in" id="JobTypech4" value="Contract" />
+                                        <label for="JobTypech4" style="padding: 0px 20px 0px 25px;">Contract</label>
+                                    </p>
+                                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="input-field col s12 m12 l6" id="ExperienceCheckbox">
+
+                                    <p style="margin-left:40px;">
+                                        Experience Level
+                                    </p>
+                                    <i class="material-icons prefix">sort</i>
+                                    <p style="display:inline-block; margin-left:40px;">
+                                        <input type="checkbox" class="filled-in" id="Experiencech1" value="Entry Level" />
+                                        <label for="Experiencech1" style="padding: 0px 20px 0px 25px;">Entry Level</label>
+                                    </p>
+                                    <p style="display:inline-block;">
+                                        <input type="checkbox" class="filled-in" id="Experiencech2" value="0 - 2 Years" />
+                                        <label for="Experiencech2" style="padding: 0px 20px 0px 25px;">0 - 2 Years</label>
+                                    </p>
+                                    <p style="display:inline-block;">
+                                        <input type="checkbox" class="filled-in" id="Experiencech3" value="2 - 5 Years" />
+                                        <label for="Experiencech3" style="padding: 0px 20px 0px 25px;">2 - 5 Years</label>
+                                    </p>
+                                    <p style="display:inline-block;">
+                                        <input type="checkbox" class="filled-in" id="Experiencech4" value="5+ Years" />
+                                        <label for="Experiencech4" style="padding: 0px 20px 0px 25px;">5+ Years</label>
+                                    </p>
+                                    @Html.ValidationMessageFor(model => model.JobType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        @Html.HiddenFor(model => model.FirstName)
+                        @Html.HiddenFor(model => model.LastName)
+                        @Html.HiddenFor(model => model.Email)
+                        @Html.HiddenFor(model => model.JobName)
+                        @Html.HiddenFor(model => model.Industry)
+                        @Html.HiddenFor(model => model.CompanyName)
+                        @Html.HiddenFor(model => model.Location)
+                        @Html.HiddenFor(model => model.JobType)
+                        @*@Html.HiddenFor(model => model.AdditionalLocations, new { @id = "additionalLocations", @value="" } )*@
+                        <input type="hidden" name="AdditionalLocations" id="AdditionalLocations" value="" />
+                        <input type="submit" value="Save" class="btn btn-default" onclick="getValue();" />
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="messages" style="padding: 0px 20px;">
+            @foreach (var item in Model.Users)
+            {
+
+                <div class="collapsible-header" style="padding: 1rem;">
+                    <div class="collection-item avatar">
+                        <div class="row">
+                            <div class="col s3" style="text-align: center;">
+                                @if (item.userImage == "" || item.userImage == null)
+                                {
+                                    <img class="circle" style="width: 65px; height: 65px;" src="~/Content/MVC_f9ad17b1-5d3b-4258-a449-abd5dc2ab8c1.jpg" />
+                                }
+                                else
+                                {
+                                    //<img class="activator" src="@Html.DisplayFor(modelItem => item.logo)">
+                                    <img class="circle" style="width: 65px; height: 65px;" src="@item.userImage" />
+                                }
+                            </div>
+                            <div class="col s8">
+                                <span class="title">@Html.DisplayFor(modelItem => item.firstname) @Html.DisplayFor(modelItem => item.lastname)</span>
+                                <p>
+                                    @Html.DisplayFor(modelItem => item.email)
+
+                                </p>
+                            </div>
+                            <div class="col s1">
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </div>
+                        </div>
+                        <hr style="margin: 0px;" />
+                        <div class="row">
+
+                            @Html.DisplayFor(modelItem => item.JobSearches.Count) @Html.Raw("Jobs")
+                            @Html.DisplayFor(modelItem => item.JobMatches.Count) @Html.Raw("Job Matches")
+                            <i class="material-icons">info_outline</i>
+                            <i class="material-icons right">more_vert</i>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+        <div role="tabpanel" class="tab-pane" id="settings" style="padding: 0px 20px;">
+           @foreach (var item in Model.Transactions)
+           {
+            <div class="carousel-cell" style="background-color: white;" href="#one!">
+                <table class="table">
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.TransactionID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.TransactionDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TransactionDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.TransactionCredits)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Credits)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Dollars)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dollars)
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <i class="material-icons">skip_previous</i>
+
+                        </td>
+                        <td><i class="material-icons right-align">skip_next</i></td>
+                    </tr>
+                </table>
+            </div>
+
+           }
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,678 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Not A Job Board</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    @Styles.Render("~/Content/css")
+
+    <!--Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ion Range Slider -->
+    <link href="~/Content/normalize.css" rel="stylesheet" />
+    <link href="~/Content/ion.rangeSlider.css" rel="stylesheet" />
+    <link href="~/Content/ion.rangeSlider.skinHTML5.css" rel="stylesheet" />
+    @*<!-- In <head> -->
+    <link href="~/Content/nouislider.min.css" rel="stylesheet">*@
+    @*<link href="~/Content/jquery-ui/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui/jquery-ui.structure.min.css" rel="stylesheet" />*@
+    <!-- Bootstrap Material -->
+    @*<link href="~/Content/css/bootstrap-material-design.css" rel="stylesheet" />
+    <link href="~/Content/css/ripples.css" rel="stylesheet" />*@
+    <link href="~/Content/css/build.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.css" />
+    <link href="~/Content/js/sidenav.css" rel="stylesheet" />
+    <link href="~/Content/js/materialtab.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link href="~/Content/js/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="navbar-fixed-top" style="position: fixed; height: 70px; background-color: white; color: #ee6e73;">
+        <div id="content">
+            <a id="menu-toggle" style="position: absolute; top: 20px; left: 20px; width: 35px; height: 35px; cursor: pointer;"><span style="top: 11px;"></span></a>
+        </div>
+        <div class="container nav-wrapper" style="height: 100%;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#!" class="brand-logo"><img src="~/Content/Images/NAJB_Logo_Web.png" style="height: 40px; margin:15px 0px;" /></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse" style="display:none;"><i class="material-icons" style="color: #ee6e73; display:none; padding: 12px;">menu</i></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                @*<ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>*@
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    
+        @if (HttpContext.Current.User.IsInRole("Searcher") && Request.IsAuthenticated && HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            @Html.Partial("_Dashboard_Searcher")
+            <div class="main-content" style="background-color: lightgrey; min-height: 100vh;">
+                <div class="container body-content" style="height: inherit; display: flex; flex-direction: column; justify-content: center; margin: auto; max-width: 1280px;">
+                    @RenderBody()
+                </div>
+            </div>
+        }
+else if (HttpContext.Current.User.IsInRole("Employer") && Request.IsAuthenticated && HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_Dashboard_Employer")
+    <div class="main-content" style="background-color: lightgrey; min-height: 100vh;">
+        <div class="container body-content" style="height: inherit; display: flex; flex-direction: column; justify-content: center; margin: auto; max-width: 1280px;">
+            @RenderBody()
+        </div>
+    </div>
+}
+else
+{
+            <div class="" style="background-color: lightgrey; min-height: 100vh;">
+                <div class="container body-content" style="height: inherit; display: flex; flex-direction: column; justify-content: center;">
+                    @RenderBody()
+                </div>
+            </div>
+        }
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    
+        <!-- Compiled and minified JavaScript -->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>-->
+        <script src="~/Content/js/materialize.js"></script>
+        @*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
+        @*<script src="~/Scripts/jquery-ui.min.js"></script>*@
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.js"></script>
+        
+        <!-- Ion Range Slider -->
+        <script src="~/Content/js/ion.rangeSlider.min.js"></script>
+    @*<script src="//cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>*@
+    <script src="~/Content/js/bootstrap-tagsinput.min.js"></script>
+    @*<script src="~/Content/js/bootstrap-typeahead.js"></script>*@
+    <script src="~/Content/js/sidenav.min.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="~/Content/js/bootstrap3-typeahead.js"></script>
+        <!-- Bootstrap Material -->
+    @*<script src="~/Content/js/material.js"></script>
+    <script src="~/Content/js/ripples.js"></script>
+    <script>$.material.init()</script>*@
+    <script>
+        document.getElementById("addSearch").onkeypress = function (e) {
+            var key = e.charCode || e.keyCode || 0;
+            if (key == 13) {
+                //alert("I told you not to, why did you do it?");
+                e.preventDefault();
+            }
+        }
+    </script>
+    <script>
+        "use strict";
+
+        var sidenav = new Sidenav({
+            content: document.getElementById("content"),
+            sidenav: document.getElementById("sidenav"),
+            backdrop: document.getElementById("backdrop")
+        });
+
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            
+            if (!this.classList.contains('active')) {
+                sidenav.open();
+                this.classList.toggle("active");
+            }
+            else {
+                sidenav.close();
+                this.classList.toggle("active");
+            }
+                
+        });
+    </script>
+    <script>
+        document.querySelector("#backdrop").addEventListener("click", function () {
+            document.getElementById("menu-toggle").classList.toggle("active");
+    });
+    </script>
+    @*<script>
+        var places = [
+  { name: "New York" },
+  { name: "Los Angeles" },
+  { name: "Copenhagen" },
+  { name: "Albertslund" },
+  { name: "Skjern" }
+        ];
+        console.log(places);
+
+        $('#JobNameChip input').tagsinput({
+            typeahead: {
+                source: places.map(function (item) { return item.name }),
+                afterSelect: function () {
+                    this.$element[0].value = '';
+                }
+            }
+        })
+    </script>*@
+    <script>
+        var places = [
+  { name: "New York" },
+  { name: "Los Angeles" },
+  { name: "Copenhagen" },
+  { name: "Albertslund" },
+  { name: "Skjern" }
+        ];
+        console.log(places);
+
+        var msg = [];
+        $.get("@Url.RouteUrl("Default", new { Action = "AutoCompleteGetJobName", Controller = "Ajax" })", function(text) {
+            msg.push(text);
+            //alert(msg);
+        });
+
+        console.log(msg);
+        $('#JobNameChip input').tagsinput({
+            typeahead: {
+                source: msg.map(function (result) { return result.Title }),
+                afterSelect: function () {
+                    this.$element[0].value = '';
+                }
+            }
+        })
+    </script>
+
+        @*<script>
+            // Initialize collapse button
+            $(".button-collapse").sideNav();
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('select').material_select();
+            });
+        </script>
+    <script>
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+    </script>
+        <script>
+            $(document).ready(function(){
+                $('.carousel.carousel-slider').carousel({ full_width: true });
+        });
+            //$('.carousel.carousel-slider').carousel({ fullWidth: true });
+        </script>*@
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.table_id').DataTable({
+                    responsive: true,
+                    "order": [[2, "desc"]]
+                });
+            });
+        </script>
+        <script>
+            $("#SalaryMin").ionRangeSlider({
+                type: "double",
+                grid: true,
+                prefix: "$",
+                min: 0,
+                max: 150000,
+                from: 20000,
+                to: 50000,
+                step: 5000
+            });
+        </script>
+        <!-- END Ion Range Slider -->
+        @*<script>
+            $('.chips').material_chip();
+        </script>*@
+        <!-- Ajax Image File Upload -->
+        <script>
+            $("#File").change(function () {
+                var data = new FormData();
+                var files = $("#File").get(0).files;
+                if (files.length > 0) {
+                    data.append("MyImages", files[0]);
+                }
+
+                $.ajax({
+                    url: "@Url.RouteUrl("Default", new { Action = "UploadFile", Controller = "Ajax" })",
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: function (response) {
+                        //code after success
+                        $("#txtImg").val(response);
+                        $("#myUploadedImg").attr('src', '/Content/Images/' + response);
+                        $("#Image").val(response);
+                    },
+                    error: function (er) {
+                        alert(er);
+                    }
+
+                });
+            });
+        </script>
+        <!-- END Ajax Image File Upload -->
+        @*<script type="text/javascript">
+                $("#JobName").tagit({
+                    triggerKeys: ['enter', 'comma', 'tab'],
+                    select: true,
+                autocomplete: {
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "@Url.RouteUrl("Default", new { Action = "AutoCompleteGetJobName", Controller = "Ajax" })",
+                            type: "GET",
+                            dataType: "json",
+                            data: { term: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+
+                                    return { label: item.Title, value: item.Title };
+                                }))
+
+                            }
+                        })
+                    }
+                },
+                allowSpaces: true,
+            });
+            </script>*@
+        @*<script type="text/javascript">
+            $("#JobNameChip input").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "@Url.RouteUrl("Default", new { Action = "AutoCompleteGetJobName", Controller = "Ajax" })",
+                        type: "GET",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+
+                                return { label: item.Title, value: item.Title };
+                            }))
+
+                        }
+                    })
+                }
+
+            });
+        </script>*@
+        @*<script type="text/javascript">
+            $("#IndustryChip input").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "@Url.RouteUrl("Default", new { Action = "AutoCompleteGetJobIndustry", Controller = "Ajax" })",
+                        type: "GET",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Industries, value: item.Industries };
+                            }))
+
+                        }
+                    })
+                }
+
+            });
+        </script>*@
+        @*<script type="text/javascript">
+            $("#CompanyNameChip input").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "@Url.RouteUrl("Default", new { Action = "AutoCompleteGetCompanyName", Controller = "Ajax" })",
+                        type: "GET",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+
+                                return { label: item.Companies, value: item.Companies };
+                            }))
+
+                        }
+                    })
+                }
+
+            });
+        </script>*@
+        @*<script type="text/javascript">
+                $("#CompanyName").tagit({
+                    triggerKeys: ['enter', 'comma', 'tab'],
+                    select: true,
+                autocomplete: {
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "@Url.RouteUrl("Default", new { Action = "AutoCompleteGetCompanyName", Controller = "Ajax" })",
+                            type: "GET",
+                            dataType: "json",
+                            data: { term: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.Companies, value: item.Companies };
+                                }))
+
+                            }
+                        })
+                    }
+                },
+                allowSpaces: true,
+            });
+            </script>
+            <script type="text/javascript">
+                $("#Industry").tagit({
+                    triggerKeys: ['enter', 'tab'],
+                    select: true,
+                autocomplete: {
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "@Url.RouteUrl("Default", new { Action = "AutoCompleteGetJobIndustry", Controller = "Ajax" })",
+                            type: "GET",
+                            dataType: "json",
+                            data: { term: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return { label: item.Industries, value: item.Industries };
+                                }))
+
+                            }
+                        })
+                    }
+                },
+                allowSpaces: true,
+            });
+            </script>*@
+        @*<script type="text/javascript">
+            $(document).ready(function () {
+                $('.table_id').DataTable({
+                    responsive: true,
+                    "order": [[ 2, "desc" ]]
+                });
+            } );
+            </script>*@
+        @*<script type="text/javascript">
+            $('#LocationNameChip input').autocomplete({
+                source: function (request, response) {
+                    $.getJSON(
+                        "https://gd.geobytes.com/AutoCompleteCity?key=7801e826329f5ba0cee7295cc2802047&callback=?&q=" + request.term,
+                        //"http://gd.geobytes.com/AutoCompleteCity?key=7801e826329f5ba0cee7295cc2802047&callback=?&q=" + request.term,
+                        function (data) {
+                            response(data);
+                        }
+                    );
+                },
+                minLength: 3,
+                select: function (event, ui) {
+                    var selectedObj = ui.item;
+                    $("#LocationNameChip input").val(selectedObj.value);
+                    //getcitydetails(selectedObj.value);
+                    return true;
+                }
+            });
+            //var availableTags = ['Vancouver, BC, Canada', 'Vancouver, WA, USA']
+
+        </script>*@
+
+        @*<script type="text/javascript">
+            $(function () {
+                $('#RadiusRadioButton input').click(function () {
+                    var location = $('#LocationNameChip').val();
+                    var radius1 = $('#Radiusch1').val();
+                    var radius2 = $('#Radiusch2').val();
+                    var radius3 = $('#Radiusch3').val();
+                    var radius4 = $('#Radiusch4').val();
+                    var radius = '';
+                    var thisRadius = $(this).val();
+
+                    alert(thisRadius);
+                    locations = "";
+                    if (location != null && radius != null) {
+                        $.getJSON("https://getnearbycities.geobytes.com/GetNearbyCities?callback=?&limit=100&radius=" + thisRadius + "&locationcode=" + location,
+                            //"http://getnearbycities.geobytes.com/GetNearbyCities?callback=?&limit=100&radius=" + radius + "&locationcode=" + location,
+                        function (data) {
+                            //alert(data);
+                            for (var i = 0; i < data.length; i++) {
+                                addLocations(data[i]);
+                            }
+
+                            function addLocations(rowData) {
+                                locations += (rowData[1] + ", " + rowData[2] + ", " + rowData[3] + ";");
+                                //alert(locations);
+
+
+                            }
+                            $('#AdditionalLocations').val(locations);
+                            $('#Radius').val(thisRadius);
+                            alert($('#AdditionalLocations').val());
+                            alert($('#Radius').val());
+                        });
+
+                    }
+                });
+            });
+        </script>*@
+        @*<script>
+                $(document).ready(function () {
+                    $('.active').click(function () {
+                        var active = $(this).val();
+                        $.ajax({
+                            type: "POST",
+                            data: '{ }',
+                            dataType: "json",
+                            url: "@Url.RouteUrl("Default", new { Action = "AjaxUpdateActive", Controller = "Ajax" })",
+                            success: function (response) {
+                                alert(response);
+
+                            },
+                            error: function (response) {
+                                alert("error");
+                            }
+                        })
+                    });
+                });
+
+            </script>*@
+       <script>
+           var JobNameChips = new Array();
+           var JobName = '';
+           $('#JobNameChip').on('chip.add', function () {
+               JobName = '';
+               JobNameChips.length = 0;
+                $('#JobNameChip .chip').each(function () {
+
+                    JobNameChips.push($(this).text().replace('close', ''));
+                    JobName = JobNameChips.join(', ');
+
+                });
+                $('#JobName').val(JobName);
+               alert(JobName);
+           });
+           $('#JobNameChip').on('chip.delete', function (e, chip) {
+               // you have the deleted chip here
+               JobName = '';
+               JobNameChips.length = 0;
+               $('#JobNameChip .chip').each(function () {
+
+                   JobNameChips.push($(this).text().replace('close', ''));
+                   JobName = JobNameChips.join(', ');
+
+               });
+               $('#JobName').val(JobName);
+               alert(JobName);
+           });
+        </script>
+        <script>
+           var IndustryChips = new Array();
+           var Industry = '';
+           $('#IndustryChip').on('chip.add', function () {
+               Industry = '';
+               IndustryChips.length = 0;
+               $('#IndustryChip .chip').each(function () {
+
+                   IndustryChips.push($(this).text().replace('close', ''));
+                   Industry = IndustryChips.join(', ');
+
+                });
+               $('#Industry').val(Industry);
+               alert(Industry);
+           });
+           $('#IndustryChip').on('chip.delete', function (e, chip) {
+               // you have the deleted chip here
+               Industry = '';
+               IndustryChips.length = 0;
+               $('#IndustryChip .chip').each(function () {
+
+                   IndustryChips.push($(this).text().replace('close', ''));
+                   Industry = IndustryChips.join(', ');
+
+               });
+               $('#Industry').val(Industry);
+               alert(Industry);
+           });
+    </script>
+    <script>
+           var CompanyNameChips = new Array();
+           var CompanyName = '';
+           $('#CompanyNameChip').on('chip.add', function () {
+               CompanyName = '';
+               CompanyNameChips.length = 0;
+               $('#CompanyNameChip .chip').each(function () {
+
+                   CompanyNameChips.push($(this).text().replace('close', ''));
+                   CompanyName = CompanyNameChips.join(', ');
+
+                });
+               $('#CompanyName').val(CompanyName);
+               alert(CompanyName);
+           });
+           $('#CompanyNameChip').on('chip.delete', function (e, chip) {
+               // you have the deleted chip here
+               CompanyName = '';
+               CompanyNameChips.length = 0;
+               $('#CompanyNameChip .chip').each(function () {
+
+                   CompanyNameChips.push($(this).text().replace('close', ''));
+                   CompanyName = CompanyNameChips.join(', ');
+
+               });
+               $('#CompanyName').val(CompanyName);
+               alert(CompanyName);
+           });
+    </script>
+    <script>
+           var LocationName = '';
+           $('#LocationNameChip').on('chip.add', function () {
+               LocationName = '';
+               $('#LocationNameChip .chip').each(function () {
+                   LocationName = $(this).text().replace('close', '');
+                });
+               $('#Location').val(LocationName);
+               alert($('#Location').val());
+           });
+           $('#LocationNameChip').on('chip.delete', function (e, chip) {
+               // you have the deleted chip here
+               $('#LocationNameChip .chip').each(function () {
+                   LocationName = '';
+               });
+               $('#Location').val(LocationName);
+               alert($('#Location').val());
+           });
+    </script>
+   
+        @*<script>
+            $("#LocationNameChip").focusout(function () {
+                var LocationNameChips = $('#LocationNameChip .chip').text().replace('close', '');
+
+                $('#Location').val(LocationNameChips);
+                alert(LocationNameChips);
+            });
+        </script>*@
+        <script>
+
+            var jobTypeVals = [];
+            var jobType = '';
+            $(function () {
+                $('#JobTypeCheckbox input').click(function () {
+
+                    $('#JobTypeCheckbox :checked').each(function () {
+                        jobTypeVals.push($(this).val());
+                        jobType = jobTypeVals.join(', ');
+                        $('#JobType').val(jobType);                    
+                    });
+                    alert(jobType);
+                    jobType = '';
+                    jobTypeVals.length = 0;                 
+                });
+
+            });
+        </script>
+    <script>
+
+        var experienceVals = [];
+        var experience = '';
+            $(function () {
+                $('#ExperienceCheckbox input').click(function () {
+
+                    $('#ExperienceCheckbox :checked').each(function () {
+                        experienceVals.push($(this).val());
+                        experience = experienceVals.join(', ');
+                        $('#Experience').val(experienceVals);
+                    });                   
+                    alert(experience);
+                    experience = '';
+                    experienceVals.length = 0;
+                });
+            });
+    </script>
+        @*<script>
+            function updateTextArea() {
+                var allVals = [];
+                $('#ExperienceCheckbox :checked').each(function () {
+                    allVals.push($(this).val());
+                });
+                $('#Experience').val(allVals);
+                //alert(allVals);
+            }
+            $(function () {
+                $('#ExperienceCheckbox input').click(updateTextArea);
+                updateTextArea();
+            });
+        </script>*@
+        @*<script>
+            $(document).ready(function () {
+                $('.carousel').carousel({ full_width: true });
+            });
+        </script>
+    <script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+    </script>*@
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $('#ShareButton').click(function () {
+            $('#ShareDiv').slideToggle();
+        });
+    </script>
+</body>
+</html> 
+

@@ -1,0 +1,46 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewCompany
+
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<div class="hide-on-med-and-down" style="height: auto;">
+    @*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+    <div class="jumbotron card" style="width: 100%;">
+        <h2>Company</h2>
+
+        <div>
+            <h4>ViewCompany</h4>
+            <hr />
+            <div class="row">
+                <div class="col s7">
+                    @if (Model.CompanyImage == "" || Model.CompanyImage == null)
+                    {
+                        <img class="circle" style="height: 75px; width: 75px; float:left; margin:10px;" src="~/Content/Images/user.png">
+                    }
+                    else
+                    {
+                        <img class="circle" style="height: 75px; width: 75px; float:left; margin:10px;" src="/Content/@Model.CompanyImage">
+                        //<img id="userImage" src="/Content/@Model.UserImage" class="najb-avatar">
+                    }
+                    <h3 style="float:left;margin-left: 20px;"><strong>@Html.DisplayFor(model => model.CompanyName, new { @class = "" })</strong></h3>
+                </div>
+                <div class="col s5 right-align">
+                    <p><strong>Address: </strong>@Html.DisplayFor(model => model.Address, new { @class = "" })</p>
+                    <p><strong>Website: </strong>@Html.DisplayFor(model => model.Website, new { @class = "" })</p>
+                    <p><strong>Apply To: </strong>@Html.DisplayFor(model => model.Contact, new { @class = "" })</p>
+                    <p><strong>Email: </strong>@Html.DisplayFor(model => model.Email, new { @class = "" })</p>
+                    <p><strong>Industry: </strong>@Html.DisplayFor(model => model.Industry, new { @class = "" })</p>
+                </div>
+            </div>
+            <hr />
+
+
+            <p><strong>Description: </strong>@Html.DisplayFor(model => model.CompanyDescription, new { @class = "" })</p>
+
+            <hr />
+            <a href="@Url.Action("EditCompany", "Employer")" class="btn btn-default">Edit</a>
+        </div>
+    </div>
+</div>

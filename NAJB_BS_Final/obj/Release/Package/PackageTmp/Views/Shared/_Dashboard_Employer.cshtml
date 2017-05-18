@@ -1,0 +1,84 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewCompany
+
+    @if (Request.IsAuthenticated)
+    {
+        
+        <div id="sidenav" class="side-nav" style="z-index: 994;">
+            <div class="userView" style="height:325px;">
+                <img class="background" src="~/Content/Images/office.jpg">
+                @if (ViewBag.Image == "" || ViewBag.Image == null)
+                {
+                    <img class="circle" src="~/Content/Images/user.png">
+                }
+                else
+                {
+                    <img class="circle" src="/Content/Images/@ViewBag.Image">
+                    //<img id="userImage" src="/Content/@Model.UserImage" class="najb-avatar">
+                }
+
+                <span class="white-text name">@ViewBag.FirstName @ViewBag.LastName</span>
+                <span class="white-text email">@ViewBag.Email</span>
+                @if (ViewBag.CompanyImage == "" || ViewBag.CompanyImage == null)
+                {
+                    <img class="circle" src="~/Content/Images/user.png">
+                }
+                else
+                {
+                    <img class="circle" src="/Content/Images/@Model.CompanyImage">
+                    //<img id="userImage" src="/Content/@Model.UserImage" class="najb-avatar">
+                }
+                @if (ViewBag.CompanyName == "" || ViewBag.CompanyName == null)
+                {
+                }
+                else
+                {
+                    <span class="white-text email">@ViewBag.CompanyName</span>
+                }
+                <span class="white-text email">Credits: @ViewBag.CompanyCredits</span>
+            </div>
+            <ul class="hide-on-med-and-down">
+                <li class="links"><a href="@Url.Action("About", "Employer")" class="waves-effect"><i class="fa fa-info-circle fa-lg"></i>About</a></li>
+                <li class="links"><a href="@Url.Action("AddCredits", "Employer")" class="waves-effect"><i class="fa fa-credit-card fa-lg"></i>Add Credits</a></li>
+                <li class="links"><a href="@Url.Action("AddJob", "Employer")" class="waves-effect"><i class="fa fa-plus fa-lg"></i>Add Job</a></li>
+                <li class="links"><a href="@Url.Action("Employer", "Employer")" class="waves-effect"><i class="fa fa-bar-chart fa-lg"></i>My Postings <span class="badge red">@ViewBag.Postings</span></a></li>
+                <li class="links"><a href="@Url.Action("Archive", "Employer")" class="waves-effect"><i class="fa fa-archive fa-lg"></i>Archive</a></li>
+                <li class="links"><a href="@Url.Action("EditEmployer", "Employer")" class="waves-effect"><i class="fa fa-pencil-square-o fa-lg"></i>Edit Profile</a></li>
+                <li class="links"><a href="@Url.Action("Company", "Employer")" class="waves-effect"><i class="fa fa-bank fa-lg"></i>My Company</a></li>
+                <li class="links"><a href="@Url.Action("EditCompany", "Employer")" class="waves-effect"><i class="fa fa-pencil-square-o fa-lg"></i>Edit Company</a></li>
+                
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <li class="links" style="position: absolute; bottom: 72px; right: 0px;"><a class="" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out fa-lg"></i>Log off</a></li>
+
+                }
+                <li class="links" style="position: absolute; bottom: 72px;"><a href="@Url.Action("About", "Employer")" class=""><i class="fa fa-question-circle fa-lg"></i>Help</a></li>
+            </ul>
+            <ul class="hide-on-large-only">
+                <li class="links" style="position: absolute; bottom: 72px;"><a href="@Url.Action("About", "Employer")" class=""><i class="fa fa-question-circle fa-lg"></i>Help</a></li>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <li class="links" style="position: absolute; bottom: 72px; right: 0px;"><a class="" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out fa-lg"></i>Log off</a></li>
+
+                }
+                
+                <li class="links"><a href="@Url.Action("About", "Employer")" class="waves-effect"><i class="fa fa-info-circle fa-lg"></i>About</a></li>
+                <li class="links"><a href="@Url.Action("AddCredits", "Employer")" class="waves-effect"><i class="fa fa-credit-card fa-lg"></i>Add Credits</a></li>
+                <li class="links"><a href="@Url.Action("AddJob", "Employer")" class="waves-effect"><i class="fa fa-plus fa-lg"></i>Add Job</a></li>
+                <li class="links"><a href="@Url.Action("Employer", "Employer")" class="waves-effect"><i class="fa fa-bar-chart fa-lg"></i>My Postings <span class="badge red">@ViewBag.Postings</span></a></li>
+                <li class="links"><a href="@Url.Action("Archive", "Employer")" class="waves-effect"><i class="fa fa-archive fa-lg"></i>Archive</a></li>
+                <li class="links"><a href="@Url.Action("EditEmployer", "Employer")" class="waves-effect"><i class="fa fa-pencil-square-o fa-lg"></i>Edit Profile</a></li>
+                <li class="links"><a href="@Url.Action("Company", "Employer")" class="waves-effect"><i class="fa fa-bank fa-lg"></i>My Company</a></li>
+                <li class="links"><a href="@Url.Action("EditCompany", "Employer")" class="waves-effect"><i class="fa fa-pencil-square-o fa-lg"></i>Edit Company</a></li>
+               
+            </ul>
+        </div>
+        <div id="backdrop"></div>
+    }
+
+
+    
+   
+
+

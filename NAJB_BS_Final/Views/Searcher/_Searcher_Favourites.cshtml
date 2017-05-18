@@ -1,0 +1,153 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewUser
+
+<div id="JobFavourites" class="second-carousel" data-flickity='{ "cellAlign": "left", "contain": true, resize: true }' style="height: 100%;">
+    @if (Model.JobMatchFavourites.Count > 0)
+    {
+        int favcount = 1;
+        foreach (var item in Model.JobMatchFavourites)
+        {
+            <div class="carousel-cell" style="width: 100%;" href="#">
+                <h4 style="font-size: 3vmax !important;"><i class="fa fa-star" style="color:#ee6e73"></i> My Job Favourite <span class="pull-right">#@favcount </span></h4>
+                <hr style="border-top-color: #ee6e73; margin-bottom: 0px;" />
+                <table class="table" style="font-size: 2vmax;">
+                    <tr>
+                        <td>
+                            <i class="fa fa-comment fa-md primary" style=""></i> @Html.Raw("Job Name")
+                        </td>
+                        <td>
+                            @if (item.JobName == null)
+                            {
+                                @Html.Raw(" - ")
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.JobName)
+                            }
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-commenting fa-md primary" style=""></i> @Html.DisplayNameFor(model => model.CompanyName)
+                        </td>
+                        <td>
+                            @if (item.CompanyName == null)
+                            {
+                                @Html.Raw(" - ")
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-building fa-md primary" style=""></i> @Html.DisplayNameFor(model => model.Industry)
+                        </td>
+                        <td>
+                            @if (item.Industry == null)
+                            {
+                                @Html.Raw(" - ")
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Industry)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-clock-o fa-md primary" style=""></i> @Html.DisplayNameFor(model => model.JobType)
+                        </td>
+                        <td>
+                            @if (item.JobType == null)
+                            {
+                                @Html.Raw(" - ")
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.JobType)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-sort-amount-asc fa-md primary" style=""></i> @Html.DisplayNameFor(model => model.Experience)
+                        </td>
+                        <td>
+                            @if (item.Experience == null)
+                            {
+                                @Html.Raw(" - ")
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Experience)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-map-marker fa-md primary" style=""></i> @Html.DisplayNameFor(model => model.Location)
+                        </td>
+                        <td>
+                            @if (item.Location == null)
+                            {
+                                @Html.Raw(" - ")
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Location)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fa fa-dollar fa-md" style="color: #4285F4;"></i> @Html.Raw("Salary")
+                        </td>
+                        <td>
+                            @if (item.SalaryMin == null && item.SalaryMax == null)
+                            {
+                                @Html.Raw(" - ")
+                            }
+                            else
+                            {
+                                @Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMin)@Html.Raw(" - ")@Html.Raw("$")@Html.DisplayFor(modelItem => item.SalaryMax)
+
+
+                            }
+                                </td>
+                            </tr>
+                        </table>
+                        <hr style="border-top-color: #ee6e73;" />
+                <div class="col-xs-4 text-center" style="text-align: center;">
+                  
+                        <a class="" style="color: grey;" href="/Searcher/UnFavourite?id=">
+                            <i class="fa fa-star fa-2x text-warning" title="Favourite" style=""></i><br />Favourite
+                        </a>
+                 
+                </div>
+
+                <div class="col-xs-4 text-center" style="text-align: center;">
+                   
+                        <a href="#" style="color: grey;"><i class="fa fa-mail-forward fa-2x text-success" style=""></i><br />Apply</a>
+
+  
+                </div>
+
+                        <div class="col-xs-4" style="text-align: center;">
+                            <a class="" style="color: grey; text-decoration: none;" id="job-delete-@item.ID" href="DeleteJobSearch?id=@item.ID"><i class="fa fa-trash fa-2x" style="color:red;"></i><br />Delete</a>
+                        </div>
+
+                    </div>
+            favcount++;
+        }
+    }
+    else
+    {
+        <div style="height: calc(100vh - 120px); padding: 0px 20px;">
+            <h4>Start selecting some Job Favourites!</h4>
+        </div>
+    }
+</div>
+

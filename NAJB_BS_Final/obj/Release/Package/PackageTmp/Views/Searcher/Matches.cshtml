@@ -1,0 +1,91 @@
+﻿@model IEnumerable<NAJB_BS_Final.JobMatch>
+
+@{
+    ViewBag.Title = "Matches";
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+<div class="hide-on-med-and-down" style="height: auto; margin-left: 2%; margin-right: 2%;">
+    @*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+    <div class="jumbotron card" style="width: 100%;">
+        <h3><i class="fa fa-retweet fa-lg" style="color: #ee6e73;"></i> Job Matches</h3>
+        <hr style="border-top-color: #ee6e73;" />
+    </div>
+</div>
+<br />
+<div class="col-md-12">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6" style="float: left;">
+            <div class="jumbotron card">
+                <h3 style="float:left;"><i class="fa fa-list-alt" style="color:#ee6e73"></i> @Html.DisplayFor(modelItem => item.name)</h3>
+                @if (item.favourite == true)
+                {
+                    <i class="fa fa-star fa-lg text-warning" style="float:right"></i>
+                }
+                @if (item.ignore == true)
+                {
+                    <i class="fa fa-volume-off text-danger" style="float:right"></i>
+                }
+                @if (item.applied == true)
+                {
+                    <i class="fa fa-volume-off text-danger" style="float:right"></i>
+                }
+                @*@if (item.shared == true)
+                {
+                    <i class="fa fa-volume-off text-danger" style="float:right"></i>
+                }*@
+                <hr style="border-top-color: #ee6e73; clear: both;"/>
+                
+                <div class="col-md-2">
+                    <img class="circle" style="width:50px; height: 50px; margin-top: 10px;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.Company.logo)" />
+                </div>
+                <div class="col-md-10">
+                    <h4><a href="/Searcher/Company?id=@Html.DisplayFor(modelItem => item.companyID)">@Html.DisplayFor(modelItem => item.companyName)</a></h4>
+                    <p>@Html.DisplayFor(modelItem => item.location)</p>
+                </div>
+                    <hr style="border-top-color: #ee6e73; clear: both;" />
+                    <p>@Html.DisplayFor(modelItem => item.description)</p>
+
+                    <hr style="border-top-color: #ee6e73;" />
+                    <a class="btn" href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.jobID)">View Job</a>
+                    @*<div class="col-md-3" style="text-align: center;">
+                <a class="text-success" style="text-decoration: none;" href="mailto:@Html.DisplayFor(model => model.Company.contact)">
+                    <i class="fa fa-mail-forward fa-lg"></i><br />
+                    Apply
+                </a>
+            </div>
+            <div class="col-md-3" style="text-align: center;">
+                <a class="text-warning" style="text-decoration: none;" href="/Searcher/Favourite?id=@Html.DisplayFor(model => model.)">
+                    <i class="fa fa-star fa-lg"></i><br />
+                    Favourite
+                </a>
+            </div>
+            <div class="col-md-3" style="text-align: center;">
+                <a class="text-danger" style="text-decoration: none;" href="mailto:@Html.DisplayFor(model => model.Company.contact)">
+                    <i class="fa fa-volume-off fa-lg"></i><br />
+                    Ignore
+                </a>
+            </div>
+            <div class="col-md-3" style="text-align: center;">
+                <a id="ShareButton" style="text-decoration: none;" class="text-info" href="#">
+                    <i class="fa fa-share-alt fa-lg"></i><br />
+                    Share
+                </a>
+            </div>*@
+                    @*@Html.ActionLink("Favourite", "Favourite", new { id = Html.DisplayFor(model => model.Job.ID) }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Ignore", "Ignore", new { id = Html.DisplayFor(model => model.Job.ID) }, new { @class = "btn btn-default" })*@
+                    @*<button  class="btn btn-default">Share</button>*@
+                    @*<div id="ShareDiv" style="display:none;">
+                <h6>Add an email to shre this Job.</h6>
+                @using (Html.BeginForm())
+                    {
+                    @Html.AntiForgeryToken()
+                    <input type="text" />
+                }
+            </div>*@
+                </div>
+        </div>
+    }
+</div>

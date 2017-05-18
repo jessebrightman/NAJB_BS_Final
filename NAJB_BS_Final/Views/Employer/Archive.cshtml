@@ -1,0 +1,125 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewCompany
+
+@{
+    ViewBag.Title = "Archive";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3 active"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+    </ul>
+</div>
+<div class="mobileSearch" style="height: auto;">
+    <div class="hide-on-med-and-down"style="margin-bottom:15px !important;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+            <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+                        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                        <li role="presentation" id="settingsli" class="col-xs-3 active"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_EmployerUserBox")
+    <div class="col-md-9 mobile">
+        <div class="jumbotron card" style="width: 100%;">
+            <h1><i class="fa fa-archive page-icon" style="padding-left: 14px;"></i> Archive</h1>
+            <hr style="border-top-color: #ee6e73;" />
+            <div>
+                <table class="table table_id">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.JobName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Industry)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.JobType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Location)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.JobDescription)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Jobs)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Industry)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.JobType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <hr style="border-top-color: #ee6e73;" />
+                <table class="table table_id">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TransactionID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TransactionDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TransactionCredits)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Dollars)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Transactions)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TransactionDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Credits)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Dollars)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

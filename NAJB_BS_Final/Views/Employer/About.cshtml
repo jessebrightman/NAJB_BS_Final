@@ -1,0 +1,42 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewCompany
+
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+    </ul>
+</div>
+<div class="mobileSearch" style="height: auto;">
+    <div class="hide-on-med-and-down" style="margin-bottom:15px !important;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+            <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+                        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Users" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-user fa-lg"></i><br />Users</a></li>
+                        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_EmployerUserBox")
+    <div class="col-md-9 mobile">
+        <div class="jumbotron card" style="width: 100%;">
+            <h1><i class="fa fa-info-circle page-icon" style="color:#ee6e73"></i> About</h1>
+            <hr style="border-top-color: #ee6e73;" />
+        </div>
+    </div>
+</div>

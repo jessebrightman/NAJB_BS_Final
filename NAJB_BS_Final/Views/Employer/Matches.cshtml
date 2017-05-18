@@ -1,0 +1,620 @@
+﻿@model IEnumerable<NAJB_BS_Final.ViewModels.EmployerMatch>
+
+@{
+    ViewBag.Title = "Candidate Matches";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-med-and-down">
+    <div class="" style="height: auto;">
+        <div style="margin-bottom:15px !important;">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+                <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+                            <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                            <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                            <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_EmployerUserBox")
+        <div class="col-md-9">
+            <div class="jumbotron card" style="width: 100%;">
+                <h1 style=""><i class="fa fa-retweet fa-lg page-icon" style="padding-left: 9px;"></i> Candidate Matches<span style="float: right;">@Model.Count() Matches</span></h1>
+                <hr style="border-top-color: #ee6e73;" />
+                <p>Review your Job Matches Candidates here. <i id="matchHelp" class="fa fa-info-circle fa-lg" style="color: #ee6e73;"></i></p>
+                @*<ul id="matchHelpText" style="display: none;">
+                    <li>Click <i class="fa fa-eye"></i> View to view the complete Job Post for this Job.</li>
+                    <li>Click <i class="fa fa-star"></i> Favourite to store this in your Favourites tab.</li>
+                    <li>Click <i class="fa fa-mail-forward"></i> Apply to send in your Application or be transferred to the Company's internal Job Portal</li>
+                    <li>Click <i class="fa fa-close"></i> Ignore to remove this Job Match and remove it form any future Emails.</li>
+                </ul>*@
+            </div>
+
+
+            <br />
+            <div class="row" style="margin-left: -15px !important; margin-right: -15px !important;">
+
+                @foreach (var item in Model)
+            {
+                    <div class="col-xs-12 col-md-6 " style="float: left; margin-bottom: 20px;">
+                        <div class="panel-group jumbotron card" style="padding-top: 15px;">
+                            <div class="panel panel-default" style="border: none;">
+                                <div class="panel-heading" style="height:auto;">
+                                    @*<div class="row">
+                                        <p style="font-size:11px !important;">
+                                            <span style=""><i class="fa fa-calendar"></i>Posted: @item.jobDate.Value.ToString("MM/dd/yyyy")</span>
+                                            <span style=""><i class="fa fa-calendar"></i>Ends: @item.endDate.Value.ToString("MM/dd/yyyy")</span>
+                                        </p>
+                                        @if (item.favourite == true)
+                                        {
+                                            <i id="Favourite-@item.jobID" class="fa fa-star fa-lg text-warning" title="Favourite" style="float:right"></i>
+                                        }
+                                        else
+                                        {
+                                            <i id="Favourite-@item.jobID" class="fa fa-star fa-lg grey-text" title="Favourite" style="float:right;"></i>
+                                        }
+                                        @if (item.ignore == true)
+                                        {
+                                            <i class="fa fa-volume-off fa-lg text-danger" style="float:right"></i>
+                                        }
+                                        @if (item.applied == true)
+                                        {
+                                            <i class="fa fa-mail-forward fa-lg text-success" style="float:right"></i>
+                                        }
+                                        @if (item.shared == true)
+                                            {
+                                                <i class="fa fa-volume-off text-danger" style="float:right"></i>
+                                        }
+                                    </div>*@
+
+                                    <h2 style="float:left; font-size: 17px;"><i class="fa fa-list-alt" style="color:#ee6e73"></i> @Html.DisplayFor(modelItem => item.JobMatch.name)</h2><br />
+                                    <div class="row">
+                                    <hr style="border-top-color: #ee6e73; clear: both;" />
+                                    <div class="col-md-4">
+                                        <p style="margin: 0px;"><i class="fa fa-eye fa-md primary" style=""></i> @Html.DisplayFor(modelItem => item.JobMatch.Company.Jobs.Where(j => j.ID == item.JobMatch.jobID).FirstOrDefault().views) Views</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p style="margin: 0px;"><i class="fa fa-calendar fa-md primary" style=""></i> Posted: @item.JobMatch.jobDate.Value.ToString("MM/dd/yyyy")</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p style="margin: 0px;"><i class="fa fa-calendar fa-md primary" style=""></i> Ends: @item.JobMatch.endDate.Value.ToString("MM/dd/yyyy")</p>
+                                    </div>
+                                </div>    
+                                <div class="row">
+                                        <hr style="border-top-color: #ee6e73; clear: both;" />
+                                    <div class="col-xs-11">
+                                        @item.MatchedUsers.Count() Matches
+                                    </div>
+                                    <div class="col-xs-1 " style="padding: 0px;">
+                                        <a class="accordion-toggle center-block" data-toggle="collapse" href="#collapse-@Html.DisplayFor(modelItem => item.JobMatch.ID)" style="float:right;">
+                                            <i class="fa fa-chevron-down fa-lg"></i>
+                                        </a>
+                                    </div>
+                                        @*<div class="col-md-3">
+                                            <img class="circle" style="width:64px; height: 64px; margin-top: 10px;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.Company.logo)" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h2 style="font-size: 16px;"><a href="/Searcher/Company?id=@Html.DisplayFor(modelItem => item.companyID)">@Html.DisplayFor(modelItem => item.companyName)</a></h2>
+                                            <p>@Html.DisplayFor(modelItem => item.location)</p>
+                                        </div>
+                                        <div class="col-xs-1 " style="padding: 0px;">
+                                            <a class="accordion-toggle center-block" data-toggle="collapse" href="#collapse-@Html.DisplayFor(modelItem => item.ID)" style="float:right;">
+                                            <i class="fa fa-chevron-down fa-lg"></i></a>
+                                        </div>*@
+                                    </div>
+                                    <div class="row">
+                                        
+                                    </div>
+                                    <div id="collapse-@Html.DisplayFor(modelItem => item.JobMatch.ID)" class="panel-collapse collapse">
+                                        <div class="panel-body" style="padding: 0px;">
+                                            <div class="row">
+                                                <hr style="border-top-color: #ee6e73;" />
+                                                <p><strong>Matched Users:</strong></p>
+                                                @foreach (var match in item.MatchedUsers)
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-xs-2">
+                                                            <img style="height:64px; width: 64px;" class="circle" src="~/Content/Images/@match.userImage" />
+                                                        </div>
+                                                        <div class="col-xs-7">
+                                                            <h6>@match.firstname @match.lastname</h6>
+                                                            <p>@match.email</p>
+                                                        </div>
+                                                        <div class="col-xs-3">
+                                                            @if (match.JobMatches.Where(jm => jm.jobID == item.JobMatch.jobID).First().applied == true)
+                                                            {
+                                                                <p>Applied <br />
+                                                            @match.JobMatches.Where(jm => jm.jobID == item.JobMatch.jobID).First().applyDate.Value.ToShortDateString()</p>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <hr style="border-top-color: #ee6e73;" />
+                                                }
+                                            </div>
+
+                                            
+                                        </div>
+                                        @*<div class="col-xs-3 text-center">
+                                            <i class="fa fa-close fa-lg text-danger" style="float:right"></i>
+                                        </div>*@
+                                    </div>
+
+                                    @*<div class="panel-footer">
+
+                                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-xs-12 col-md-6" style="float: left; margin-bottom: 20px;">
+                    <div class="jumbotron card" style="padding-top: 15px;">
+                        @if (item.favourite == true)
+                                        {
+                            <i class="fa fa-star fa-lg text-warning" title="Favourite" style="float:right"></i>
+                        }
+                        @if (item.ignore == true)
+                                        {
+                            <i class="fa fa-volume-off text-danger" style="float:right"></i>
+                        }
+                        @if (item.applied == true)
+                                        {
+                            <i class="fa fa-volume-off text-danger" style="float:right"></i>
+                        }
+                        @if (item.shared == true)
+                            {
+                                <i class="fa fa-volume-off text-danger" style="float:right"></i>
+                        }
+                        <div class="row">
+                            <p style="font-size:11px !important;">
+                                <span style="float: left;">Posted: @item.jobDate.Value.ToString("MM/dd/yyyy")</span>
+                                <span style="float: right;">Ends: @item.endDate.Value.ToString("MM/dd/yyyy")</span>
+                            </p>
+                        </div>
+                        <h3 style="float:left;"><i class="fa fa-list-alt" style="color:#ee6e73"></i> @Html.DisplayFor(modelItem => item.name)</h3>
+
+                        <hr style="border-top-color: #ee6e73; clear: both;"/>
+
+                        <div class="col-md-2">
+                            <img class="circle" style="width:50px; height: 50px; margin-top: 10px;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.Company.logo)" />
+                        </div>
+                        <div class="col-md-10">
+                            <h4><a href="/Searcher/Company?id=@Html.DisplayFor(modelItem => item.companyID)">@Html.DisplayFor(modelItem => item.companyName)</a></h4>
+                            <p>@Html.DisplayFor(modelItem => item.location)</p>
+                        </div>
+                            <hr style="border-top-color: #ee6e73; clear: both;" />
+                            <p>@Html.Raw(item.description)</p>
+
+                            <hr style="border-top-color: #ee6e73;" />
+                            <a class="btn" href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.jobID)">View Job</a>
+                            @*<div class="col-md-3" style="text-align: center;">
+                        <a class="text-success" style="text-decoration: none;" href="mailto:@Html.DisplayFor(model => model.Company.contact)">
+                            <i class="fa fa-mail-forward fa-lg"></i><br />
+                            Apply
+                        </a>
+                    </div>
+                    <div class="col-md-3" style="text-align: center;">
+                        <a class="text-warning" style="text-decoration: none;" href="/Searcher/Favourite?id=@Html.DisplayFor(model => model.)">
+                            <i class="fa fa-star fa-lg"></i><br />
+                            Favourite
+                        </a>
+                    </div>
+                    <div class="col-md-3" style="text-align: center;">
+                        <a class="text-danger" style="text-decoration: none;" href="mailto:@Html.DisplayFor(model => model.Company.contact)">
+                            <i class="fa fa-volume-off fa-lg"></i><br />
+                            Ignore
+                        </a>
+                    </div>
+                    <div class="col-md-3" style="text-align: center;">
+                        <a id="ShareButton" style="text-decoration: none;" class="text-info" href="#">
+                            <i class="fa fa-share-alt fa-lg"></i><br />
+                            Share
+                        </a>
+                    </div>*@
+                    @*@Html.ActionLink("Favourite", "Favourite", new { id = Html.DisplayFor(model => model.Job.ID) }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Ignore", "Ignore", new { id = Html.DisplayFor(model => model.Job.ID) }, new { @class = "btn btn-default" })*@
+                    @*<button  class="btn btn-default">Share</button>*@
+                    @*<div id="ShareDiv" style="display:none;">
+                            <h6>Add an email to shre this Job.</h6>
+                            @using (Html.BeginForm())
+                                {
+                                @Html.AntiForgeryToken()
+                                <input type="text" />
+                            }
+                        </div>
+                            </div>
+                    </div>*@
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Users" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-user fa-lg"></i><br />Users</a></li>
+    </ul>
+</div>
+
+<div class="hide-on-large-only" style="position: absolute; top: 120px; background-color: lightgrey; width: 100%; height: auto;">
+    <div id="Matches" class="" style="padding-top: 10px; background-color: lightgrey;">
+        @foreach (var item in Model)
+        {
+            <div class="col-xs-12 col-md-6" style="float: left; margin-bottom: 10px; padding: 0px;">
+                <div class="panel-group card">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="height:auto; padding: 15px;">
+                            <div class="row">
+                                <div class="col-xs-3" style="padding: 0px;">
+                                    @if (item.JobMatch.Company.logo == "" || item.JobMatch.Company.logo == null)
+                                    {
+                                        <img class="circle" style="width: 65px; height: 65px;" src="~/Content/MVC_f9ad17b1-5d3b-4258-a449-abd5dc2ab8c1.jpg" />
+                                    }
+                                    else
+                                    {
+                                        //<img class="activator" src="@Html.DisplayFor(modelItem => item.logo)">
+                                        <img class="circle" style="width: 65px; height: 65px;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.JobMatch.Company.logo)" />
+                                    }
+                                </div>
+                                <div class="col-xs-8" style="padding: 0px;">
+                                    <h3 style="float:left; font-size: 2.5vmax !important; margin: 0px;"> @Html.DisplayFor(modelItem => item.JobMatch.name)</h3><br />
+                                    <h5 style="float:left; margin: 0px;"> @Html.DisplayFor(modelItem => item.JobMatch.Company.name)</h5>
+                                        
+                                </div>
+                                <div class="col-xs-1" style="padding: 0px;">
+                                    <a data-toggle="collapse" href="#collapse-mobile-@Html.DisplayFor(modelItem => item.JobMatch.ID)"><i class="fa fa-chevron-down"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="collapse-mobile-@Html.DisplayFor(modelItem => item.JobMatch.ID)" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                @foreach (var match in item.MatchedUsers)
+                                {
+                                    <p>@match.firstname @match.lastname</p>
+                                }
+                                <p style="font-size:11px !important;">
+                                    <span style="">Posted: @item.JobMatch.jobDate.Value.ToString("MM/dd/yyyy")</span><br />
+                                    <span style="">Ends: @item.JobMatch.endDate.Value.ToString("MM/dd/yyyy")</span>
+                                </p>
+                                <p><strong>Job Description:</strong></p>
+                                <p>
+                                    @if (item.JobMatch.description.Length > 100)
+                                    {
+                                        string sub = item.JobMatch.description.Substring(0, 100);
+                                        @Html.Raw(sub + "<span>...</span>")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(item.JobMatch.description)
+                                    }
+                                </p>
+                                <div class="row">
+                                    <hr style="border-top-color: #ee6e73;" />
+                                    @*<div class="col-xs-4">
+                                            <a class="btn" href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.jobID)">View Job</a>
+                                        </div>*@
+                                    <div class="col-xs-3 text-center" style="padding:0px 5px;">
+                                        <a class="" style="color: grey;" href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.JobMatch.jobID)">
+                                            <i class="fa fa-eye fa-lg text-info" title="View" style=""></i><br />View
+                                        </a>
+                                    </div>
+                                    <div id="MobileFavouriteButton" class="col-xs-3 text-center" style="padding:0px 5px;">
+                                        @if (item.JobMatch.favourite == true)
+                                        { 
+                                            <div id="@item.JobMatch.jobID" class="text-warning" style="" val="@Html.DisplayFor(modelItem => item.JobMatch.jobID)">
+                                                <i class="fa fa-star fa-lg" title="Favourite" style=""></i><br /><span style="color: grey; text-shadow:none;">Favourite</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div id="@item.JobMatch.jobID" class="grey-text" style="" href="@Html.DisplayFor(modelItem => item.JobMatch.jobID)">
+                                                <i class="fa fa-star fa-lg" title="Favourite" style=""></i><br /><span style="color: grey; text-shadow:none;">Favourite</span>
+</div>
+                                        }
+                                    </div>
+
+                                    <div class="col-xs-3 text-center" style="padding:0px 5px;">
+                                        @if (item.JobMatch.applied == true)
+                                        {
+                                            <a id="MobileApplyButton" href="#" style="color: grey;"><i class="fa fa-mail-forward fa-lg text-danger" style=""></i><br />Applied</a>
+                                        }
+                                        else
+                                        {
+                                            <a id="MobileApplyButton" href="#" style="color: grey;"><i class="fa fa-mail-forward fa-lg" style=""></i><br />Apply</a>
+
+                                        }
+                                    </div>
+                                    <div id="MobileIgnoreButton" class="col-xs-3 text-center" style="padding:0px 5px;">
+                                        @if (item.JobMatch.ignore == true)
+                                        {
+                                            <div id="@item.JobMatch.jobID" class="grey-text" style="" value="@Html.DisplayFor(modelItem => item.JobMatch.jobID)">
+                                                <i class="fa fa-close fa-lg" style=""></i><br /><span style="color: grey;">Ignore</span>
+</div>
+                                        }
+                                        else
+                                        {
+                                            <div id="@item.JobMatch.jobID" class="grey-text" style="" value="@Html.DisplayFor(modelItem => item.JobMatch.jobID)">
+                                                <i class="fa fa-close fa-lg" style=""></i><br /><span style="color: grey;">Ignore</span>
+</div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            @*<div class="panel-footer">
+
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-xs-12 col-md-6" style="float: left; margin-bottom: 20px;">
+                    <div class="jumbotron card" style="padding-top: 15px;">
+                        <div class="row">
+                            <p style="font-size:11px !important;">
+                                <span style="float: left;">Posted: @item.jobDate.Value.ToString("MM/dd/yyyy")</span>
+                                <span style="float: right;">Ends: @item.endDate.Value.ToString("MM/dd/yyyy")</span>
+                            </p>
+                            <h3 style="float:left;"><i class="fa fa-list-alt" style="color:#ee6e73"></i> @Html.DisplayFor(modelItem => item.name)</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p style="margin: 0px;"><i class="fa fa-map-marker fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(modelItem => item.location)</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p style="margin: 0px;"><i class="fa fa-clock-o fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(modelItem => item.jobType)</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p style="margin: 0px;"><i class="fa fa-sort-amount-asc fa-md" style="color: #26a69a;"></i> @Html.DisplayFor(modelItem => item.experience)</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p style="margin: 0px;"><i class="fa fa-dollar fa-md" style="color: #26a69a;"></i> $@Html.DisplayFor(modelItem => item.salaryMin) - $@Html.DisplayFor(modelItem => item.salaryMax)</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <hr style="border-top-color: #ee6e73; clear: both;" />
+
+                            <div class="col-xs-3 col-md-2">
+                                <img class="circle" style="width:50px; height: 50px; margin-top: 10px;" src="~/Content/Images/@Html.DisplayFor(modelItem => item.Company.logo)" />
+                            </div>
+                            <div class="col-xs-9 col-md-10">
+                                <h4><a href="/Searcher/Company?id=@Html.DisplayFor(modelItem => item.companyID)">@Html.DisplayFor(modelItem => item.companyName)</a></h4>
+                                <p>@Html.DisplayFor(modelItem => item.location)</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <hr style="border-top-color: #ee6e73; clear: both;" />
+                            <p><strong>Job Description:</strong></p>
+                            <p>
+                                @if (item.description.Length > 100)
+                                {
+                                    string sub = item.description.Substring(0, 100);
+                                    @Html.Raw(sub + "<span>...</span>")
+                                }
+                                else
+                                {
+                                    @Html.Raw(item.description)
+                                }
+                            </p>
+                        </div>
+                        <div class="row">
+                            <hr style="border-top-color: #ee6e73;" />
+                            @*<div class="col-xs-4">
+                                    <a class="btn" href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.jobID)">View Job</a>
+                                </div>
+                            <div class="col-xs-3 text-center" style="padding:0px 5px;">
+                                <a class="" style="color: grey;" href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.jobID)">
+                                    <i class="fa fa-eye fa-lg text-info" title="View" style=""></i><br />View
+                                </a>
+                            </div>
+                            <div class="col-xs-3 text-center" style="padding:0px 5px;">
+                                @if (item.favourite == true)
+                                {
+                                    <a class="" style="color: grey;" href="/Searcher/UnFavourite?id=@Html.DisplayFor(modelItem => item.jobID)">
+                                        <i class="fa fa-star fa-lg text-warning" title="Favourite" style=""></i><br />UnFavourite
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="" style="color: grey;"href="/Searcher/Favourite?id=@Html.DisplayFor(modelItem => item.jobID)">
+                                        <i class="fa fa-star fa-lg" title="Favourite" style=""></i><br />Favourite
+                                    </a>
+                                }
+                            </div>
+
+                            <div class="col-xs-3 text-center" style="padding:0px 5px;">
+                                @if (item.applied == true)
+                                {
+                                    <a href="#" style="color: grey;"><i class="fa fa-mail-forward fa-lg text-danger" style=""></i><br />Applied</a>
+                                }
+                                else
+                                {
+                                    <a href="#" style="color: grey;"><i class="fa fa-mail-forward fa-lg" style=""></i><br />Apply</a>
+                                }
+                            </div>
+                            <div class="col-xs-3 text-center" style="padding:0px 5px;">
+                                @if (item.ignore == true)
+                                {
+                                    <a class="" style="color: grey;" href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.jobID)">
+                                        <i class="fa fa-close fa-lg text-danger" style=""></i><br />Ignore
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="" style="color: grey;" href="/Searcher/Job?id=@Html.DisplayFor(modelItem => item.jobID)">
+                                        <i class="fa fa-close fa-lg text-danger" style=""></i><br />Ignore
+                                    </a>
+                                }
+                            </div>
+
+                            @*<div class="col-xs-3 text-center">
+                                    <i class="fa fa-close fa-lg text-danger" style="float:right"></i>
+                                </div>
+                        </div>
+                    </div>
+                </div>*@
+        }
+    </div>
+</div>
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('#IgnoreButton div').click(function () {
+                    if ($(this).hasClass('text-danger')) {
+                        $(this).removeClass('text-danger').addClass('grey-text');
+                        var id = $(this).attr('id');
+                        alert(id);
+                        $.ajax({
+                            url: "/Ajax/Ignore",
+                            type: "GET",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                                alert(data);
+
+                            }
+                        })
+                    }
+                    else {
+                        $(this).removeClass('grey-text').addClass('text-danger');
+                        var id = $(this).attr('id');
+                        alert(id);
+                        $.ajax({
+                            url: "/Ajax/Ignore",
+                            type: "GET",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                                alert(data);
+
+                            }
+                        })
+                    }
+                });
+                $('#FavouriteButton div').click(function () {
+                    if ($(this).hasClass('text-warning')) {
+                        $(this).removeClass('text-warning').addClass('grey-text');
+                        var id = $(this).attr('id');
+                        $('#Favourite-' + id).removeClass('text-warning');
+
+                        alert(id);
+                        $.ajax({
+                            url: "/Ajax/Favourite",
+                            type: "GET",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                                alert(data);
+
+                            }
+                        })
+                    }
+                    else {
+                        $(this).removeClass('grey-text').addClass('text-warning');
+                        var id = $(this).attr('id');
+                        $('#Favourite-' + id).addClass('text-warning');
+                        alert(id);
+                        $.ajax({
+                            url: "/Ajax/Favourite",
+                            type: "GET",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                                alert(data);
+
+                            }
+                        })
+                    }
+                });
+            });
+        </script>
+<script>
+            $(document).ready(function () {
+                $('#MobileIgnoreButton div').click(function () {
+                    if ($(this).hasClass('text-danger')) {
+                        $(this).removeClass('text-danger').addClass('grey-text');
+                        var id = $(this).attr('id');
+                        alert(id);
+                        $.ajax({
+                            url: "/Ajax/Ignore",
+                            type: "GET",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                                alert(data);
+
+                            }
+                        })
+                    }
+                    else {
+                        $(this).removeClass('grey-text').addClass('text-danger');
+                        var id = $(this).attr('id');
+                        alert(id);
+                        $.ajax({
+                            url: "/Ajax/Ignore",
+                            type: "GET",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                                alert(data);
+
+                            }
+                        })
+                    }
+                });
+                $('#MobileFavouriteButton div').click(function () {
+                    if ($(this).hasClass('text-warning')) {
+                        $(this).removeClass('text-warning').addClass('grey-text');
+                        var id = $(this).attr('id');
+                        $('#MobileFavourite-' + id).removeClass('text-warning');
+
+                        alert(id);
+                        $.ajax({
+                            url: "/Ajax/Favourite",
+                            type: "GET",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                                alert(data);
+
+                            }
+                        })
+                    }
+                    else {
+                        $(this).removeClass('grey-text').addClass('text-warning');
+                        var id = $(this).attr('id');
+                        $('#MobileFavourite-' + id).addClass('text-warning');
+                        alert(id);
+                        $.ajax({
+                            url: "/Ajax/Favourite",
+                            type: "GET",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                                alert(data);
+
+                            }
+                        })
+                    }
+                });
+            });
+</script>
+        <script>
+            $('#matchHelp').click(function () {
+                $('#matchHelpText').slideToggle();
+            });
+        </script>
+       
+    }

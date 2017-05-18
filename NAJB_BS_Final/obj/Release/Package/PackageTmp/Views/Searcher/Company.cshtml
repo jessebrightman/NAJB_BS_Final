@@ -1,0 +1,27 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewUser
+
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_Layout_Searcher.cshtml";
+}
+
+<div class="" style="height: auto;">
+    @*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+    <div class="jumbotron card" style="width: 100%;">
+        <h3><i class="fa fa-list-alt" style="color:#ee6e73"></i> @Html.DisplayFor(model => model.Company.name)</h3>
+        <img class="circle" style="width:50px; height: 50px;" src="~/Content/Images/@Html.DisplayFor(model => model.Company.logo)" />
+        <h6>@Html.DisplayFor(model => model.Company.address)</h6>
+        <h6>@Html.DisplayFor(model => model.Company.phone)</h6>
+        <h6><a href="@Html.DisplayFor(model => model.Company.website)">@Html.DisplayFor(model => model.Company.website)</a></h6>
+
+
+        <hr style="border-top-color: #ee6e73;" />
+        <h6>@Html.DisplayNameFor(model => model.Company.industry): @Html.DisplayFor(model => model.Company.industry)</h6>
+        <h6>@Html.DisplayNameFor(model => model.Company.contact): @Html.DisplayFor(model => model.Company.contact)</h6>
+        <hr style="border-top-color: #ee6e73;" />
+        <p>@Html.DisplayFor(model => model.Company.description)</p>
+
+        <hr style="border-top-color: #ee6e73;" />
+       
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿@model NAJB_BS_Final.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="row" style="align-self:center; max-width: 500px; width: 90%;">
+    <div class="col s12">
+        <div class="card">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "", role = "form" }))
+            {
+                <div class="card-content">
+                    <h5>Register</h5>
+                    <h6>Create a new account here.</h6>
+                    <hr style="border-top-color: #ee6e73;" />
+
+                    <div id="registerForm" class="">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger", @style = "margin-bottom: 20px;" })
+                        @*<div class="row">
+                                <div class="input-field col s12">
+                                    @Html.DropDownListFor(model => model.UserType, new SelectList(@ViewBag.UserType, "Value", "Text"), "Select User Type", new { @class = "" })
+                                    @Html.LabelFor(m => m.UserType, new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @*@Html.LabelFor(m => m.UserType, new { @class = "" })*@
+                                    @Html.DropDownListFor(model => model.UserType, new SelectList(@ViewBag.UserType, "Value", "Text"), "Choose your option", new { @class = "" })
+                                <label>User Type</label>
+                                    @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger", @style = "position: relative; top: -15px;" })
+                                @*<select id="UserType">
+        <option value="" disabled selected>Choose your option</option>
+        <option value="1">Searcher</option>
+        <option value="2">Employer</option>
+    </select>
+    <label>User Type</label>
+    @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger", @style = "position: relative; top: -15px;" })*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.LabelFor(m => m.Email, new { @class = "" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", @style = "position: relative; top: -15px;" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "" })
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger", @style = "position: relative; top: -15px;" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "" })
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger", @style = "position: relative; top: -15px;" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.LabelFor(m => m.Password, new { @class = "" })
+                                @Html.PasswordFor(m => m.Password, new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @style = "position: relative; top: -15px;" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s10 offset-s1">
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "" })
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger", @style = "position: relative; top: -15px;" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="border-top-color: #ee6e73;" />
+                    <div class="">
+                        <input type="submit" class="btn btn-default right-align" value="Register" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

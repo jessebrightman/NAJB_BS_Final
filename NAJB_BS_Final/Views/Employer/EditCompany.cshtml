@@ -1,0 +1,199 @@
+﻿@model NAJB_BS_Final.ViewModels.EditCompany
+
+@{
+    ViewBag.Title = "EditCompany";
+    Layout = "~/Views/Shared/_Layout_Manage.cshtml";
+}
+
+@Html.Partial("_Messages")
+
+<div class="hide-on-large-only card" style="margin-top: 0px; position:fixed; top: 70px; width: 100%; border-top: 2px solid lightgray; z-index: 98;">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+    </ul>
+</div>
+<div class="mobileSearch" style="">
+    <div class="hide-on-med-and-down" style="margin-bottom:15px !important;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+            <div class="card" style="width: 100%; height:50px; margin-bottom: 1px; ">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" id="searchli" class="col-xs-3"><a href="/Employer/Employer" @*aria-controls="home" role="tab" data-toggle="tab"*@><i class="fa fa-list-alt fa-lg"></i><br />Posts</a></li>
+                        <li role="presentation" id="profileli" class="col-xs-3"><a href="/Employer/AddJob" @*aria-controls="profile" role="tab" data-toggle="tab"*@><i class="fa fa-plus fa-lg"></i><br />Add</a></li>
+                        <li role="presentation" id="messagesli" class="col-xs-3"><a href="/Employer/Matches" @*aria-controls="messages" role="tab" data-toggle="tab"*@><i class="fa fa-retweet fa-lg"></i><br />Matches</a></li>
+                        <li role="presentation" id="settingsli" class="col-xs-3"><a href="/Employer/Archive" @*aria-controls="settings" role="tab" data-toggle="tab"*@><i class="fa fa-archive fa-lg"></i><br />Archive</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_EmployerUserBox")
+    <div class="col-md-9 mobile">
+        <div class="jumbotron card" style="width: 100%; margin-top: 0px;">
+            <h1><i class="fa fa-building fa-md page-icon" style="color: #ee6e73;"></i> Edit Your Company</h1>
+            <hr style="border-top-color: #ee6e73;" />
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col-md-4">
+                        <div class="file-field input-field col s12 m6" style="text-align:center;">
+                            <img id="CompanymyUploadedImg" alt="Photo" class="circle" style="height:130px; width: 130px; margin: 23px 0px;" src="/Content/Images/@ViewBag.Company.logo" />
+                            <div class="file-field input-field" style="margin-top: 20px !important;">
+                                <div class="btn">
+                                    <span>File</span>
+
+                                </div>
+                                <input type="file" id="CompanyFile">
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-top: 43px;">
+                        <div class="row">
+                            <div class="input-field col s12" style="margin-bottom: 10px;">
+                                @Html.TextBoxFor(m => m.CompanyName, new { @class = "" })
+                                @Html.LabelFor(m => m.CompanyName, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="input-field col s12" style="margin-bottom: 10px;">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "" })
+                                @Html.LabelFor(m => m.Address, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="input-field col s12" style="margin-bottom: 10px;">
+                                @Html.TextBoxFor(m => m.Industry, new { @class = "" })
+                                @Html.LabelFor(m => m.Industry, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Industry, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-top: 43px;">
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Industry, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Industry, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Industry, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="input-field col s12" style="margin-bottom: 10px;">
+                                @Html.TextBoxFor(m => m.Website, new { @class = "" })
+                                @Html.LabelFor(m => m.Website, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Website, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="input-field col s12" style="margin-bottom: 10px;">
+                                @Html.TextBoxFor(m => m.Contact, new { @class = "" })
+                                @Html.LabelFor(m => m.Contact, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Contact, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Contact, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="input-field col s12" style="margin-bottom: 10px;">
+                                @Html.TextBoxFor(m => m.Phone, new { @class = "" })
+                                @Html.LabelFor(m => m.Phone, new { @class = "" })
+                                @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.CompanyDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CompanyDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.CompanyImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CompanyImage, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyImage, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12" style="margin-bottom: 10px;">
+                            @Html.LabelFor(model => model.CompanyDescription, htmlAttributes: new { @class = "" })
+
+                            @Html.EditorFor(model => model.CompanyDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CompanyDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr style="border-top-color: #ee6e73; clear: both;" />
+                    @Html.HiddenFor(model => model.CompanyID)
+                    @Html.HiddenFor(model => model.Image)
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Update" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+    <!-- CKE Editor -->
+    <script src="//cdn.ckeditor.com/4.5.10/standard/ckeditor.js"></script>
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('CompanyDescription');
+
+    </script>
+

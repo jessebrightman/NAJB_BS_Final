@@ -1,0 +1,276 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewCompany
+
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<div class="hide-on-med-and-down" style="height: auto;">
+    @*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+    <div class="jumbotron card" style="width: 100%;">
+        <h2>About</h2>
+
+        <div>
+            <h4>ViewCompany</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Image2)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Image2)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserImage)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserImage)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CompanyID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CompanyID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CompanyName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Industry)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Industry)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Website)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Website)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Contact)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Contact)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Credits)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Credits)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CompanyDescription)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CompanyDescription)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Image)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Image)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CompanyImage)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CompanyImage)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobDescription)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobDescription)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Date)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Location)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Location)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SalaryMin)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SalaryMin)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SalaryMax)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SalaryMax)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ApplyTo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ApplyTo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Experience)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Experience)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TransactionID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TransactionID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PayPalID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PayPalID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TransactionCompanyID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TransactionCompanyID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TransactionCredits)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TransactionCredits)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dollars)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dollars)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TransactionDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TransactionDate)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+</div>

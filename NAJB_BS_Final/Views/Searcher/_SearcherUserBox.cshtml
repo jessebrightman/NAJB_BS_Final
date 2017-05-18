@@ -1,0 +1,43 @@
+﻿<div class="hide-on-med-and-down col-md-3">
+    <div class="jumbotron card" style="width: 100%; margin-bottom: 15px;">
+        <div style="position: relative; top: -80px; margin-bottom: -80px;">
+            @if (ViewBag.Image == "" || ViewBag.Image == null)
+            {
+                <div class="circle img-responsive" style="overflow: hidden; display: inline-block; width:100px; height:100px;">
+                    <img class="" src="~/Content/Images/user.png">
+                </div>
+            }
+            else
+            {
+                <div class="circle img-responsive" style="overflow: hidden; display: inline-block; width:100px; height:100px;">
+                    <img style="width:100px; height:100px;" class="" src="/Content/Images/@ViewBag.Image">
+                </div>
+            }
+            <h4>@ViewBag.FirstName @ViewBag.LastName</h4>
+            <h6>@ViewBag.Email</h6>
+            @if (ViewBag.Resume == null)
+            {
+                <a href="/Searcher/EditSearcher">+Add A Resume</a>
+            }
+            else
+            {
+                <div><a href="~/Content/Resumes/@ViewBag.Resume"> Resume <i class="fa fa-check"></i></a></div>
+            }
+            <hr style="border-top-color: #ee6e73;" />
+            @ViewBag.Searches Job Searches<br />
+            @ViewBag.Matches Job Matches
+            <hr style="border-top-color: #ee6e73;" />
+            @ViewBag.Applications Applications
+        </div>
+    </div>
+    <div class="jumbotron card" style="width: 100%;">
+        <h4><i class="fa fa-building page-icon" style="color: #ee6e73;"></i> Top Companies</h4>
+        <p><a href="/Searcher/Companies">View All</a></p>
+        <hr style="border-top-color: #ee6e73;" />
+        @foreach (var name in ViewBag.Companies)
+        {
+            <h6><a href="/Searcher/Company?id=@name.ID">@name.name</a></h6>
+        }
+    </div>
+</div>
+

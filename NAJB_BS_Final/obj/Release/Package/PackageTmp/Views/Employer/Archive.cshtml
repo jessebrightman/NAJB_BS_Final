@@ -1,0 +1,99 @@
+﻿@model NAJB_BS_Final.ViewModels.ViewCompany
+
+@{
+    ViewBag.Title = "Archive";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<div class="hide-on-med-and-down" style="height: auto;">
+    @*<div class="jumbotron card" style="background-color: rgba(201, 188, 188, 0.6); width: 100%;">*@
+    <div class="jumbotron card" style="width: 100%;">
+        <h2>Archive</h2>
+
+        <div>
+            <h4>ViewCompany</h4>
+            <hr />
+            <table class="table table_id">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.JobName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Industry)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.JobType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Location)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.JobDescription)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Jobs)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Industry)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <table class="table table_id">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TransactionID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TransactionDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TransactionCredits)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Dollars)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Transactions)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TransactionDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Credits)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Dollars)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

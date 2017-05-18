@@ -1,0 +1,89 @@
+﻿@model NAJB_BS_Final.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="row" style="align-self:center; min-width: 50%;">
+    <div class="col s12">
+        <div class="card">
+
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="card-content">
+                    <h4>@ViewBag.Title.</h4>
+                    <h5>Create a new account.</h5>
+                    <hr />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @*<div class="row">
+                            <div class="input-field col s12">
+                                @Html.DropDownListFor(model => model.UserType, new SelectList(@ViewBag.UserType, "Value", "Text"), "Select User Type", new { @class = "" })
+                                @Html.LabelFor(m => m.UserType, new { @class = "control-label" })
+                                @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                    <div class="row">
+                        <div class="input-field col s10 offset-s1">
+                            @*@Html.LabelFor(m => m.UserType, new { @class = "" })
+                            @Html.DropDownListFor(model => model.UserType, new SelectList(@ViewBag.UserType, "Value", "Text"), "", new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })*@
+                            <select>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="1">Searcher</option>
+                                <option value="2">Employer</option>
+                            </select>
+                            <label>User Type</label>
+                            @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s10 offset-s1">
+                            @Html.LabelFor(m => m.Email, new { @class = "" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s10 offset-s1">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s10 offset-s1">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s10 offset-s1">
+                            @Html.LabelFor(m => m.Password, new { @class = "" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s10 offset-s1">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "" })
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                        <div class="card-action">
+                            <input type="submit" class="btn btn-default right-align" value="Register" />
+                        </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

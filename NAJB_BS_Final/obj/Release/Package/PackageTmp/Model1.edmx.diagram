@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0b38b497d46d4637b470137740f1c7f7" Name="Diagram1">
+        <EntityTypeShape EntityType="notajobb_devModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.AspNetRole" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.AspNetUser" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.Company" Width="1.5" PointX="7.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.Job" Width="1.5" PointX="9.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.JobCompany" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.JobIndustry" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.JobMatch" Width="1.5" PointX="12.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.JobSearch" Width="1.5" PointX="9.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.JobTitle" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.NAJB_user" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="notajobb_devModel.Transaction" Width="1.5" PointX="9.75" PointY="28.125" IsExpanded="true" />
+        <AssociationConnector Association="notajobb_devModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK__NAJB_user__Ident__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK__Company__NAJB_us__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK__Job__companyID__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK__JobMatche__compa__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK__JobSearch__compa__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK__Transacti__Compa__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK__JobMatche__NAJB___2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.FK__JobSearch__najb___2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="notajobb_devModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
