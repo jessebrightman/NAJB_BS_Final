@@ -105,7 +105,7 @@ namespace NAJB_BS_Final.Controllers
                         Host = "smtp.sendgrid.net",
                         Port = 587,
                         DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
-                        Credentials = new NetworkCredential("jesse@loomo.ca", "snowboarding1")
+                        Credentials = new NetworkCredential("**User**", "**Password**")
                     })
                     try
                     {
@@ -174,7 +174,7 @@ namespace NAJB_BS_Final.Controllers
                     Host = "smtp.sendgrid.net",
                     Port = 587,
                     DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
-                    Credentials = new NetworkCredential("jesse@loomo.ca", "snowboarding1")
+                    Credentials = new NetworkCredential("**User**", "**Password**")
                 })
                     try
                     {
@@ -236,7 +236,7 @@ namespace NAJB_BS_Final.Controllers
                     Host = "smtp.sendgrid.net",
                     Port = 587,
                     DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
-                    Credentials = new NetworkCredential("jesse@loomo.ca", "snowboarding1")
+                    Credentials = new NetworkCredential("**User**", "**Password**")
                 })
                     try
                     {
@@ -292,9 +292,9 @@ namespace NAJB_BS_Final.Controllers
         public Task SendAsync(string to, string body)
         {
             // Credentials:
-            var credentialUserName = "jesse@loomo.ca";
+            var credentialUserName = "**User**";
             var sentFrom = "info@notajobboard.com";
-            var pwd = "snowboarding1";
+            var pwd = "**Password**";
 
             // Configure the client:
             System.Net.Mail.SmtpClient client =
